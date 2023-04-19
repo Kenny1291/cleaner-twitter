@@ -1,11 +1,18 @@
-chrome.storage.sync.get(["hide_tweet_analytics"]).then((result) => {
-    document.body.classList.toggle("hide-tweet-analytics", result.hide_tweet_analytics)
-})
+(async () => {
+    const src = chrome.runtime.getURL("data.js")
+    const data = await import(src)
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.hide_tweet_analytics) {
-        document.body.classList.add("hide-tweet-analytics")
-    } else {
-        document.body.classList.remove("hide-tweet-analytics")
-    }
-})
+    // set classes based on storage keys values the first time
+    data.pieces.forEach(piece => {
+        chrome.storage.sync.get([piece]).then((result) => {
+            document.body.classList.toggle(piece, result[piece])
+        })
+    })
+
+    // listen for storage keys values changes and set classes
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        data.pieces.forEach(piece => {
+            document.body.classList.toggle(piece, message[piece])
+        })
+    })
+})()
