@@ -1,5 +1,3 @@
-
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log('MESSAGE', message);
     if (message.hide_tweet_analytics) {
