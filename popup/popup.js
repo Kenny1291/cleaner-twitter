@@ -1,36 +1,39 @@
+import { getPieces } from '/data.js'
+
 (async () => {
-  const src = chrome.runtime.getURL("data.js")
-  const data = await import(src)
+  const pieces = await getPieces();
 
   const h2 = document.querySelector('h2')
 
-  data.pieces.forEach(piece => {
-
+  pieces.forEach(piece => {
     const toggleName = piece
-    .split('_')
-    .map(word => word[0].toUpperCase() + word.slice(1))
-    .join(' ')
+      .split('_')
+      .map(word => word[0].toUpperCase() + word.slice(1))
+      .join(' ')
 
-    h2.insertAdjacentHTML('afterend', `
+    h2.insertAdjacentHTML(
+      'afterend',
+      `
       <div class="switch-container">
         <label for=${piece}>${toggleName}</label>
         <input id=${piece} type="checkbox" />
       </div>
-    `)
+    `
+    );
 
     const pieceToggle = document.getElementById(piece)
 
     //set toggles based on storage keys values the first time
-    chrome.storage.sync.get([piece]).then((result) => {
+    chrome.storage.sync.get([piece]).then(result => {
       pieceToggle.checked = result[piece]
     })
 
-    pieceToggle.addEventListener('click', function() {
+    pieceToggle.addEventListener('click', function () {
       toggleStorageKey(piece)
     })
 
     function toggleStorageKey(key) {
-      chrome.storage.sync.set({[key]: pieceToggle.checked})
+      chrome.storage.sync.set({ [key]: pieceToggle.checked })
     }
   })
 })()
