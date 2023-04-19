@@ -1,3 +1,7 @@
 .hide_tweet_analytics div:has(> a[aria-label$="View Tweet analytics"]) {
     display: none;
 }
+
+.hide_twitter_blue a[href="/i/twitter_blue_sign_up"] {
+    display: none;
+}
