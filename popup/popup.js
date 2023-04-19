@@ -1,14 +1,21 @@
-const hide_tweet_analytics_switch = document.getElementById("hide_tweet_analytics")
+(async () => {
+  const src = chrome.runtime.getURL("data.js")
+  const data = await import(src)
 
-chrome.storage.sync.get(["hide_tweet_analytics"]).then((result) => {
-    hide_tweet_analytics_switch.checked = result.hide_tweet_analytics
-})
+  data.pieces.forEach(piece => {
+    const pieceToggle = document.getElementById(piece)
 
-hide_tweet_analytics_switch.addEventListener('click', function() {
-  toggleStorageKey('hide_tweet_analytics')
-})
+    //set toggles based on storage keys values the first time
+    chrome.storage.sync.get([piece]).then((result) => {
+      pieceToggle.checked = result[piece]
+    })
 
-function toggleStorageKey(key) {
-    const toggle = document.getElementById(key)
-    chrome.storage.sync.set({[key]: toggle.checked})
-}
+    pieceToggle.addEventListener('click', function() {
+      toggleStorageKey(piece)
+    })
+
+    function toggleStorageKey(key) {
+      chrome.storage.sync.set({[key]: pieceToggle.checked})
+    }
+  })
+})()
