@@ -8,7 +8,7 @@ chrome.runtime.onInstalled.addListener(async function () {
 })
 
 chrome.storage.onChanged.addListener(async (changes, namespace) => {
-  const pieces = await getPieces();
+  const pieces = await getPieces()
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
     pieces.forEach(piece => {
       if (key === piece) {

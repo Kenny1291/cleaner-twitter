@@ -5,7 +5,7 @@ import { getPieces } from '/data.js'
 
   const h2 = document.querySelector('h2')
 
-  pieces.forEach(piece => {
+  pieces.reverse().forEach(piece => {
     const toggleName = piece
       .split('_')
       .map(word => word[0].toUpperCase() + word.slice(1))
@@ -19,7 +19,7 @@ import { getPieces } from '/data.js'
         <input id=${piece} type="checkbox" />
       </div>
     `
-    );
+    )
 
     const pieceToggle = document.getElementById(piece)
 
