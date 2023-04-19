@@ -11,8 +11,6 @@
   
     // listen for storage keys values changes and set classes
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      pieces.forEach(piece => {
-        document.body.classList.toggle(piece, message[piece])
-      })
+      document.body.classList.toggle(Object.keys(message)[0], Object.values(message)[0])
     })
 })()

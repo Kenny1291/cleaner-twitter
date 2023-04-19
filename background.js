@@ -1,11 +1,11 @@
 import { getPieces } from '/data.js'
 
 chrome.runtime.onInstalled.addListener(async function () {
-  const pieces = await getPieces();
+  const pieces = await getPieces()
   pieces.forEach(piece => {
     chrome.storage.sync.set({ [piece]: true })
-  });
-});
+  })
+})
 
 chrome.storage.onChanged.addListener(async (changes, namespace) => {
   const pieces = await getPieces();
