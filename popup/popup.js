@@ -2,7 +2,22 @@
   const src = chrome.runtime.getURL("data.js")
   const data = await import(src)
 
+  const h2 = document.querySelector('h2')
+
   data.pieces.forEach(piece => {
+
+    const toggleName = piece
+    .split('_')
+    .map(word => word[0].toUpperCase() + word.slice(1))
+    .join(' ')
+
+    h2.insertAdjacentHTML('afterend', `
+      <div class="switch-container">
+        <label for=${piece}>${toggleName}</label>
+        <input id=${piece} type="checkbox" />
+      </div>
+    `)
+
     const pieceToggle = document.getElementById(piece)
 
     //set toggles based on storage keys values the first time
