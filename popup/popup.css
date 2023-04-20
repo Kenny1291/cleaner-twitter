@@ -2,10 +2,16 @@ body {
     width: fit-content;
     font-size: 14px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
     background-color: #1a8cd8;
     color: #ffffff;
     white-space: nowrap;
 }
+
+h2 {
+    text-align: center;
+}
+
 .switch-container {
     display: flex;
     justify-content: space-between;
@@ -13,4 +19,8 @@ body {
 
 input {
     accent-color: #07283e;
+}
+
+label {
+    margin-right: 1rem;
 }
