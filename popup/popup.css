@@ -1,11 +1,15 @@
 body {
     width: 170px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     font-size: 14px;
-    background-color: antiquewhite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a8cd8;
+    color: #ffffff;
 }
 .switch-container {
     display: flex;
+    justify-content: space-between;
+}
+
+input {
+    accent-color: #07283e;
 }
