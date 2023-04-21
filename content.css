@@ -33,3 +33,7 @@
 .hide_promoted_tweets div:has(> div > div[data-testid="placementTracking"]) {
     display: none;
 }
+
+.hide_verified_organizations a[href="/i/verified-orgs-signup"] {
+    display: none;
+}
