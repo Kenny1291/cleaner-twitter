@@ -1,3 +1,5 @@
+import { createCSSRulesArrayOfObjectsWithRuleNames } from "./utils.js";
+
 const defaultCSSRulesArray = [
   '.hide_tweet_analytics div:has(> a[aria-label$="View Tweet analytics"]) {display: none;}',
   '.hide_twitter_blue a[href="/i/twitter_blue_sign_up"] {display: none;}',
@@ -42,11 +44,3 @@ chrome.storage.onChanged.addListener(async (changes, namespace) => {
     }
   }
 })
-
-function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArray) {
-  return CSSRulesArray.map(rule => {
-    const match = rule.match(/\.([a-z0-9_-]+)/i)
-    const name = match ? match[1] : ''
-    return { name, rule, active: false }
-  })
-}

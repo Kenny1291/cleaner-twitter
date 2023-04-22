@@ -28,5 +28,9 @@
   "background": {
     "service_worker": "background.js", "type": "module"
   },
-  "options_page": "options/options.html"
+  "options_page": "options/options.html",
+  "web_accessible_resources": [{
+    "matches": ["<all_urls>"],
+    "resources": ["utils.js"]
+  }]
 }
