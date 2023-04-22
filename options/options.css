@@ -1,0 +1,27 @@
+html {
+    display: flex;
+    justify-content: center;
+    background-color: #141414;
+    color: antiquewhite;
+}
+
+body {
+}
+
+h2 {
+    text-align: center;
+}
+
+div {
+    text-align: left;
+}
+
+button {
+    float: right;
+}
+
+#editor {
+    position: relative;
+    width: 70vw;
+    height: 90vh;
+}
