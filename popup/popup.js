@@ -1,12 +1,12 @@
-import { getPieces } from '/data.js'
-
 (async () => {
-  const pieces = await getPieces();
+  const CSSRules = await chrome.storage.sync.get().then(result => {
+    return result.CSSRulesArrayOfObjectsWithNames
+  })
 
   const h2 = document.querySelector('h2')
 
-  pieces.reverse().forEach(piece => {
-    const toggleName = piece
+  CSSRules.forEach(CSSRule => {
+    const toggleName = CSSRule.name
       .split('_')
       .map(word => word[0].toUpperCase() + word.slice(1))
       .join(' ')
@@ -15,25 +15,28 @@ import { getPieces } from '/data.js'
       'afterend',
       `
       <div class="switch-container">
-        <label for=${piece}>${toggleName}</label>
-        <input id=${piece} type="checkbox" />
+        <label for=${CSSRule.name}>${toggleName}</label>
+        <input id=${CSSRule.name} type="checkbox" />
       </div>
     `
     )
 
-    const pieceToggle = document.getElementById(piece)
+    const ruleToggle = document.getElementById(CSSRule.name)
 
     //set toggles based on storage keys values the first time
-    chrome.storage.sync.get([piece]).then(result => {
-      pieceToggle.checked = result[piece]
+    ruleToggle.checked = CSSRule.active
+
+    ruleToggle.addEventListener('click', function () {
+      toggleStorageKey(CSSRule.name)
     })
 
-    pieceToggle.addEventListener('click', function () {
-      toggleStorageKey(piece)
-    })
-
-    function toggleStorageKey(key) {
-      chrome.storage.sync.set({ [key]: pieceToggle.checked })
+    function toggleStorageKey(CSSRuleName) {
+      chrome.storage.sync.get().then(result => {
+        const CSSRules = result.CSSRulesArrayOfObjectsWithNames
+        const CSSRule = CSSRules.find(rule => rule.name === CSSRuleName)
+        CSSRule.active = !CSSRule.active
+        chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
+      })
     }
   })
 })()
