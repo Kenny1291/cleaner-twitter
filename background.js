@@ -1,6 +1,4 @@
-import { createCSSRulesArrayOfObjectsWithRuleNames } from "./utils.js";
-
-
+import { setDefaultRules } from "./utils.js";
 
 chrome.runtime.onInstalled.addListener( () => {
   setDefaultRules()
