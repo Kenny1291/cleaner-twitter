@@ -1,4 +1,4 @@
-import { createCSSRulesArrayOfObjectsWithRuleNames } from "../utils.js";
+import { createCSSRulesArrayOfObjectsWithRuleNames, setDefaultRules } from "../utils.js";
 
 (async () => {
     const CSSRules = await chrome.storage.sync.get().then(result => {
@@ -27,6 +27,12 @@ import { createCSSRulesArrayOfObjectsWithRuleNames } from "../utils.js";
     function extractCSSRulesToArray(css) {
         return css.replace(/(?<=\.)\s+/g, '').match(/\.[^}]*}/g)
     }
+
+    document.getElementById('resetButton').addEventListener('click', async () => {
+        setDefaultRules().then(() => {
+            window.close()
+        })
+    })
 })()
 
 
