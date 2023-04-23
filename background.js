@@ -23,24 +23,32 @@ chrome.runtime.onInstalled.addListener( () => {
 
 chrome.storage.onChanged.addListener(async (changes, namespace) => {
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-    //find out which rule got toggled
     let rulesToggled = []
-    for(let i = 0; i < oldValue.length; i++) {
-      if(oldValue[i].active != newValue[i].active) {
-        rulesToggled.push({name: newValue[i].name, active: newValue[i].active})
+    if(oldValue.length === newValue.length) {
+      //find out which rule got toggled
+      for(let i = 0; i < oldValue.length; i++) {
+        if(oldValue[i].active != newValue[i].active) {
+          rulesToggled.push({name: newValue[i].name, active: newValue[i].active})
+        }
       }
+    } else { //rules changed
+      sendMessageToTwitterTabs({name: 'rulesChanged', active: true})
     }
     if (rulesToggled.length > 0) {
       rulesToggled.forEach(ruleToggled => {
-        (async () => {
-          const tabs = await chrome.tabs.query({ url: 'https://*.twitter.com/*' })
-          tabs.forEach(async tab => {
-            await chrome.tabs.sendMessage(tab.id, {
-              [ruleToggled.name]: ruleToggled.active,
-            })
-          })
-        })()
+        sendMessageToTwitterTabs(ruleToggled)
       })
     }
   }
 })
+
+function sendMessageToTwitterTabs(obj) {
+  (async () => {
+    const tabs = await chrome.tabs.query({ url: 'https://*.twitter.com/*' })
+    tabs.forEach(async tab => {
+      await chrome.tabs.sendMessage(tab.id, {
+        [obj.name]: obj.active,
+      })
+    })
+  })()
+}
