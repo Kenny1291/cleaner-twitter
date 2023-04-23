@@ -16,8 +16,8 @@ const defaultCSSRulesArray = [
   '.hide_twitter_icon h1 {display: none;}',
 ]
 
-chrome.runtime.onInstalled.addListener( () => {
-    const CSSRulesArrayOfObjectsWithNames = createCSSRulesArrayOfObjectsWithRuleNames(defaultCSSRulesArray)
+chrome.runtime.onInstalled.addListener(async () => {
+    const CSSRulesArrayOfObjectsWithNames = await createCSSRulesArrayOfObjectsWithRuleNames({CSSRulesArray: defaultCSSRulesArray})
     chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames })
 })
 

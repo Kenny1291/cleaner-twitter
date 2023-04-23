@@ -12,10 +12,10 @@ import { createCSSRulesArrayOfObjectsWithRuleNames } from "../utils.js";
     let formattedCSS = formatCSS(CSSRules.map(rule => rule.rule).join('\n'))
     editor.session.insert({row: 0, column: 0}, formattedCSS)
 
-    document.querySelector('button').addEventListener('click', () => {
+    document.getElementById('saveButton').addEventListener('click', async () => {
         const css = editor.getValue()
         const CSSRulesArray = extractCSSRulesToArray(css)
-        const CSSRulesArrayOfObjectsWithNames = createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArray)
+        const CSSRulesArrayOfObjectsWithNames = await createCSSRulesArrayOfObjectsWithRuleNames({CSSRulesArray: CSSRulesArray, fetchStateFromStorage: true})
         chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames }).then(() => {
             window.close()
         })
