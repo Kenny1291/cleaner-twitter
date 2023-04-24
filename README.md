@@ -19,3 +19,13 @@ A Chrome extension to make Twitter UI cleaner by removing annoying pieces. Custo
 - JavaScript
 - HTML
 - CSS
+
+## 📲 Installation
+1. Download [latest release](https://github.com/Kenny1291/cleaner-twitter/releases)
+2. Unzip folder
+3. Go to extension page in your Chromium browser
+4. Enable developer mode
+5. Select "Load unpacked" and select the unzipped folder
+6. Keep the folder on your pc
+
+(*Or wait until Chrome Web Store or Edge Add-ons publishes the extension*)
