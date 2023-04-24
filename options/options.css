@@ -2,10 +2,11 @@ html {
     display: flex;
     justify-content: center;
     background-color: #141414;
-    color: antiquewhite;
+    color: white;
 }
 
 body {
+    font-size: 14px;
 }
 
 h2 {
