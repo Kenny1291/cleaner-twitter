@@ -22,7 +22,11 @@ import { createCSSRulesArrayOfObjectsWithRuleNames, setDefaultRules } from "../u
     })
 
     function formatCSS(css) {
-        return css.replace(/([{])\s*/g, '$1\n    ').replace(/}\s*/g, '\n}\n').replace(/([^\s])\s*{/g, '$1 {').trim()
+        return css.replace(/([{])\s*/g, ' $1\n    ')
+                    .replace(/}\s*/g, '\n}\n')
+                    .replace(/([^\s])\s*{/g, '$1 {')
+                    .replace(/\n\s*\n/g, '\n')
+                    .trim();
     }
     function extractCSSRulesToArray(css) {
         return css.replace(/(?<=\.)\s+/g, '').match(/\.[^}]*}/g)
