@@ -28,4 +28,7 @@ A Chrome extension to make Twitter UI cleaner by removing annoying pieces. Custo
 5. Select "Load unpacked" and select the unzipped folder
 6. Keep the folder on your pc
 
-(*Or wait until Chrome Web Store or Edge Add-ons publishes the extension*)
+OR
+
+1. Download from [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jabjjnnceiebegglceajildfcdjjjjma)
+2. Download from Chrome Web Store (*currently not available)*
