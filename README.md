@@ -32,5 +32,5 @@ A Chrome extension to make Twitter UI cleaner by removing annoying pieces. Custo
 
 OR
 
-1. Download from [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jabjjnnceiebegglceajildfcdjjjjma)
-2. Download from Chrome Web Store (*currently not available)*
+1. Download from [Chrome Web Store](https://chrome.google.com/webstore/detail/cleaner-twitter/iplodopmopkmkpblangcjomcdfiidneo)
+2. Download from [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jabjjnnceiebegglceajildfcdjjjjma)
