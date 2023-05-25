@@ -16,12 +16,6 @@ A Chrome extension to make Twitter UI cleaner by removing annoying pieces. Custo
     - Hide Footer
     - Hide Message Drawer
 
-
-## ⚡Technologies Used
-- JavaScript
-- HTML
-- CSS
-
 ## 📲 Installation
 1. Download [latest release](https://github.com/Kenny1291/cleaner-twitter/releases)
 2. Unzip folder
@@ -34,3 +28,8 @@ OR
 
 1. Download from [Chrome Web Store](https://chrome.google.com/webstore/detail/cleaner-twitter/iplodopmopkmkpblangcjomcdfiidneo)
 2. Download from [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jabjjnnceiebegglceajildfcdjjjjma)
+
+## ⚡Technologies Used
+- JavaScript
+- HTML
+- CSS
