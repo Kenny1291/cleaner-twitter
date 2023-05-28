@@ -1,7 +1,12 @@
 import { setDefaultRules } from "./utils.js";
 
-chrome.runtime.onInstalled.addListener( () => {
-  setDefaultRules()
+chrome.runtime.onInstalled.addListener( async () => {
+  const rulesInStorage = await chrome.storage.sync.get()
+  if(Object.keys(rulesInStorage).length > 0) {
+    chrome.storage.sync.set({ rulesInStorage })
+  } else {
+    setDefaultRules()
+  }
 })
 
 chrome.storage.onChanged.addListener(async (changes, namespace) => {
