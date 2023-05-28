@@ -24,7 +24,7 @@ const defaultCSSRulesArray = [
   '.hide_footer nav[aria-label="Footer"] {display: none;}',
   '.hide_messages_drawer div[data-testid="DMDrawer"] {display: none;}',
 //   '.hide_promoted_tweets div:has(> div[arial-label="placement-tracking"] > svg) {display: none;}',
-  '.hide_verified_organizations a[href="/i/verified-orgs-signup"] {display: none;}',
+//   '.hide_verified_organizations a[href="/i/verified-orgs-signup"] {display: none;}',
 //   '.hide_twitter_button a[href="/compose/tweet"] {display: none;}',
 //   '.hide_account_menu div:has(> div > div[aria-label="Account menu"]) {display: none;}',
 //   '.hide_twitter_icon h1 {display: none;}',
