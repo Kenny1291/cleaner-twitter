@@ -29,17 +29,15 @@
     ruleToggle.addEventListener('click', function () {
       toggleStorageKey(CSSRule.name)
     })
-
-    function toggleStorageKey(CSSRuleName) {
-      chrome.storage.sync.get().then(result => {
-        const CSSRules = result.CSSRulesArrayOfObjectsWithNames
-        const CSSRule = CSSRules.find(rule => rule.name === CSSRuleName)
-        CSSRule.active = !CSSRule.active
-        chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
-      })
-    }
   })
-
+  function toggleStorageKey(CSSRuleName) {
+    chrome.storage.sync.get().then(result => {
+      const CSSRules = result.CSSRulesArrayOfObjectsWithNames
+      const CSSRule = CSSRules.find(rule => rule.name === CSSRuleName)
+      CSSRule.active = !CSSRule.active
+      chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
+    })
+  }
   document.getElementById('editCSSRules').addEventListener('click', () => {
     window.open(chrome.runtime.getURL('options/options.html'))
   })
