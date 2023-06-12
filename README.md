@@ -9,7 +9,8 @@ A Chrome extension to make Twitter UI cleaner by removing annoying pieces. Custo
 - Modify and add custom CSS rules
 - Predefined CSS rules:
     - Hide Tweet Analytics
-    - Hide Twitter Blue Menu Option
+    - Hide Verified Menu Option
+    - Hide Get Verified
     - Hide Trends For You
     - Hide Who To Follow
     - Hide Footer
