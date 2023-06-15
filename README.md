@@ -1,4 +1,4 @@
-## 🫧 Cleaner Twitter
+## <img src="https://github.com/Kenny1291/readme-assets/blob/main/cleaner-twitter/clean%20tw%20new%20icon.jpg" height="100" width="100"> Cleaner Twitter 
 
 A Chrome extension to make Twitter UI cleaner by removing annoying pieces. Customizable so that you can hide whatever you prefer and don't have to rely on me to keep the css rules updated. V1 forever! (when I get there 😉).
 
