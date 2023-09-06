@@ -15,10 +15,10 @@ export async function createCSSRulesArrayOfObjectsWithRuleNames({CSSRulesArray, 
 }
 
 const defaultCSSRulesArray = [
-  '.hide_tweet_analytics div:has(> a[aria-label$="View Tweet analytics"]) {display: none;}',
+  '.hide_tweet_analytics div:has(> a[aria-label$="View post analytics"]) {display: none;}',
   // '.hide_twitter_blue a[href="/i/twitter_blue_sign_up"] {display: none;}',
   '.hide_verified a[href="/i/verified-choose"] {display: none;}',
-  '.hide_get_verified div:has(> aside > a[href="/i/verified-choose"]) {display: none;}',
+  '.hide_subscribe_to_premium div:has(> aside > a[href="/i/verified-choose"]) {display: none;}',
 //   '.hide_explore  a[href="/explore"] {display: none;}',
 //   '.hide_bookmarks a[href="/i/bookmarks"] {display: none;}',
   '.hide_trends_for_you div:has(> div > section > div[aria-label="Timeline: Trending now"]) {display: none;}',
