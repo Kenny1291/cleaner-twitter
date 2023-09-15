@@ -28,8 +28,3 @@ OR
 
 1. Download from [Chrome Web Store](https://chrome.google.com/webstore/detail/cleaner-twitter/iplodopmopkmkpblangcjomcdfiidneo)
 2. Download from [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jabjjnnceiebegglceajildfcdjjjjma)
-
-## ⚡Technologies Used
-- JavaScript
-- HTML
-- CSS
