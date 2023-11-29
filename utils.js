@@ -1,4 +1,4 @@
-async function getCSSRulesFromStorage() {
+export async function getCSSRulesFromStorage() {
     return await chrome.storage.sync.get().then(result => result.CSSRulesArrayOfObjectsWithNames);
 }
 

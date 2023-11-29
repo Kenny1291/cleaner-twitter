@@ -1,6 +1,6 @@
 import { setDefaultRules } from "./utils.js";
 
-chrome.runtime.onInstalled.addListener( async () => {
+chrome.runtime.onInstalled.addListener(async () => {
   const rulesInStorage = await chrome.storage.sync.get()
   if(Object.keys(rulesInStorage).length > 0) {
     chrome.storage.sync.set({ rulesInStorage })
@@ -9,7 +9,7 @@ chrome.runtime.onInstalled.addListener( async () => {
   }
 })
 
-chrome.storage.onChanged.addListener(async (changes, namespace) => {
+chrome.storage.onChanged.addListener((changes, namespace) => {
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
     let rulesToggled = []
     if(oldValue.length === newValue.length) {
@@ -30,13 +30,11 @@ chrome.storage.onChanged.addListener(async (changes, namespace) => {
   }
 })
 
-function sendMessageToTwitterTabs(obj) {
-  (async () => {
+async function sendMessageToTwitterTabs(obj) {
     const tabs = await chrome.tabs.query({ url: 'https://*.twitter.com/*' })
     tabs.forEach(async tab => {
       await chrome.tabs.sendMessage(tab.id, {
         [obj.name]: obj.active,
       })
     })
-  })()
 }
