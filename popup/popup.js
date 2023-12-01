@@ -23,7 +23,7 @@ CSSRules.forEach(CSSRule => {
         `
             <div class="switch-container">
             <label for=${CSSRule.name}>${toggleName}</label>
-            <input id=${CSSRule.name} type="checkbox" />
+            <input id=${CSSRule.name} type="checkbox" role="switch" />
             </div>
         `
     )
