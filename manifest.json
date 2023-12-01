@@ -14,7 +14,7 @@
   },
   "content_scripts": [
     {
-        "js": ["content.js"],
+        "js": ["scripts/content.js"],
         "matches": [
             "https://*.twitter.com/*"
         ],
@@ -26,7 +26,7 @@
     "tabs"
   ],
   "background": {
-    "service_worker": "background.js", "type": "module"
+    "service_worker": "service_workers/background.js", "type": "module"
   },
   "options_page": "options/options.html",
   "web_accessible_resources": [{

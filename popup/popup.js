@@ -1,9 +1,17 @@
-import { getCSSRulesFromStorage } from "../utils.js";
+import { getCSSRulesFromStorage } from "../utils/utils.js";
 
+/**@type {CSSRulesArray} */
 const CSSRules = await getCSSRulesFromStorage()
 
+/**@type {HTMLHeadingElement} */
 const h2 = document.querySelector('h2')
 
+/**
+ * Iterates over each CSSRule in CSSRules array.
+ * For each CSSRule, it creates a toggle switch and sets up an event listener for it.
+ * The toggle switch's state is based on the 'active' property of the CSSRule.
+ * When the toggle switch is clicked, it calls the {@link toggleStorageKey} function with the CSSRule's name.
+ */
 CSSRules.forEach(CSSRule => {
     const toggleName = CSSRule.name
         .split('_')
@@ -13,16 +21,16 @@ CSSRules.forEach(CSSRule => {
     h2.insertAdjacentHTML(
         'afterend',
         `
-        <div class="switch-container">
-        <label for=${CSSRule.name}>${toggleName}</label>
-        <input id=${CSSRule.name} type="checkbox" />
-        </div>
-    `
+            <div class="switch-container">
+            <label for=${CSSRule.name}>${toggleName}</label>
+            <input id=${CSSRule.name} type="checkbox" />
+            </div>
+        `
     )
 
+    /**@type {HTMLInputElement} */
     const ruleToggle = document.getElementById(CSSRule.name)
 
-    //set toggles based on storage keys values the first time
     ruleToggle.checked = CSSRule.active
 
     ruleToggle.addEventListener('click', function () {
@@ -30,6 +38,11 @@ CSSRules.forEach(CSSRule => {
     })
 })
 
+/**
+ * Toggles the 'active' property of a CSS rule in Chrome storage.
+ * 
+ * @param {string} CSSRuleName - The name of the CSS rule to toggle.
+ */
 function toggleStorageKey(CSSRuleName) {
     chrome.storage.sync.get().then(result => {
         const CSSRules = result.CSSRulesArrayOfObjectsWithNames
