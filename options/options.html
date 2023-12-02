@@ -1,15 +1,39 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="options.css">
-    </head>
-    <body>
-        <h2>Edit CSS Rules</h2>
-        <p>Here are all the CSS rules. Every rule <b>requires</b> to have a class defined like this: <b>.this_is_the_name_of_the_toggle_option</b>; the class gets applied to the body to toggle the rule.</p>
-        <p>You can press the "Reset" button to restore all the default rules. After you finished editing, press the "Save" button to apply the changes.</p>
-        <pre id="editor"></pre>
-        <script src="../vendor/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-        <button id="resetButton">Reset</button>
-        <button id="saveButton">Save</button>
-    </body>
-    <script src="options.js" type="module"></script>
+<head>
+    <link rel="stylesheet" href="options.css">
+    <link rel="stylesheet" href="../vendor/pico/pico.min.css">
+</head>
+
+<body>
+    <h2>Edit CSS Rules</h2>
+    <p>Here you can see all the CSS rules. Every rule <b>requires</b> to have a class defined like the following example: <b>.toggle_option_name</b>, it will be used as name for the toggle option.</p>
+    <p>The rules get applied to the body element of Twitter when enabled.</p>
+    <hr width="80%" />
+    <pre id="editor"></pre>
+    <script src="../vendor/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <div id="buttonContainer">
+        <button class="outline" id="saveButton">Save</button>
+        <button class="secondary outline" id="resetButton" data-target="confirmResetModal">Restore default rules</button>
+    </div>
+
+    <!-- Modal -->
+    <dialog id="confirmResetModal">
+        <article>
+            <a href="#close" aria-label="Close" class="close closeModalAnchor" data-target="confirmResetModal">
+            </a>
+            <h3>Are you sure?</h3>
+            <p>Restoring the default rules will will <b>delete all your custom rules permanently!</b></p>
+            <footer>
+                <a href="#cancel" role="button" class="secondary closeModalAnchor" data-target="confirmResetModal">
+                    Cancel
+                </a>
+                <a href="#confirm" role="button" data-target="confirmResetModal" id="confirmResetButton">
+                    Confirm
+                </a>
+            </footer>
+        </article>
+    </dialog>
+</body>
+<script src="../vendor/pico/modal.js"></script>
+<script src="options.js" type="module"></script>
 </html>

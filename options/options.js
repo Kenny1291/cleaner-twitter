@@ -16,9 +16,7 @@ document.getElementById('saveButton').addEventListener('click', async () => {
     const css = editor.getValue()
     const CSSRulesArray = formattedCSSStringToArray(css)
     const CSSRulesArrayOfObjectsWithNames = await createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArray, true)
-    chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames }).then(() => {
-        window.close()
-    })
+    chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames }).then(() => window.close())
 })
 
 /**
@@ -46,11 +44,8 @@ function formattedCSSStringToArray(css) {
     return css.replace(/(?<=\.)\s+/g, '').match(/\.[^}]*}/g)
 }
 
-document.getElementById('resetButton').addEventListener('click', () => {
-    setDefaultRules().then(() => {
-        window.close()
-    })
-})
-
-
-
+//Reset default rules (modal)
+document.getElementById('resetButton').addEventListener('click', () => toggleModal(event))
+const closeModelAnchors = document.getElementsByClassName('closeModalAnchor')
+for (const closeModelAnchor of closeModelAnchors) closeModelAnchor.addEventListener('click', () => toggleModal(event))
+document.getElementById('confirmResetButton').addEventListener('click', () => setDefaultRules().then(() => window.close()))   
