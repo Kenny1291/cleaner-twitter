@@ -1,13 +1,10 @@
 import { setDefaultRules } from "../utils/utils.js";
 
 chrome.runtime.onInstalled.addListener(async () => {
-    const rulesInStorage = await chrome.storage.sync.get()
-    if(Object.keys(rulesInStorage).length > 0) {
-      chrome.storage.sync.set({ rulesInStorage })
-    } else {
-      setDefaultRules()
-    }
-  })
+    const rulesInStorage = await chrome.storage.sync.get('CSSRulesArrayOfObjectsWithNames')
+    const foundStoredRules = Object.keys(rulesInStorage).length > 0
+    if (!foundStoredRules) setDefaultRules()
+})
 
 chrome.storage.onChanged.addListener((changes, areaName) => {
     let [[key, { oldValue, newValue }]] = Object.entries(changes);
