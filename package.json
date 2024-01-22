@@ -16,10 +16,8 @@
     "url": "https://github.com/Kenny1291/cleaner-twitter/issues"
   },
   "homepage": "https://github.com/Kenny1291/cleaner-twitter#readme",
-  "dependencies": {
-    "@types/chrome": "^0.0.253"
-  },
   "devDependencies": {
+    "@types/chrome": "^0.0.258",
     "jszip": "^3.10.1"
   }
 }
