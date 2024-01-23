@@ -4,7 +4,9 @@
   "description": "A Chromium extension to make Twitter UI cleaner by removing annoying pieces. Customizable so that you can hide whatever you prefer and don't have to rely on me to keep the CSS rules updated. V1 forever! (when I get there 😉).",
   "main": "background.js",
   "scripts": {
-    "build": "node make-publish-zip.js"
+    "zip": "node make-publish-zip.js",
+    "folder": "node make-test-folder.js",
+    "build": "npm run zip && npm run folder"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,9 @@
   },
   "homepage": "https://github.com/Kenny1291/cleaner-twitter#readme",
   "devDependencies": {
+    "@playwright/test": "^1.41.1",
     "@types/chrome": "^0.0.258",
+    "@types/node": "^20.11.5",
     "jszip": "^3.10.1"
   }
 }

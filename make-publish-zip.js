@@ -50,3 +50,6 @@ const foldersToAdd = [
 ]
 
 createZip(filesToAdd, foldersToAdd)
+
+
+module.exports = { filesToAdd, foldersToAdd }
