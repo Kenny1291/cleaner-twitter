@@ -1,6 +1,6 @@
-const JSZip = require('jszip')
-const fs = require('fs')
-const path = require('path')
+import JSZip from 'jszip'
+import fs from 'fs'
+import path from 'path'
 
 async function addFile(zip, filePath) {
     const data = fs.readFileSync(filePath)
@@ -38,8 +38,8 @@ async function createZip(files, folders) {
 }
 
 //********************************************************************
-const filesToAdd = ['manifest.json']
-const foldersToAdd = [
+export const filesToAdd = ['manifest.json']
+export const foldersToAdd = [
     'images',
     'options',
     'popup',
@@ -50,6 +50,3 @@ const foldersToAdd = [
 ]
 
 createZip(filesToAdd, foldersToAdd)
-
-
-module.exports = { filesToAdd, foldersToAdd }

@@ -1,5 +1,5 @@
-const { filesToAdd, foldersToAdd } = require('./make-publish-zip')
-const fs = require('fs-extra');
+import { filesToAdd, foldersToAdd } from './make-publish-zip.js';
+import fs from 'fs-extra';
 
 const destinationFolder = 'dist/cleaner-twitter/'
 
@@ -16,4 +16,4 @@ async function make() {
     }
 }
 
-make();
+make()
