@@ -1,3 +1,4 @@
+import { updateDefaultCSSRules } from "../utils/defaultRulesUpdate.js"
 import { getCSSRulesFromStorage } from "../utils/utils.js";
 
 /**@type {CSSRuleObject[]} */
@@ -74,3 +75,10 @@ autoUpdatesToggle.addEventListener('click', async () => {
     await chrome.storage.sync.set({ autoUpdate: !autoUpdateItem.autoUpdate })
 })
 //Auto updates setting <--
+
+//Update now button -->
+const updateNowButton = document.getElementById('update-now')
+updateNowButton.addEventListener('click', async () => {
+    await updateDefaultCSSRules(true)
+})
+//Update now button <--
