@@ -23,7 +23,8 @@
   ],
   "permissions": [
     "storage",
-    "tabs"
+    "tabs",
+    "webNavigation"
   ],
   "background": {
     "service_worker": "service_workers/background.js", "type": "module"
