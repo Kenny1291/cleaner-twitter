@@ -1,6 +1,20 @@
 import { setDefaultRules } from "../utils/utils.js";
+import { updateDefaultCSSRules } from "../utils/defaultRulesUpdate.js";
+
+chrome.webNavigation.onCommitted.addListener(async () => {
+        await updateDefaultCSSRules()
+    }, 
+    { url: [{ urlMatches: 'https://*.twitter.com/*' }] 
+})
 
 chrome.runtime.onInstalled.addListener(async () => {
+    const versionInStorage = await chrome.storage.sync.get('version')
+    if(Object.keys(versionInStorage).length === 0) {
+        await chrome.storage.sync.clear()
+        setDefaultRules()
+        return
+    }
+
     const rulesInStorage = await chrome.storage.sync.get('CSSRulesArrayOfObjectsWithNames')
     const foundStoredRules = Object.keys(rulesInStorage).length > 0
     if (!foundStoredRules) setDefaultRules()
@@ -22,8 +36,8 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 /**
  * Check wether the number of rules or the rules changed 
  * 
- * @param {CSSRulesArray} oldValue 
- * @param {CSSRulesArray} newValue 
+ * @param {CSSRuleObject[]} oldValue 
+ * @param {CSSRuleObject[]} newValue 
  * @returns {boolean} true if rules changed, false otherwise
  */
 function checkIfRulesChanged(oldValue, newValue) {
@@ -43,8 +57,8 @@ function checkIfRulesChanged(oldValue, newValue) {
 /**
  * Finds the rules that have been toggled
  *  
- * @param {CSSRulesArray} oldValue 
- * @param {CSSRulesArray} newValue 
+ * @param {CSSRuleObject[]} oldValue 
+ * @param {CSSRuleObject[]} newValue 
  * @returns {message[]} An array of messages
  */
 function getRulesThatChangedState(oldValue, newValue) {
