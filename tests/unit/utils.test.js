@@ -19,7 +19,7 @@ describe('getRuleName()', () => {
 })
 
 describe('processCSSRule()', () => {
-    it('should return a CSSRuleObject', () => {
+    it('should return a "CSSRuleObject"', () => {
         const expected = CSSRulesArrayOfObjectsWithNames[0]
         const actual = processCSSRule(exampleRule, CSSRulesArrayOfObjectsWithNames)
         assert.deepEqual(actual, expected) 
