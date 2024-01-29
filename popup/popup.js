@@ -1,6 +1,6 @@
 import { getCSSRulesFromStorage } from "../utils/utils.js";
 
-/**@type {CSSRulesArray} */
+/**@type {CSSRuleObject[]} */
 const CSSRules = await getCSSRulesFromStorage()
 
 /**@type {HTMLHeadingElement} */
@@ -29,6 +29,7 @@ CSSRules.forEach(CSSRule => {
     )
 
     /**@type {HTMLInputElement} */
+    //@ts-ignore
     const ruleToggle = document.getElementById(CSSRule.name)
 
     ruleToggle.checked = CSSRule.active
@@ -55,3 +56,21 @@ function toggleStorageKey(CSSRuleName) {
 document.getElementById('editCSSRules').addEventListener('click', () => {
     window.open(chrome.runtime.getURL('options/options.html'))
 })
+
+//Auto updates setting -->
+let autoUpdateItem = await chrome.storage.sync.get('autoUpdate')
+if(Object.keys(autoUpdateItem).length === 0) {
+    await chrome.storage.sync.set({ autoUpdate: true })
+    autoUpdateItem.autoUpdate = true
+}
+
+/**@type {HTMLInputElement} */
+//@ts-ignore
+const autoUpdatesToggle = document.getElementById('rules-auto-updates')
+autoUpdatesToggle.checked = autoUpdateItem.autoUpdate
+
+autoUpdatesToggle.addEventListener('click', async () => {
+    autoUpdateItem = await chrome.storage.sync.get('autoUpdate')
+    await chrome.storage.sync.set({ autoUpdate: !autoUpdateItem.autoUpdate })
+})
+//Auto updates setting <--

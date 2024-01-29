@@ -8,6 +8,19 @@
         <div id="button-container">
             <button id="editCSSRules" class="outline">Edit CSS rules</button>
         </div>
+        <details>
+            <summary>Advanced settings</summary>
+            <div class="switch-container">
+                <label for="rules-auto-updates">Auto update rules</label>
+                <input id="rules-auto-updates" type="checkbox" role="switch" />
+            </div>
+        </details>
     </body>
     <script src="popup.js" type="module"></script>
+    
+    <!-- The following script does not work inside popup.js -->
+    <script>
+        const accordion = document.querySelector('details')
+        accordion.addEventListener('click', () => accordion.toggleAttribute('open'))
+    </script>
 </html>
