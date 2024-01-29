@@ -9,9 +9,14 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from ".
 
 
 /**
- * Updates default CSS rules in storage if the remote version is newer, by replacing, adding, and removing rules as necessary
+ * Updates default CSS rules in storage if the remote version is newer, by replacing, adding, and removing rules as necessary.
+ * Only if the auto update setting is enabled
  */
 export async function updateDefaultCSSRules() {
+    const autoUpdateItem = await chrome.storage.sync.get('autoUpdate')
+    const autoUpdateState = autoUpdateItem.autoUpdate
+    if(!autoUpdateState) return
+
     const defaultCSSRulesJson = await fetchDefaultCSSRulesJSON()
     const versionItem = await chrome.storage.sync.get('version')
     const currentRulesVersion = versionItem.version
