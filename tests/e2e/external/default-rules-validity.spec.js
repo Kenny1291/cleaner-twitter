@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 // @ts-ignore
 import { test, expect } from '@playwright/test'
 // import { testUser } from './static-data/twitterCredentials.js'

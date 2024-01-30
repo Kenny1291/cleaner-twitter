@@ -5,3 +5,4 @@ dist/
 /blob-report/
 /playwright/.cache/
 twitterCredentials.js
+.env
