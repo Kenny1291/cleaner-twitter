@@ -1,9 +1,11 @@
 import { test as base, chromium } from '@playwright/test'
-import path from 'path'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const test = base.extend({
   context: async ({ }, use) => {
-    const pathToExtension = path.join(__dirname, '../..', 'dist/cleaner-twitter')
+    const pathToExtension = __dirname + '/../../dist/cleaner-twitter'
     const context = await chromium.launchPersistentContext('', {
       headless: false,
       args: [
