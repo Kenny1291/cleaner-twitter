@@ -26,5 +26,3 @@ jobs:
 
     - name: Run tests
       run: npx playwright test tests/e2e/external/default-rules-validity.spec.js
-
-      name: Check default rules validity

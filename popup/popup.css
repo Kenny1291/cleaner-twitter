@@ -33,3 +33,7 @@ button {
     width: 50% !important;
     margin: auto !important;
 }
+
+details {
+    margin-left: 0.5rem;
+}
