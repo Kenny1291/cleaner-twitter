@@ -1,6 +1,6 @@
 // @ts-ignore
 import { test, expect } from '@playwright/test'
-import { testUser } from './static-data/twitterCredentials.js'
+// import { testUser } from './static-data/twitterCredentials.js'
 // @ts-ignore
 import defaultCSSRules from '../../../data/defaultCSSRules.json' assert { type: 'json' }
 
@@ -12,16 +12,16 @@ test.beforeAll(async ({ browser }) => {
     await page.goto('https://twitter.com')
 
     await page.click('text="Sign in"')
-    await page.fill('input', testUser.EMAIL)
+    await page.fill('input', process.env.USER_EMAIL)
     await page.click('text="Next"')
 
     try {
         await page.waitForSelector('input[name="text"]', { timeout: 1000 }),
-        await page.fill('input[name="text"]', testUser.USERNAME)
+        await page.fill('input[name="text"]', process.env.USER_USERNAME)
         await page.click('text="Next"')
     } catch (e) {}
 
-    await page.fill('input[name="password"]', testUser.PASSWORD)
+    await page.fill('input[name="password"]', process.env.USER_PASSWORD)
     await Promise.all([
         page.waitForNavigation(),
         page.click('text="Log in"'),
