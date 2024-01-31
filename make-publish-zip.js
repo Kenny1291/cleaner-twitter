@@ -1,3 +1,4 @@
+//@ts-ignore
 import JSZip from 'jszip'
 import fs from 'fs'
 import path from 'path'

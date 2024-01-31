@@ -25,6 +25,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
  */
 function injectStylesAndSetClasses() {
     /**@type {?HTMLStyleElement} */
+    // @ts-ignore
     const oldStyle =  document.getElementById('cleanerTwitterStyles')
 
     if(oldStyle) oldStyle.remove()

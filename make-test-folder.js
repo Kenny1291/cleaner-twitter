@@ -3,6 +3,9 @@ import fs from 'fs-extra';
 
 const destinationFolder = 'dist/cleaner-twitter/'
 
+/**
+ * @param {string} fileOrFolder 
+ */
 async function copyToDestDir(fileOrFolder) {
     await fs.copy(fileOrFolder, destinationFolder + fileOrFolder);
 }

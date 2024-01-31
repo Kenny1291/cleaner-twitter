@@ -5,7 +5,9 @@ import {
     processCSSRule,
     fetchDefaultCSSRulesJSON
 } from '../../utils/utils.js'
+// @ts-ignore
 import defaultCSSRules from '../../data/defaultCSSRules.json' assert { type: 'json' }
+// @ts-ignore
 import CSSRulesArrayOfObjectsWithNames from './static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
 
 const exampleRule = ".hide_tweet_analytics div:has(> a[aria-label$='View post analytics']) {display: none;}"

@@ -1,15 +1,16 @@
 import { createCSSRulesArrayOfObjectsWithRuleNames, getCSSRulesFromStorage, setDefaultRules } from "../utils/utils.js";
 
-/**@type {CSSRulesArray} */
+/**@type {CSSRuleObject[]} */
 const CSSRules = await getCSSRulesFromStorage()
 
 /**
  * Setup Ace code editor
  */
-let editor = ace.edit("editor")
+// @ts-ignore
+const editor = ace.edit("editor")
 editor.setTheme("ace/theme/twilight")
 editor.session.setMode("ace/mode/css")
-let formattedCSS = CSSRulesArrayRulesToString(CSSRules)
+const formattedCSS = CSSRulesArrayRulesToString(CSSRules)
 editor.session.insert({ row: 0, column: 0 }, formattedCSS)
 
 document.getElementById('saveButton').addEventListener('click', async () => {
@@ -22,7 +23,7 @@ document.getElementById('saveButton').addEventListener('click', async () => {
 /**
  * Extracts all the CSS rules from a CSSRulesArray and formats them for the editor
  *
- * @param {CSSRulesArray} CSSRulesArray
+ * @param {CSSRuleObject[]} CSSRulesArray
  * @returns {string} A formatted string of CSS rules.
  */
 function CSSRulesArrayRulesToString(CSSRulesArray) {
