@@ -68,12 +68,10 @@ test.beforeAll(async ({ browser }) => {
         const sel = await page.waitForSelector('input[name="text"]', { timeout: 5000 })
         if(sel) {
             const response = await fetch(`https://api.testmail.app/api/json?apikey=${process.env.TEST_MAIL_APP_APIKEY}&namespace=${process.env.TEST_MAIL_APP_NAMESPACE}&timestamp_from=${Date.now()}&livequery=true`)
-            console.log("After fetch");
             const emails = await response.json()
             const emailText = emails.emails[0].text
             const startIndexOfCode = emailText.indexOf("code.") + 7 
             const confirmationCode = emailText.substring(startIndexOfCode, startIndexOfCode + 9)
-            console.log(confirmationCode);
             await page.fill('input[name="text"]', confirmationCode)
             await page.click('text="Next"')
         }

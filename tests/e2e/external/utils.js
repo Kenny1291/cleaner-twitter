@@ -1,5 +1,4 @@
 /**
- * 
  * @param {string} str 
  * @param {string} char 
  * @returns {number}
@@ -11,7 +10,6 @@ function secondLastIndexOf(str, char) {
 }
 
 /**
- * 
  * @param {string} rule 
  * @returns {string}
  */
