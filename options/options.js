@@ -39,10 +39,10 @@ function CSSRulesArrayRulesToString(CSSRulesArray) {
  * Extracts all CSS rules from a string and returns them as an array
  *
  * @param {string} css - The string to extract rules from.
- * @returns {Array} An array of CSS rules.
+ * @returns {string[]} An array of CSS rules.
  */
 function formattedCSSStringToArray(css) {
-    return css.replace(/(?<=\.)\s+/g, '').match(/\.[^}]*}/g)
+    return css.replace(/\n\s*/g, '').match(/\.[^}]*}/g);
 }
 
 //Reset default rules (modal)
