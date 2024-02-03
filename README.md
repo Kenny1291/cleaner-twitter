@@ -8,6 +8,7 @@ A Chromium extension to make Twitter UI cleaner by removing annoying pieces. Cus
 - Hide UI pieces (togglable)
 - Modify and add custom CSS rules
 - Remote default rules update (no extension update required)
+  - Every day at midnight an automatic check is performed to verify that all rules are still valid 
   
 ## 📲 Installation
 1. Download [latest release](https://github.com/Kenny1291/cleaner-twitter/releases)
