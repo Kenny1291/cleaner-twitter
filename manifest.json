@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Cleaner Twitter",
   "description": "Make Twitter UI cleaner by removing annoying pieces.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "action": {
     "default_popup": "popup/popup.html",
     "default_icon": {
