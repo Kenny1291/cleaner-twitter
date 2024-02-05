@@ -128,7 +128,10 @@ function composeNewCSSRulesArray(currentCSSRules, oldRulesIndexAndNewRulesUUID, 
  */
 export function replaceRules(oldRulesIndexAndNewRulesUUID, currentCSSRule, newDefaultRules) {
     for (const oldRuleIndexAndNewRuleUUID of oldRulesIndexAndNewRulesUUID) {
-        currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].rule = newDefaultRules[oldRuleIndexAndNewRuleUUID.newRuleUUID]
+        const newRule = newDefaultRules[oldRuleIndexAndNewRuleUUID.newRuleUUID]
+        currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].rule = newRule
+        const newName = getRuleName(newRule)
+        currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].name = newName
     }
 }
 
