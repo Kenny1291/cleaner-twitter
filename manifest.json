@@ -24,7 +24,8 @@
   "permissions": [
     "storage",
     "tabs",
-    "webNavigation"
+    "webNavigation",
+    "scripting"
   ],
   "background": {
     "service_worker": "service_workers/background.js", "type": "module"
@@ -33,5 +34,6 @@
   "web_accessible_resources": [{
     "matches": ["<all_urls>"],
     "resources": ["utils.js"]
-  }]
+  }],
+  "host_permissions": ["https://*.twitter.com/*"]
 }
