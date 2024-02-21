@@ -79,6 +79,32 @@ autoUpdatesToggle.addEventListener('click', async () => {
 //Update now button -->
 const updateNowButton = document.getElementById('update-now')
 updateNowButton.addEventListener('click', async () => {
-    await updateDefaultCSSRules(true)
+    const response = await updateDefaultCSSRules(true)
+    updateNowButton.insertAdjacentHTML(
+        'beforebegin', 
+        `<div 
+            style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            "
+        >
+            <p 
+                id="updateFeedbackMsg"
+                style="
+                    font-size: 11px;
+                    margin: 0 0 8 0;
+                    padding: 5px;
+                    background-color: #1f2937;
+                    color: white;
+                    border-radius: 5px;
+                    border: 1px solid #4b5563;
+                    width: min-content;
+                "
+            >
+                ${response}
+            </p>
+        </div>`    
+    )
 })
 //Update now button <--
