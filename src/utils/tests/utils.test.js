@@ -4,11 +4,11 @@ import {
     getRuleName,
     processCSSRule,
     fetchDefaultCSSRulesJSON
-} from '../../src/utils/utils.js'
+} from '../utils.js'
 // @ts-ignore
-import defaultCSSRules from '../../data/defaultCSSRules.json' assert { type: 'json' }
+import defaultCSSRules from '../../../data/defaultCSSRules.json' assert { type: 'json' }
 // @ts-ignore
-import CSSRulesArrayOfObjectsWithNames from './static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
+import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
 
 const exampleRule = ".hide_tweet_analytics div:has(> a[aria-label$='View post analytics']) {display: none;}"
 

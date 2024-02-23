@@ -4,15 +4,15 @@ import {
     CSSFileAsString ,
     CSSFileAsStringArr,
     CSSRulesFormattedArr
-} from './static-data/CSSRuleParserFixtures.js'
+} from '../../../tests/unit/static-data/CSSRuleParserFixtures.js'
 import { 
     fromArrayOfFormattedRulesToCSSFileString,
     fromCSSStringToArrayOfFormattedRules,
     getSingleRulesFromCSSFileString,
     formatRuleForStorage
-} from '../../utils/CSSRulesParser.js'
+} from '../CSSRulesParser.js'
 // @ts-ignore
-import CSSRulesArrayOfObjectsWithNames from './static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
+import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
 
 
 describe('getSingleRulesFromCSSFileString()', () => {

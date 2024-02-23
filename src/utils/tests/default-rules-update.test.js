@@ -9,15 +9,15 @@ import {
     removeRules,
     getCurrentRulesHashed,
     sha256Hash
-} from '../../src/utils/defaultRulesUpdate.js'
+} from '../defaultRulesUpdate.js'
 // @ts-ignore
-import CSSRulesArrayOfObjectsWithNames from './static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
+import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
 // @ts-ignore
-import defaultCSSRules from '../../data/defaultCSSRules.json' assert { type: 'json' }
+import defaultCSSRules from '../../../data/defaultCSSRules.json' assert { type: 'json' }
 // @ts-ignore
-import defaultRulesV0Hashed from './static-data/default-rules-v0-hashed.json' assert { type: 'json' }
+import defaultRulesV0Hashed from '../../../tests/unit/static-data/default-rules-v0-hashed.json' assert { type: 'json' }
 // @ts-ignore
-import defaultRulesV0 from './static-data/default-rules-v0.json' assert { type: 'json' }
+import defaultRulesV0 from '../../../tests/unit/static-data/default-rules-v0.json' assert { type: 'json' }
 
 describe('getRulesToReplace()', () => {
     const currentRulesHashed = JSON.parse(JSON.stringify(defaultRulesV0Hashed))
@@ -98,6 +98,7 @@ describe('getRulesToRemove()', () => {
     })
 })  
 
+//TODO: Fix failing test
 describe('replaceRules()', () => {
     it('should replace all the rules with the new ones provided', () => {
         const oldRulesIndexAndNewRulesUUID = [
