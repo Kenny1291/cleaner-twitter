@@ -1,5 +1,5 @@
-import { setDefaultRules } from "../src/utils/utils.js";
-import { updateDefaultCSSRules } from "../src/utils/defaultRulesUpdate.js";
+import { setDefaultRules } from "../utils/utils.js";
+import { updateDefaultCSSRules } from "../utils/defaultRulesUpdate.js";
 
 chrome.webNavigation.onCommitted.addListener(async () => {
         await updateDefaultCSSRules()
