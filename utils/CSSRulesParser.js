@@ -1,3 +1,4 @@
+//TODO: Doc this functions
 /**
  * 
  * @param {CSSRuleObject[]} CSSRules
@@ -68,14 +69,16 @@ export function formatRuleForStorage(CSSRule) {
             CSSRule = CSSRule.substring(0, i) + CSSRule.substring(i + 1)
             i--
         }
-    }
-    const indexOfOpeningBracket = CSSRule.indexOf('{')
-    if(indexOfOpeningBracket + 1 < CSSRule.length && CSSRule[indexOfOpeningBracket + 1] === ' ') {
-        CSSRule = CSSRule.substring(0, indexOfOpeningBracket + 1) + CSSRule.substring(indexOfOpeningBracket + 2)
-    }
-    const indexOfClosingBracket = CSSRule.indexOf('}')
-    if(indexOfClosingBracket - 1 >= 0 && CSSRule[indexOfClosingBracket - 1] === ' ') {
-        CSSRule = CSSRule.substring(0, indexOfClosingBracket - 1) + CSSRule.substring(indexOfClosingBracket)
+        const indexOfOpeningBracket = CSSRule.indexOf('{')
+        if(indexOfOpeningBracket + 1 < CSSRule.length && CSSRule[indexOfOpeningBracket + 1] === ' ') {
+            CSSRule = CSSRule.substring(0, indexOfOpeningBracket + 1) + CSSRule.substring(indexOfOpeningBracket + 2)
+            i--
+        }
+        const indexOfClosingBracket = CSSRule.indexOf('}')
+        if(indexOfClosingBracket - 1 >= 0 && CSSRule[indexOfClosingBracket - 1] === ' ') {
+            CSSRule = CSSRule.substring(0, indexOfClosingBracket - 1) + CSSRule.substring(indexOfClosingBracket)
+            i--
+        }
     }
     return CSSRule
 }
