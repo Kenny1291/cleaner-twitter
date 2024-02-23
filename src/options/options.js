@@ -1,4 +1,5 @@
 import { createCSSRulesArrayOfObjectsWithRuleNames, getCSSRulesFromStorage, setDefaultRules } from "../utils/utils.js";
+import { fromCSSStringToArrayOfFormattedRules, fromArrayOfFormattedRulesToCSSFileString } from "../utils/CSSRulesParser.js";
 
 /**@type {CSSRuleObject[]} */
 const CSSRules = await getCSSRulesFromStorage()
@@ -10,40 +11,40 @@ const CSSRules = await getCSSRulesFromStorage()
 const editor = ace.edit("editor")
 editor.setTheme("ace/theme/twilight")
 editor.session.setMode("ace/mode/css")
-const formattedCSS = CSSRulesArrayRulesToString(CSSRules)
+const formattedCSS = fromArrayOfFormattedRulesToCSSFileString(CSSRules)
 editor.session.insert({ row: 0, column: 0 }, formattedCSS)
 
 document.getElementById('saveButton').addEventListener('click', async () => {
     const css = editor.getValue()
-    const CSSRulesArray = formattedCSSStringToArray(css)
+    const CSSRulesArray = fromCSSStringToArrayOfFormattedRules(css)
     const CSSRulesArrayOfObjectsWithNames = await createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArray, true)
     chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames }).then(() => window.close())
 })
 
-/**
- * Extracts all the CSS rules from a CSSRulesArray and formats them for the editor
- *
- * @param {CSSRuleObject[]} CSSRulesArray
- * @returns {string} A formatted string of CSS rules.
- */
-function CSSRulesArrayRulesToString(CSSRulesArray) {
-    return CSSRulesArray.map(rule => rule.rule).join('\n')
-        .replace(/([{])\s*/g, ' $1\n    ')
-        .replace(/}\s*/g, '\n}\n')
-        .replace(/([^\s])\s*{/g, '$1 {')
-        .replace(/\n\s*\n/g, '\n')
-        .trim();
-}
+// /**
+//  * Extracts all the CSS rules from a CSSRulesArray and formats them for the editor
+//  *
+//  * @param {CSSRuleObject[]} CSSRulesArray
+//  * @returns {string} A formatted string of CSS rules.
+//  */
+// function CSSRulesArrayRulesToString(CSSRulesArray) {
+//     return CSSRulesArray.map(rule => rule.rule).join('\n')
+//         .replace(/([{])\s*/g, ' $1\n    ')
+//         .replace(/}\s*/g, '\n}\n')
+//         .replace(/([^\s])\s*{/g, '$1 {')
+//         .replace(/\n\s*\n/g, '\n')
+//         .trim();
+// }
 
-/**
- * Extracts all CSS rules from a string and returns them as an array
- *
- * @param {string} css - The string to extract rules from.
- * @returns {string[]} An array of CSS rules.
- */
-function formattedCSSStringToArray(css) {
-    return css.replace(/\n\s*/g, '').match(/\.[^}]*}/g);
-}
+// /**
+//  * Extracts all CSS rules from a string and returns them as an array
+//  *
+//  * @param {string} css - The string to extract rules from.
+//  * @returns {string[]} An array of CSS rules.
+//  */
+// function formattedCSSStringToArray(css) {
+//     return css.replace(/\n\s*/g, '').match(/\.[^}]*}/g);
+// }
 
 //Reset default rules (modal)
 document.getElementById('resetButton').addEventListener('click', () => toggleModal(event))
