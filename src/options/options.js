@@ -21,31 +21,6 @@ document.getElementById('saveButton').addEventListener('click', async () => {
     chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames }).then(() => window.close())
 })
 
-// /**
-//  * Extracts all the CSS rules from a CSSRulesArray and formats them for the editor
-//  *
-//  * @param {CSSRuleObject[]} CSSRulesArray
-//  * @returns {string} A formatted string of CSS rules.
-//  */
-// function CSSRulesArrayRulesToString(CSSRulesArray) {
-//     return CSSRulesArray.map(rule => rule.rule).join('\n')
-//         .replace(/([{])\s*/g, ' $1\n    ')
-//         .replace(/}\s*/g, '\n}\n')
-//         .replace(/([^\s])\s*{/g, '$1 {')
-//         .replace(/\n\s*\n/g, '\n')
-//         .trim();
-// }
-
-// /**
-//  * Extracts all CSS rules from a string and returns them as an array
-//  *
-//  * @param {string} css - The string to extract rules from.
-//  * @returns {string[]} An array of CSS rules.
-//  */
-// function formattedCSSStringToArray(css) {
-//     return css.replace(/\n\s*/g, '').match(/\.[^}]*}/g);
-// }
-
 //Reset default rules (modal)
 document.getElementById('resetButton').addEventListener('click', () => toggleModal(event))
 const closeModelAnchors = document.getElementsByClassName('closeModalAnchor')
