@@ -1,4 +1,4 @@
-import { createCSSRulesArrayOfObjectsWithRuleNames, getCSSRulesFromStorage, setDefaultRules } from "../../utils/utils.js";
+import { createCSSRulesArrayOfObjectsWithRuleNames, getCSSRulesFromStorage, setDefaultRules } from "../utils/utils.js";
 
 /**@type {CSSRuleObject[]} */
 const CSSRules = await getCSSRulesFromStorage()
