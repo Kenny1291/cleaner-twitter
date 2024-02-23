@@ -1,5 +1,5 @@
-import { updateDefaultCSSRules } from "../src/utils/defaultRulesUpdate.js"
-import { getCSSRulesFromStorage } from "../src/utils/utils.js";
+import { updateDefaultCSSRules } from "../utils/defaultRulesUpdate.js"
+import { getCSSRulesFromStorage } from "../utils/utils.js";
 
 /**@type {CSSRuleObject[]} */
 const CSSRules = await getCSSRulesFromStorage()

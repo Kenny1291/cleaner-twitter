@@ -9,7 +9,7 @@ import {
     removeRules,
     getCurrentRulesHashed,
     sha256Hash
-} from '../../utils/defaultRulesUpdate.js'
+} from '../../src/utils/defaultRulesUpdate.js'
 // @ts-ignore
 import CSSRulesArrayOfObjectsWithNames from './static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
 // @ts-ignore
