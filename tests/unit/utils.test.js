@@ -4,7 +4,7 @@ import {
     getRuleName,
     processCSSRule,
     fetchDefaultCSSRulesJSON
-} from '../../utils/utils.js'
+} from '../../src/utils/utils.js'
 // @ts-ignore
 import defaultCSSRules from '../../data/defaultCSSRules.json' assert { type: 'json' }
 // @ts-ignore

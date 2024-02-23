@@ -5,8 +5,8 @@
   "main": "background.js",
   "type": "module",
   "scripts": {
-    "zip": "node make-publish-zip.js",
-    "folder": "node make-test-folder.js",
+    "zip": "node scripts/make-publish-zip.js",
+    "folder": "node scripts/make-test-folder.js",
     "build": "npm run zip && npm run folder"
   },
   "repository": {
