@@ -14,7 +14,7 @@
   },
   "content_scripts": [
     {
-        "js": ["content_scripts/content.js"],
+        "js": ["src/content_scripts/content.js"],
         "matches": [
             "https://*.twitter.com/*"
         ],

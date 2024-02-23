@@ -36,7 +36,7 @@ function injectContentScriptInOpenTwitterTabs(tabs) {
     for (const tab of tabs) {
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
-            files: ['content_scripts/content.js'] 
+            files: ['src/content_scripts/content.js'] 
         })
     }
 }
