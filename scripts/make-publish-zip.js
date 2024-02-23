@@ -41,13 +41,13 @@ async function createZip(files, folders) {
 //********************************************************************
 export const filesToAdd = ['manifest.json']
 export const foldersToAdd = [
-    'images',
-    'options',
-    'popup',
-    'scripts',
-    'service_workers',
-    'utils',
-    'vendor'
+    'src/images',
+    'src/options',
+    'src/popup',
+    'src/content_scripts',
+    'src/service_workers',
+    'src/utils',
+    'src/vendor'
 ]
 
 createZip(filesToAdd, foldersToAdd)
