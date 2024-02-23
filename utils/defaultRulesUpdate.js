@@ -11,6 +11,9 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from ".
 /**
  * Updates default CSS rules in storage if the remote version is newer, by replacing, adding, and removing rules as necessary.
  * Only if the auto update setting is enabled
+ * 
+ * @param {boolean} manual - Indicates wether the updates is manually triggered or not
+ * @returns {Promise<string>} A message indicating if the update is performed
  */
 export async function updateDefaultCSSRules(manual = false) {
     if(!manual) {
@@ -35,7 +38,10 @@ export async function updateDefaultCSSRules(manual = false) {
         const CSSRulesArrayOfObjectsWithNames = composeNewCSSRulesArray(currentCSSRulesArray, oldRulesIndexAndNewRulesUUID, UUIDSOfRulesToAdd, indexesOfRulesToRemove, remoteNewRules)
 
         chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames, version: defaultRulesVersion })
+
+        return `Default rules updated from version ${currentRulesVersion} to version ${defaultRulesVersion}`
     }
+    return "You already have the latest version"
 }
 
 /**
