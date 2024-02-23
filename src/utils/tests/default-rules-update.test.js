@@ -98,7 +98,6 @@ describe('getRulesToRemove()', () => {
     })
 })  
 
-//TODO: Fix failing test
 describe('replaceRules()', () => {
     it('should replace all the rules with the new ones provided', () => {
         const oldRulesIndexAndNewRulesUUID = [
@@ -106,11 +105,13 @@ describe('replaceRules()', () => {
             { oldRuleIndex: 3, newRuleUUID: "testUUID2" }
         ]
         const defaultRulesV0Mod = JSON.parse(JSON.stringify(defaultRulesV0))
-        defaultRulesV0Mod["testUUID1"] = "testRule1"
-        defaultRulesV0Mod["testUUID2"] = "testRule2"
+        defaultRulesV0Mod["testUUID1"] = ".testName1 testRule"
+        defaultRulesV0Mod["testUUID2"] = ".testName2 testRule"
         const expected = JSON.parse(JSON.stringify(CSSRulesArrayOfObjectsWithNames))
-        expected[0].rule = "testRule1"
-        expected[3].rule = "testRule2"
+        expected[0].rule = ".testName1 testRule"
+        expected[0].name = "testName1"
+        expected[3].rule = ".testName2 testRule"
+        expected[3].name = "testName2"
         const actual = JSON.parse(JSON.stringify(CSSRulesArrayOfObjectsWithNames))
         replaceRules(oldRulesIndexAndNewRulesUUID, actual, defaultRulesV0Mod)
         assert.deepEqual(actual, expected)
