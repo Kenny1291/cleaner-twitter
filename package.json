@@ -13,8 +13,8 @@
     "type": "git",
     "url": "git+https://github.com/Kenny1291/cleaner-twitter.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Raiquen Guidotti <raiquen@guidotti.solutions>",
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/Kenny1291/cleaner-twitter/issues"
   },
