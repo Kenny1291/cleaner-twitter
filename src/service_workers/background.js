@@ -42,9 +42,9 @@ function injectContentScriptInOpenTwitterTabs(tabs) {
 }
 
 chrome.storage.onChanged.addListener((changes, areaName) => {
-    let [[key, { oldValue, newValue }]] = Object.entries(changes);
+    const [[key, { oldValue, newValue }]] = Object.entries(changes);
 
-    let rulesChanged = checkIfRulesChanged(oldValue, newValue)
+    const rulesChanged = checkIfRulesChanged(oldValue, newValue)
 
     if(rulesChanged) {
         sendMessageToTwitterTabs({ name: 'rulesChanged', active: true })
@@ -83,7 +83,7 @@ function checkIfRulesChanged(oldValue, newValue) {
  * @returns {message[]} An array of messages
  */
 function getRulesThatChangedState(oldValue, newValue) {
-    let rulesToggled = []
+    const rulesToggled = []
 
     for (let i = 0; i < oldValue.length; i++) {
         if (oldValue[i].active != newValue[i].active) {
