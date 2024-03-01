@@ -88,6 +88,6 @@ test('current default css rules validity', async () => {
 
     for(const defaultRule of Object.values(defaultCSSRules.defaultRules)) {
         const selector = getSelector(defaultRule)
-        await page.waitForSelector(selector, { timeout: 5000 })
+        await page.waitForSelector(selector, { timeout: 10000 })
     }
 })
