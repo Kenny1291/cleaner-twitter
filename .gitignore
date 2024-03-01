@@ -6,3 +6,4 @@ dist/
 /playwright/.cache/
 twitterCredentials.js
 .env
+/tools/env.js
