@@ -30,7 +30,7 @@ describe('getRulesToReplace()', () => {
         assert.equal(actual, expected)
     })
 
-    it('should return am Array of "oldRuleIndexAndNewRuleUUID"', () => {
+    it('should return an Array of "oldRuleIndexAndNewRuleUUID"', () => {
         const actual = getRulesToReplace(defaultCSSRules.oldRules["0"], currentRulesHashed)
         assert.equal(
             Array.isArray(actual) && (arrOfObjs => { 
