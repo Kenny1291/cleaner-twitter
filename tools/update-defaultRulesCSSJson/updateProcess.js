@@ -1,29 +1,40 @@
 let rulesModified = false
 
-function processDefaultRulesUpdate(newDefaultRules, oldDefaultRulesJson) {
-//    const intervalId = setInterval(() => manageStatusUpdates(), 1000);
-
+/**
+ * @param {updatedDefaultRules[]} newDefaultRules 
+ * @param {defaultCSSRules} oldDefaultRulesJson 
+ */
+async function processDefaultRulesUpdate(newDefaultRules, oldDefaultRulesJson) {
     const oldRules = JSON.parse(JSON.stringify(oldDefaultRulesJson.defaultRules))
-    pushStatusUpdateToUser('Adding rules')
+    // pushStatusUpdateToUser('Adding rules...')
     addRules(newDefaultRules, oldDefaultRulesJson)
-    pushStatusUpdateToUser('Done!')
-    pushStatusUpdateToUser('Removing rules')
+    // pushStatusUpdateToUser('Removing rules...')
     removeRules(newDefaultRules, oldDefaultRulesJson)
-    pushStatusUpdateToUser('Done!')
-    pushStatusUpdateToUser('Replacing rules')
+    // pushStatusUpdateToUser('Replacing rules...')
     replaceRules(newDefaultRules, oldDefaultRulesJson)
-    pushStatusUpdateToUser('Done!')
     if(rulesModified) {
-        updateOldDefaultRulesJson(oldDefaultRulesJson, oldRules)
-        //push to GitHub
-        createNewBranch(`Default CSS rules update v.${oldDefaultRulesJson.version}`)
-            .then(() => pushStatusUpdateToUser('Done!'))
+        // pushStatusUpdateToUser('Updating version and adding old default rules...')
+        await updateOldDefaultRulesJson(oldDefaultRulesJson, oldRules)
+        // pushStatusUpdateToUser('Creating new branch remotely...')
+        const branchName = "rules-update-tool" + Math.floor(Math.random() * 900) + 100
+        await createNewBranch(branchName)
+        // pushStatusUpdateToUser('Pushing commit to remote repo...')
+        const commitMessage = `defaultCSSRulesJSON update to version ${oldDefaultRulesJson.version}`
+        // pushStatusUpdateToUser('Opening a pull request...')
+        await commitUpdateDefaultCSSRulesJson(branchName, commitMessage)
+        const pullReq = await openPullRequest(commitMessage + " [AUTOMATED]", branchName)
+        //TODO: The following message was not printed
+        //@ts-ignore
+        pushStatusUpdateToUser(`Done! You can now review and accept the changes on GitHub. <a href=${pullReq.html_url}>Pull request</a>`)
+    } else {
+        pushStatusUpdateToUser('No changes to apply.')
     }
-    
-
-    // clearInterval(intervalId)
 }
 
+/**
+ * @param {updatedDefaultRules[]} newDefaultRules 
+ * @param {defaultCSSRules} oldDefaultRulesJson 
+ */
 function addRules(newDefaultRules, oldDefaultRulesJson) {
     for (let i = 0; i < newDefaultRules.length; i++) {
         const newUUID = newDefaultRules[i].UUID
@@ -41,6 +52,10 @@ function addRules(newDefaultRules, oldDefaultRulesJson) {
     }
 }
 
+/**
+ * @param {updatedDefaultRules[]} newDefaultRules 
+ * @param {defaultCSSRules} oldDefaultRulesJson 
+ */
 function removeRules(newDefaultRules, oldDefaultRulesJson) {
     for (const oldUUID of Object.keys(defaultCSSRulesJson.defaultRules)) {
         let matchFound = false
@@ -57,6 +72,10 @@ function removeRules(newDefaultRules, oldDefaultRulesJson) {
     }
 }
 
+/**
+ * @param {updatedDefaultRules[]} newDefaultRules 
+ * @param {defaultCSSRules} oldDefaultRulesJson 
+ */
 function replaceRules(newDefaultRules, oldDefaultRulesJson) {
     const oldRulesEntries = Object.entries(oldDefaultRulesJson.defaultRules)
     for (const oldRuleEntry of oldRulesEntries) {
@@ -73,27 +92,33 @@ function replaceRules(newDefaultRules, oldDefaultRulesJson) {
     }
 }
 
-function composeOldRulesArr(oldRules) {
+/**
+ * @param {defaultCSSRules["defaultRules"]} oldRules 
+ * @returns {Promise<oldRules[]>}
+ */
+async function composeOldRulesArr(oldRules) {
     const oldRulesArr = []
     for (const oldRuleEntry of Object.entries(oldRules)) {
         const UUID = oldRuleEntry[0]
-        const hash = oldRuleEntry[1]
+        const hash = await sha256Hash(oldRuleEntry[1])
         oldRulesArr.push({ UUID, hash })
     }
     return oldRulesArr
 }
 
-function updateOldDefaultRulesJson(oldDefaultRulesJson, oldRules) {
+/**
+ * @param {defaultCSSRules} oldDefaultRulesJson 
+ * @param {defaultCSSRules["defaultRules"]} oldRules 
+ */
+async function updateOldDefaultRulesJson(oldDefaultRulesJson, oldRules) {
     oldDefaultRulesJson.version += 1
-    oldDefaultRulesJson.oldRules[oldDefaultRulesJson.version] = composeOldRulesArr(oldRules)
+    oldDefaultRulesJson.oldRules[oldDefaultRulesJson.version] = await composeOldRulesArr(oldRules)
 }
 
-// async function manageStatusUpdates() {
-//     const status = await OPFS.readFile('myFile')
-
-// }
-
 let lastCallTime
+/**
+ * @param {string} status 
+ */
 function pushStatusUpdateToUser(status) {
     const timeElapsedSinceLastCall = Date.now() - lastCallTime
     if(timeElapsedSinceLastCall < 1000) {
@@ -111,7 +136,3 @@ function pushStatusUpdateToUser(status) {
 
     lastCallTime = Date.now()
 }
-
-// async function updateStatus(status) {
-//     await OPFS.writeFile('myFile', status)
-// }

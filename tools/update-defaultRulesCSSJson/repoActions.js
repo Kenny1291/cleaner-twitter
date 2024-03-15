@@ -1,46 +1,79 @@
-import { GITHUB_TOKEN } from "../env.js";
-//@ts-ignore
-import defaultCSSRulesJson from '../../../data/defaultCSSRules.json' assert { type: 'json' }
-
-//Create new branch
 /**
- * 
- * @param {*} name 
- * @returns 
+ * @returns {Promise<string|boolean>}
+ */
+async function getLatestCommitSHAFromMain() {
+    const req = new GitHubApiCall(HTTPMethod.GET, 'commits/main').make()
+    const res = await req.getResponse()
+    //@ts-ignore
+    return res.sha
+}
+
+/**
+ * @param {string} name 
+ * @returns {Promise<JSON|boolean>}
  */
 async function createNewBranch(name) {
-    const req = new GitHubApiCall(HTTPMethod.POST, 'git/refs', { ref: `refs/heads/${name}` }).make()
+    const latestCommitSHAFromMain = await getLatestCommitSHAFromMain()
+    const req = new GitHubApiCall(
+                    HTTPMethod.POST,
+                    'git/refs',
+                    { 
+                        ref: `refs/heads/${name}`,
+                        sha: latestCommitSHAFromMain
+                    }
+                )
+                .make()
     return await req.getResponse()
 }
 
-//Commit file defaultCSSRules.json
-function commitUpdateDefaultCSSRulesJson(branch, commitMessage) {
-    new GitHubApiCall(
+/**
+ * @returns {Promise<string|boolean>}
+ */
+async function getDefaultCSSRulesJsonBlobSHA() {
+    const req = new GitHubApiCall(HTTPMethod.GET, 'contents/data/defaultCSSRules.json').make()
+    const res = await req.getResponse()
+    //@ts-ignore
+    return res.sha
+}
+
+/**
+ * @param {string} branch 
+ * @param {string} commitMessage 
+ * @returns {Promise<JSON|boolean>}
+ */
+async function commitUpdateDefaultCSSRulesJson(branch, commitMessage) {
+    const defaultCSSRulesJsonBlobSHA = await getDefaultCSSRulesJsonBlobSHA()
+    const req = new GitHubApiCall(
         HTTPMethod.PUT,
-        'contents/PATH',
+        'contents/data/defaultCSSRules.json',
         {
             message: commitMessage,
             committer: { name: 'Raiquen Guidotti', email: 'raiquen@guidotti.solutions' },
-            content: btoa(JSON.stringify(defaultCSSRulesJson)),
-            sha: getDefaultCSSRulesJsonBlobSHA(),
+            content: btoa(JSON.stringify(defaultCSSRulesJson, undefined, 1)),
+            sha: defaultCSSRulesJsonBlobSHA,
             branch: branch
         }
     )
     .make()
+    return await req.getResponse()
 }
 
-const getDefaultCSSRulesJsonBlobSHA = () => new GitHubApiCall(HTTPMethod.GET, 'contents/PATH').make().sha
-
-//Open PR
-function openPullRequest(title, branchName) {
-    new GitHubApiCall(
+/**
+ * @param {string} title 
+ * @param {string} branchName 
+ * @returns {Promise<JSON|boolean>}
+ */
+async function openPullRequest(title, branchName) {
+    const req = new GitHubApiCall(
         HTTPMethod.POST,
         'pulls',
         {
             title: title,
-            head: `${USERNAME}:${branchName}`,
+            head: `${GitHubApiCall.username}:${branchName}`,
             base: 'main',
             draft: true
         }
     )
+    .make()
+    return await req.getResponse()
 }

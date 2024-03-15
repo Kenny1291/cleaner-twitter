@@ -1,4 +1,5 @@
 const fieldSet = document.querySelector('form')
+/**@type {defaultCSSRules} */
 let defaultCSSRulesJson
 
 fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRules.json')
@@ -23,6 +24,7 @@ fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/def
         }
 
         for (const deleteBtn of document.getElementsByClassName('deleteBtn')) {
+            //@ts-ignore
             deleteBtn.addEventListener('click', (event) => event.target.parentElement.remove())
         }
     })
@@ -38,14 +40,26 @@ document.getElementById('addBtn').addEventListener('click', () => {
             </fieldset>
         `
         )
+    //@ts-ignore
     document.getElementById('newDeleteBtn' + counter++).addEventListener('click', (event) => event.target.parentElement.remove())
 })
 
-document.getElementById('applyUpdateBtn').addEventListener('click', () => {
+document.getElementById('applyUpdateBtn').addEventListener('click', (event) => {
+    //@ts-ignore
+    event.target.disabled = true;
     const newDefaultRules = getNewDefaultRules()
     processDefaultRulesUpdate(newDefaultRules, defaultCSSRulesJson)
 })
 
+/**
+ * @typedef {Object} updatedDefaultRules
+ * @property {string} UUID
+ * @property {string} rule
+ */
+
+/**
+ * @returns {updatedDefaultRules[]}
+ */
 function getNewDefaultRules() {
     const newDefaultRules = []
     const textAreas = document.getElementsByTagName('textarea')
