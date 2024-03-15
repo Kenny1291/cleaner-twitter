@@ -1,6 +1,6 @@
 class GitHubApiCall extends XHR {
-    #username = 'Kenny1291'
-    #repoName = 'cleaner-twitter'
+    static username = 'Kenny1291'
+    static #repoName = 'cleaner-twitter'
 
     /**
      * @param {HTTPMethod} method
@@ -10,7 +10,7 @@ class GitHubApiCall extends XHR {
     constructor(method, relativeUrl, body = null) {
         super(
             method,
-            `https://api.github.com/repos/${this.#username}/${this.#repoName}/${relativeUrl}`,
+            `https://api.github.com/repos/${GitHubApiCall.username}/${GitHubApiCall.#repoName}/${relativeUrl}`,
             [
                 { name: 'Accept', value: 'application/vnd.github+json' },
                 { name: 'Authorization', value: `Bearer ${GITHUB_TOKEN}` },
