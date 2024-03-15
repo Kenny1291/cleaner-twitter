@@ -77,7 +77,7 @@ class XHR {
             const status = this.#request.status
             const successful = status >= 200 || status <= 299
             if(successful) {
-                this.#response = this.#request.response
+                this.#response = JSON.parse(this.#request.response)
                 if(this.#responsePromiseResolve !== undefined) {
                     this.#responsePromiseResolve(this.#response)
                 }
