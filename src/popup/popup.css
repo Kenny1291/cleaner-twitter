@@ -26,6 +26,10 @@ label {
     margin-bottom: 1rem;
 }
 
+#update-now-container {
+    display: flex;
+}
+
 button {
     font-size: 13px !important;
     width: 50% !important;
