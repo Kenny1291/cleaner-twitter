@@ -12,7 +12,7 @@ async function copyToDestDir(fileOrFolder) {
     await fs.copy(fileOrFolder, destinationFolder + fileName)
 }
 
-async function make() {
+export async function make() {
     for (const file of filesToAdd) {
         await copyToDestDir(file)
     }
@@ -20,5 +20,3 @@ async function make() {
         await copyToDestDir(folder)
     }
 }
-
-make()
