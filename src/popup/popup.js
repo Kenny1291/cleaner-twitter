@@ -1,6 +1,19 @@
 import { updateDefaultCSSRules } from "../utils/defaultRulesUpdate.js"
 import { getCSSRulesFromStorage } from "../utils/utils.js";
 
+/**
+ * 
+ * @param {string} content 
+ */
+export function displayHTMLContent(content) {
+    h2.insertAdjacentHTML(
+        'afterend',
+        `
+            ${content}
+        `
+    )
+}
+
 /**@type {CSSRuleObject[]} */
 const CSSRules = await getCSSRulesFromStorage()
 
@@ -18,16 +31,23 @@ CSSRules.forEach(CSSRule => {
         .split('_')
         .map(word => word[0].toUpperCase() + word.slice(1))
         .join(' ')
+    
+    displayHTMLContent(`
+        <div class="switch-container">
+        <label for=${CSSRule.name}>${toggleName}</label>
+        <input id=${CSSRule.name} type="checkbox" role="switch" />
+        </div>
+    `)
 
-    h2.insertAdjacentHTML(
-        'afterend',
-        `
-            <div class="switch-container">
-            <label for=${CSSRule.name}>${toggleName}</label>
-            <input id=${CSSRule.name} type="checkbox" role="switch" />
-            </div>
-        `
-    )
+    // h2.insertAdjacentHTML(
+    //     'afterend',
+    //     `
+    //         <div class="switch-container">
+    //         <label for=${CSSRule.name}>${toggleName}</label>
+    //         <input id=${CSSRule.name} type="checkbox" role="switch" />
+    //         </div>
+    //     `
+    // )
 
     /**@type {HTMLInputElement} */
     //@ts-ignore

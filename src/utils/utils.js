@@ -1,3 +1,5 @@
+import { displayHTMLContent } from "../popup/popup.js";
+
 /**
  * Asynchronously retrieves CSS rules from the Chrome storage.
  *
@@ -61,12 +63,19 @@ export async function setDefaultRules() {
 //TODO: handle errors
 /**
  * 
- * @returns {Promise<defaultCSSRules>}
+ * @returns {Promise<defaultCSSRules|boolean>}
  */
 export async function fetchDefaultCSSRulesJSON() {
     let defaultRules
-    await fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRules.json')
+    fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRules.json')
             .then(response => response.json())
             .then(data => defaultRules = data)
+            .catch(() => {
+                //TODO: Write to popup directly from here
+                //This is not working I don't know why.
+                console.log("Fech failing");
+                displayHTMLContent("<div>Unable to reach remote server</div>")
+                defaultRules = false
+            })
     return defaultRules
 }
