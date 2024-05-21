@@ -77,14 +77,14 @@ autoUpdatesToggle.addEventListener('click', async () => {
 //Auto updates setting <--
 
 //Update now button -->
-const updateNowButton = document.getElementById('update-now')
+const updateNowContainer = document.getElementById('update-now-container')
 let updateNowClicked = false
-updateNowButton.addEventListener('click', async () => {
+updateNowContainer.addEventListener('click', async () => {
     if(updateNowClicked) return
     
     updateNowClicked = true
     const response = await updateDefaultCSSRules(true)
-    updateNowButton.insertAdjacentHTML(
+    updateNowContainer.insertAdjacentHTML(
         'beforebegin', 
         `<div 
             style="
