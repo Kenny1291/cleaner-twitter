@@ -23,7 +23,7 @@ async function addFolder(zip, folderPath) {
     }
 }
 
-async function createZip(files, folders) {
+export async function createZip(files, folders) {
     const zip = new JSZip()
 
     for (const file of files) {
@@ -49,5 +49,3 @@ export const foldersToAdd = [
     'src/utils',
     'src/vendor'
 ]
-
-createZip(filesToAdd, foldersToAdd)
