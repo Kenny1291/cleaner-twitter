@@ -1,6 +1,4 @@
 html {
-    display: flex;
-    justify-content: center;
     background-color: #141414;
     color: white;
 }
@@ -29,5 +27,34 @@ button {
 #editor {
     position: relative;
     width: 70vw;
-    height: 70vh;
+    height: 55vh;
+}
+
+#warningMsg {
+    font-size: 11px !important;
+    font-style: italic;
+}
+
+#faqContainer {
+    width: 60vw;
+    margin: auto;
+}
+
+#faqContainer p {
+    text-align: left !important;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    line-height: normal;
+}
+
+#faqContainer summary {
+    font-weight: bold;
+}
+
+#showFaqButton {
+    width: 10rem !important;
+    font-weight: normal !important;
+    padding: 0.2rem;
+    margin: auto;
+    border: 0em;
 }

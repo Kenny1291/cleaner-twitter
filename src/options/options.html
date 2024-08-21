@@ -6,9 +6,31 @@
 
 <body>
     <h2>Edit CSS Rules</h2>
-    <p>Here you can see all the CSS rules. Every rule <b>requires</b> to have a class defined like the following example: <b>.toggle_option_name</b>, it will be used as name for the toggle option.</p>
-    <p>The rules get applied to the body element of Twitter when enabled.</p>
-    <hr width="80%" />
+    <p id="warningMsg"><mark>This is an advanced feature. If not used properly, it can cause the extension to stop working. Don't worry; if you break something, you can safely reset the rules by clicking the "Restore default rules" button below.</mark></p>
+    <p>These are all the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax#css_rulesets" class="secondary">CSS rules.</a> Every rule defines which Twitter <abbr title="User Interface">UI</abbr> piece to hide and the name to display for the toggle option.</p>
+    <div id="faqContainer">
+        <details>
+            <summary role="button" class="outline secondary" id="showFaqButton">Show FAQ</summary>
+            <details>
+                <summary>What is the correct rule format?</summary>
+                <p>The easiest way to add a new rule is to copy and paste an existing one and then proceed to modify it by following this brief guide.</p>
+                <p>A rule has three parts separated by one a space.<br></p>
+                <ol>
+                    <li>The first part is the name you want to assign to the relative toggle option in the following format: "<b>.example_rule_name</b>".</li>
+                    <li>The second part of a rule is the <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors" target="_blank" class="secondary">CSS selector</a> (<i>which is the code that we use to tell the browser what element to target</i>). This can be any valid CSS selector.</li>
+                    <li>The third and last part of a rule is the <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps/How_CSS_is_structured#properties_and_values" target="_blank" class="secondary">CSS property</a> (<i>which tells the browser what to do with the targeted element</i>). It needs to be "<b>{ display: none; }</b>" in order to hide the element.</li>
+                </ol>
+            </details>
+            <details>
+                <summary>Do rule updates overwrite modifications I made?</summary>
+                <p>
+                    The rules update system is designed to preserve any modification you make.<br>
+                    When you modify or delete a default rule it will not be updated or re-added when a new version of default rules is released.<br>
+                </p>
+            </details>
+        </details>
+    </div>
+    <hr>
     <pre id="editor"></pre>
     <script src="../vendor/ace/ace.js" type="text/javascript" charset="utf-8"></script>
     <div id="buttonContainer">
