@@ -5,6 +5,9 @@
     </head>
     <body>
         <h2>Cleaner Twitter</h2>
+        <div id="enableDisableAllButton-Container">
+            <button class="outline contrast" id="enableDisableAllButton"></button>
+        </div>
         <details>
             <summary>Advanced settings</summary>
             <div id="button-container">
@@ -20,10 +23,4 @@
         </details>
     </body>
     <script src="popup.js" type="module"></script>
-
-    <!-- The following script does not work inside popup.js -->
-    <script>
-        const accordion = document.querySelector('details')
-        accordion.addEventListener('click', () => accordion.toggleAttribute('open'))
-    </script>
 </html>

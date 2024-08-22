@@ -40,3 +40,12 @@ details {
     margin-left: 0.5rem;
     margin-top: 1.5rem;
 }
+
+#enableDisableAllButton {
+    padding: 0.1rem;
+    margin-bottom: 0.3rem !important;
+}
+
+#enableDisableAllButton-Container {
+    display: flex;
+}

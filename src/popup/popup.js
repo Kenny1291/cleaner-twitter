@@ -4,9 +4,42 @@ import { getCSSRulesFromStorage } from "../utils/utils.js";
 /**@type {CSSRuleObject[]} */
 const CSSRules = await getCSSRulesFromStorage()
 
-/**@type {HTMLHeadingElement} */
-const h2 = document.querySelector('h2')
+//Enable / disable all button -->
+/**@type {HTMLButtonElement} */
+const enableDisableAllButton = document.querySelector('#enableDisableAllButton')
 
+const disableAllText = "Disable All"
+const enableAllText = "Enable All"
+
+function setEnableDisableAllButtonText() {
+    if(CSSRules.some(CSSRuleObject => CSSRuleObject.active)) {
+        enableDisableAllButton.textContent = disableAllText
+    } else {
+        enableDisableAllButton.textContent = enableAllText
+    }
+}
+
+setEnableDisableAllButtonText()
+
+enableDisableAllButton.addEventListener('click', () => {
+    const enabledOrDisabledState = enableDisableAllButton.textContent === enableAllText
+
+    for (const CSSRuleObject of CSSRules) {
+        CSSRuleObject.active = enabledOrDisabledState
+    }
+
+    chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
+        .then(() => {
+            setEnableDisableAllButtonText()
+
+            /**@type {NodeListOf<HTMLInputElement>} */
+            const switches = document.querySelectorAll('input[role="switch"]')
+            switches.forEach(input => input.checked = enabledOrDisabledState)
+        })
+})
+//Enable / disable all button <--
+
+const enableDisableAllButtonContainer = document.getElementById('enableDisableAllButton-Container')
 /**
  * Iterates over each CSSRule in CSSRules array.
  * For each CSSRule, it creates a toggle switch and sets up an event listener for it.
@@ -19,7 +52,7 @@ CSSRules.forEach(CSSRule => {
         .map(word => word[0].toUpperCase() + word.slice(1))
         .join(' ')
 
-    h2.insertAdjacentHTML(
+        enableDisableAllButtonContainer.insertAdjacentHTML(
         'afterend',
         `
             <div class="switch-container">
