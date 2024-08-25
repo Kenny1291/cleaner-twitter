@@ -48,7 +48,14 @@ enableDisableAllButton.addEventListener('click', () => {
 let cardElement
 
 CSSRules.forEach(CSSRule => {
+    const userSectionId = "userCustomRules"
+    if (CSSRule.group === "" && !document.getElementById(userSectionId)) {
+        const otherArticle = document.getElementById("otherCard")
+        otherArticle.insertAdjacentHTML('afterend', `<article id="${userSectionId}">My Rules</article>`)
+    }
+
     cardElement = document.getElementById(CSSRule.group)
+    if (!cardElement) cardElement = document.getElementById(userSectionId)
 
     const toggleName = CSSRule.name
         .split('_')
