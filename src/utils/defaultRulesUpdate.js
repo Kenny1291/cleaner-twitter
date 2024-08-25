@@ -32,7 +32,7 @@ export async function updateDefaultCSSRules(manual = false) {
         const currentRulesHashed = await getCurrentRulesHashed(currentCSSRulesArray)
         const remoteOldRules = defaultCSSRulesJson.oldRules[String(currentRulesVersion)]
         const remoteNewRules = defaultCSSRulesJson.defaultRules
-        const oldRulesIndexAndNewRulesUUID = getRulesToReplace(remoteOldRules, currentRulesHashed)
+        const oldRulesIndexAndNewRulesUUID = getRulesToUpdate(remoteOldRules, currentRulesHashed)
         const UUIDSOfRulesToAdd = getRulesToAdd(remoteNewRules, remoteOldRules)
         const indexesOfRulesToRemove = getRulesToRemove(remoteOldRules, remoteNewRules)
         const CSSRulesArrayOfObjectsWithNames = composeNewCSSRulesArray(currentCSSRulesArray, oldRulesIndexAndNewRulesUUID, UUIDSOfRulesToAdd, indexesOfRulesToRemove, remoteNewRules)
@@ -51,7 +51,7 @@ export async function updateDefaultCSSRules(manual = false) {
  * @param {string[]} currentRulesHashed 
  * @returns {oldRuleIndexAndNewRuleUUID[]}
  */
-export function getRulesToReplace(oldRulesHashed, currentRulesHashed) {
+export function getRulesToUpdate(oldRulesHashed, currentRulesHashed) {
     const oldRulesIndexAndNewRulesUUID = []
     for (const oldRule  of oldRulesHashed) {
         for (let i = 0; i < currentRulesHashed.length; i++) {
@@ -119,31 +119,32 @@ export function getRulesToRemove(oldRules, defaultRules) {
  * @returns {CSSRuleObject[]}
  */
 function composeNewCSSRulesArray(currentCSSRules, oldRulesIndexAndNewRulesUUID, UUIDSOfRulesToAdd, indexesOfRulesToRemove, newDefaultRules) {
-    if(oldRulesIndexAndNewRulesUUID.length > 0) replaceRules(oldRulesIndexAndNewRulesUUID, currentCSSRules, newDefaultRules)
+    if(oldRulesIndexAndNewRulesUUID.length > 0) updateRules(oldRulesIndexAndNewRulesUUID, currentCSSRules, newDefaultRules)
     if(UUIDSOfRulesToAdd.length > 0) addRules(UUIDSOfRulesToAdd, currentCSSRules, newDefaultRules)
     if(indexesOfRulesToRemove.length > 0) removeRules(indexesOfRulesToRemove, currentCSSRules)
     return currentCSSRules
 }
 
 /**
- * Replaces the rule in each CSS rule object at specified indexes with corresponding new default rules
+ * Updates CSS rule object at specified indexes
  * 
  * @param {oldRuleIndexAndNewRuleUUID[]} oldRulesIndexAndNewRulesUUID 
  * @param {CSSRuleObject[]} currentCSSRule 
  * @param {defaultRule[]} newDefaultRules
  */
-export function replaceRules(oldRulesIndexAndNewRulesUUID, currentCSSRule, newDefaultRules) {
+export function updateRules(oldRulesIndexAndNewRulesUUID, currentCSSRule, newDefaultRules) {
     for (const oldRuleIndexAndNewRuleUUID of oldRulesIndexAndNewRulesUUID) {
-        let newRule
+        let newRuleObj
         for (const newDefaultRule of newDefaultRules) {
             if (newDefaultRule.UUID === oldRuleIndexAndNewRuleUUID.newRuleUUID) {
-                newRule = newDefaultRule.rule
+                newRuleObj = newDefaultRule
                 break
             }
         }
-        currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].rule = newRule
-        const newName = getRuleName(newRule)
+        currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].rule = newRuleObj.rule
+        const newName = getRuleName(newRuleObj.rule)
         currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].name = newName
+        currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].group = newRuleObj.group
     }
 }
 
