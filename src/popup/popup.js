@@ -39,21 +39,24 @@ enableDisableAllButton.addEventListener('click', () => {
 })
 //Enable / disable all button <--
 
-const enableDisableAllButtonContainer = document.getElementById('enableDisableAllButton-Container')
 /**
  * Iterates over each CSSRule in CSSRules array.
  * For each CSSRule, it creates a toggle switch and sets up an event listener for it.
  * The toggle switch's state is based on the 'active' property of the CSSRule.
  * When the toggle switch is clicked, it calls the {@link toggleStorageKey} function with the CSSRule's name.
  */
+let cardElement
+
 CSSRules.forEach(CSSRule => {
+    cardElement = document.getElementById(CSSRule.group)
+
     const toggleName = CSSRule.name
         .split('_')
         .map(word => word[0].toUpperCase() + word.slice(1))
         .join(' ')
 
-        enableDisableAllButtonContainer.insertAdjacentHTML(
-        'afterend',
+        cardElement.insertAdjacentHTML(
+        'beforeend',
         `
             <div class="switch-container">
             <label for=${CSSRule.name}>${toggleName}</label>
