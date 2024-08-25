@@ -31,7 +31,7 @@ export function getRuleName(rule) {
 export function processCSSRule(rule, CSSRules) {
     const name = getRuleName(rule)
     const CSSRule = CSSRules.find(rule => rule.name === name);
-    return { name, rule, active: CSSRule ? CSSRule.active : false, group: "" }
+    return { name, rule, active: CSSRule ? CSSRule.active : false, group: CSSRule ? CSSRule.group : "" }
 }
 
 /**
