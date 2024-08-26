@@ -36,18 +36,20 @@ async function processDefaultRulesUpdate(newDefaultRules, oldDefaultRulesJson) {
  * @param {defaultCSSRules} oldDefaultRulesJson 
  */
 function addRules(newDefaultRules, oldDefaultRulesJson) {
-    for (let i = 0; i < newDefaultRules.length; i++) {
-        const newUUID = newDefaultRules[i].UUID
+    for (const newDefaultRule of newDefaultRules) {
+        const newUUID = newDefaultRule.UUID
         let matchFound = false
-        for (const oldUUID of Object.keys(oldDefaultRulesJson.defaultRules)) {
-            if(newUUID === oldUUID) {
+        for (const oldDefaultRule of oldDefaultRulesJson.defaultRules) {
+            if(newUUID === oldDefaultRule.UUID) {
                 matchFound = true
                 break
             }
         }
         if(!matchFound) {
             rulesModified = true
-            oldDefaultRulesJson.defaultRules[newUUID] = newDefaultRules[i].rule
+            oldDefaultRulesJson.defaultRules.push(
+                { UUID: newUUID, rule: newDefaultRule.rule, group: newDefaultRule.group }
+            )
         }
     }
 }
@@ -57,17 +59,19 @@ function addRules(newDefaultRules, oldDefaultRulesJson) {
  * @param {defaultCSSRules} oldDefaultRulesJson 
  */
 function removeRules(newDefaultRules, oldDefaultRulesJson) {
-    for (const oldUUID of Object.keys(defaultCSSRulesJson.defaultRules)) {
+    for (const oldDefaultRule of defaultCSSRulesJson.defaultRules) {
         let matchFound = false
+        let indexObj = 0
         for (const newRule of newDefaultRules) {
-            if(oldUUID === newRule.UUID) {
+            if(oldDefaultRule.UUID === newRule.UUID) {
                 matchFound = true
                 break
             }
+            indexObj++
         }
         if(!matchFound) {
             rulesModified = true
-            delete oldDefaultRulesJson.defaultRules[oldUUID]
+            oldDefaultRulesJson.defaultRules.splice(indexObj, 1)
         }
     }
 }
@@ -77,30 +81,35 @@ function removeRules(newDefaultRules, oldDefaultRulesJson) {
  * @param {defaultCSSRules} oldDefaultRulesJson 
  */
 function replaceRules(newDefaultRules, oldDefaultRulesJson) {
-    const oldRulesEntries = Object.entries(oldDefaultRulesJson.defaultRules)
-    for (const oldRuleEntry of oldRulesEntries) {
-        const oldRuleUUID = oldRuleEntry[0]
-        const oldRule = oldRuleEntry[1]
+    let indexObj = 0
+    for (const oldDefaultRule of oldDefaultRulesJson.defaultRules) {
+        const oldRuleUUID = oldDefaultRule.UUID
+        const oldRule = oldDefaultRule.rule
         for (const newRule of newDefaultRules) {
             if(oldRuleUUID === newRule.UUID) {
                 if(oldRule !== newRule.rule) {
                     rulesModified = true
-                    oldDefaultRulesJson.defaultRules[oldRuleUUID] = newRule.rule
+                    oldDefaultRulesJson.defaultRules[indexObj].rule = newRule.rule
+                }
+                if(oldDefaultRule.group !== newRule.group) {
+                    rulesModified = true
+                    oldDefaultRulesJson.defaultRules[indexObj].group = newRule.group
                 }
             }
         }
+        indexObj++
     }
 }
 
 /**
- * @param {defaultCSSRules["defaultRules"]} oldRules 
+ * @param {defaultRule[]} oldRules 
  * @returns {Promise<oldRules[]>}
  */
 async function composeOldRulesArr(oldRules) {
     const oldRulesArr = []
-    for (const oldRuleEntry of Object.entries(oldRules)) {
-        const UUID = oldRuleEntry[0]
-        const hash = await sha256Hash(oldRuleEntry[1])
+    for (const oldRuleObj of oldRules) {
+        const UUID = oldRuleObj.UUID
+        const hash = await sha256Hash(oldRuleObj.rule)
         oldRulesArr.push({ UUID, hash })
     }
     return oldRulesArr

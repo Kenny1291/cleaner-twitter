@@ -30,7 +30,7 @@ async function createNewBranch(name) {
  * @returns {Promise<string|boolean>}
  */
 async function getDefaultCSSRulesJsonBlobSHA() {
-    const req = new GitHubApiCall(HTTPMethod.GET, 'contents/data/defaultCSSRules.json').make()
+    const req = new GitHubApiCall(HTTPMethod.GET, 'contents/data/defaultCSSRulesV2.json').make()
     const res = await req.getResponse()
     //@ts-ignore
     return res.sha
@@ -45,10 +45,10 @@ async function commitUpdateDefaultCSSRulesJson(branch, commitMessage) {
     const defaultCSSRulesJsonBlobSHA = await getDefaultCSSRulesJsonBlobSHA()
     const req = new GitHubApiCall(
         HTTPMethod.PUT,
-        'contents/data/defaultCSSRules.json',
+        'contents/data/defaultCSSRulesV2.json',
         {
             message: commitMessage,
-            committer: { name: 'Raiquen Guidotti', email: 'raiquen@guidotti.solutions' },
+            committer: { name: 'Raiquen Guidotti', email: 'raiquen@live.com' },
             content: btoa(JSON.stringify(defaultCSSRulesJson, undefined, 1)),
             sha: defaultCSSRulesJsonBlobSHA,
             branch: branch
