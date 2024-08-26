@@ -111,8 +111,8 @@ async function composeOldRulesArr(oldRules) {
  * @param {defaultCSSRules["defaultRules"]} oldRules 
  */
 async function updateOldDefaultRulesJson(oldDefaultRulesJson, oldRules) {
-    oldDefaultRulesJson.version += 1
     oldDefaultRulesJson.oldRules[oldDefaultRulesJson.version] = await composeOldRulesArr(oldRules)
+    oldDefaultRulesJson.version += 1 
 }
 
 let lastCallTime
