@@ -122,6 +122,7 @@ function composeNewCSSRulesArray(currentCSSRules, oldRulesIndexAndNewRulesUUID, 
     if(oldRulesIndexAndNewRulesUUID.length > 0) updateRules(oldRulesIndexAndNewRulesUUID, currentCSSRules, newDefaultRules)
     if(UUIDSOfRulesToAdd.length > 0) addRules(UUIDSOfRulesToAdd, currentCSSRules, newDefaultRules)
     if(indexesOfRulesToRemove.length > 0) removeRules(indexesOfRulesToRemove, currentCSSRules)
+    handleEventualCSSRulesArrayOldStructure(currentCSSRules, oldRulesIndexAndNewRulesUUID, newDefaultRules)
     return currentCSSRules
 }
 
@@ -180,6 +181,37 @@ export function addRules(UUIDSOfRulesToAdd, currentCSSRule, newDefaultRules) {
 export function removeRules(indexesOfRulesToRemove, currentCSSRule) {
     for (const indexOfRuleToRemove of indexesOfRulesToRemove) {
         currentCSSRule.splice(indexOfRuleToRemove, 1)
+    }
+}
+
+/**
+ * Adds group key if missing
+ * 
+ * @param {CSSRuleObject[]} currentCSSRules 
+ * @param {oldRuleIndexAndNewRuleUUID[]} matchingRules 
+ * @param {defaultRule[]} newDefaultRules
+ */
+function handleEventualCSSRulesArrayOldStructure(currentCSSRules, matchingRules, newDefaultRules) {
+    let i = 0
+    for (const CSSRuleObject of currentCSSRules) {
+        // @ts-ignore
+        if (!Object.hasOwn(CSSRuleObject, "group")) {
+            let found = false
+            second:
+            for (const matchingRuleObj of matchingRules) {
+                if (i === matchingRuleObj.oldRuleIndex) {
+                    for (const newDefaultRule of newDefaultRules) {
+                        if (matchingRuleObj.newRuleUUID === newDefaultRule.UUID) {
+                            currentCSSRules[i].group = newDefaultRule.group
+                            found = true
+                            break second
+                        }
+                    }
+                }
+            }
+            if (!found) currentCSSRules[i].group = ""
+        }
+        i++
     }
 }
 
