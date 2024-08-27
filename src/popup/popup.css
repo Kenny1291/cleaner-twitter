@@ -49,3 +49,7 @@ details {
 #enableDisableAllButton-Container {
     display: flex;
 }
+
+.advancedSettingsBtn {
+    padding: 0.3rem;
+}

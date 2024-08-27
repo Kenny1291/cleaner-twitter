@@ -14,8 +14,10 @@ const enableAllText = "Enable All"
 function setEnableDisableAllButtonText() {
     if(CSSRules.some(CSSRuleObject => CSSRuleObject.active)) {
         enableDisableAllButton.textContent = disableAllText
+        enableDisableAllButton.className = "outline secondary"
     } else {
         enableDisableAllButton.textContent = enableAllText
+        enableDisableAllButton.className = "outline"
     }
 }
 
