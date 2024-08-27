@@ -2,3 +2,7 @@
     color: #c52f21 !important;
     border-color: #c52f21 !important;
 }
+
+select {
+    width: 170px !important;
+}

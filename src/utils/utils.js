@@ -31,11 +31,11 @@ export function getRuleName(rule) {
 export function processCSSRule(rule, CSSRules) {
     const name = getRuleName(rule)
     const CSSRule = CSSRules.find(rule => rule.name === name);
-    return { name, rule, active: CSSRule ? CSSRule.active : false }
+    return { name, rule, active: CSSRule ? CSSRule.active : false, group: CSSRule ? CSSRule.group : "" }
 }
 
 /**
- * Asynchronously creates a {@link CSSRulesArray}
+ * Asynchronously creates a {@link CSSRuleObject[]}
  * The CSS rules can be fetched from the Chrome storage or processed from a provided array.
  *
  * @param {string[]} CSSRulesArr - An array of CSS rules. Each rule is a string representing a CSS rule.
@@ -48,14 +48,20 @@ export async function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArr, fet
     return CSSRulesArr.map(rule => processCSSRule(rule, CSSRules))
 }
 
+//TODO: device if keep; doc accordingly; create new types if needed
+function processCSSRuleDefaultObject(ruleObject) {
+    delete ruleObject.UUID
+    ruleObject.name = getRuleName(ruleObject.rule)
+    ruleObject.active = false
+}
+
 /**
  * Asynchronously creates a {@link CSSRuleObject} Array and then sets it in the Chrome storage.
  */
 export async function setDefaultRules() {
-    const defaultRulesJSON = await fetchDefaultCSSRulesJSON();
-    const defaultRules = Object.values(defaultRulesJSON.defaultRules);
-    const CSSRulesArrayOfObjectsWithNames = await createCSSRulesArrayOfObjectsWithRuleNames(defaultRules)
-    chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames, version: defaultRulesJSON.version })
+    const defaultRulesJSON = await fetchDefaultCSSRulesJSON()
+    defaultRulesJSON.defaultRules.forEach(ruleObj => processCSSRuleDefaultObject(ruleObj))
+    chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
 }
 
 //TODO: handle errors
@@ -65,7 +71,7 @@ export async function setDefaultRules() {
  */
 export async function fetchDefaultCSSRulesJSON() {
     let defaultRules
-    await fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRules.json')
+    await fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
             .then(response => response.json())
             .then(data => defaultRules = data)
     return defaultRules

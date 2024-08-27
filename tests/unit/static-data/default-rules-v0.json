@@ -1,9 +1,0 @@
-{
-    "7282db6d-efec-4369-9381-d3e6a048684d": ".hide_tweet_analytics div:has(> a[aria-label$='View post analytics']) {display: none;}",
-    "4f2a50c0-10a1-460a-b2e3-8909741c23b1": ".hide_verified a[href='/i/verified-choose'] {display: none;}" ,
-    "21bac13f-fa37-428c-b1db-c6f82a7c560c": ".hide_subscribe_to_premium div:has(> aside > a[href='/i/verified-choose']) {display: none;}", 
-    "6a60761c-7806-4dc9-b96a-16be7a9db329": ".hide_trends_for_you div:has(> div > section > div[aria-label='Timeline: Trending now']) {display: none;}", 
-    "5e98e03c-c16f-4e2f-9208-d966a69a8111": ".hide_who_to_follow div:has(> div > aside[aria-label='Who to follow']) {display: none;}", 
-    "0799879a-e14d-4b28-b23b-a73a9b2ba120": ".hide_footer nav[aria-label='Footer'] {display: none;}", 
-    "fb46e63b-6fcd-49cc-88f8-86b60cbcd5f3": ".hide_messages_drawer div[data-testid='DMDrawer'] {display: none;}"
-}
