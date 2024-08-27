@@ -52,7 +52,7 @@ export async function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArr, fet
 function processCSSRuleDefaultObject(ruleObject) {
     delete ruleObject.UUID
     ruleObject.name = getRuleName(ruleObject.rule)
-    ruleObject.active = false
+    ruleObject.active = true
 }
 
 /**
