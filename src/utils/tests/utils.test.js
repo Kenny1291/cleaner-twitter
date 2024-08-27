@@ -6,7 +6,7 @@ import {
     fetchDefaultCSSRulesJSON
 } from '../utils.js'
 // @ts-ignore
-import defaultCSSRules from '../../../data/defaultCSSRules.json' assert { type: 'json' }
+import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' assert { type: 'json' }
 // @ts-ignore
 import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
 
