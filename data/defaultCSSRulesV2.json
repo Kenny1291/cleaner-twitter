@@ -1,0 +1,207 @@
+{
+    "version": 5,
+    "defaultRules": [
+        {
+            "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
+            "rule": ".hide_tweet_analytics div:has(> a[aria-label$='View post analytics']) {display: none;}",
+            "group": "timelineCard"
+        },
+        {
+            "UUID": "4f2a50c0-10a1-460a-b2e3-8909741c23b1",
+            "rule": ".hide_premium_menu_item a[href='/i/premium_sign_up'] {display: none;}",
+            "group": "menuCard"
+        },
+        {
+            "UUID": "21bac13f-fa37-428c-b1db-c6f82a7c560c",
+            "rule": ".hide_subscribe_to_premium div:has(> aside[aria-label='Subscribe to Premium']) {display: none;}",
+            "group": "sidebarCard"
+        },
+        {
+            "UUID": "6a60761c-7806-4dc9-b96a-16be7a9db329",
+            "rule": ".hide_trends_for_you div:has(> div > section > div[aria-label='Timeline: Trending now']) {display: none;}",
+            "group": "sidebarCard"
+        },
+        {
+            "UUID": "5e98e03c-c16f-4e2f-9208-d966a69a8111",
+            "rule": ".hide_who_to_follow div:has(> div > aside[aria-label='Who to follow']) {display: none;}",
+            "group": "sidebarCard"
+        },
+        {
+            "UUID": "0799879a-e14d-4b28-b23b-a73a9b2ba120",
+            "rule": ".hide_footer nav[aria-label='Footer'] {display: none;}",
+            "group": "sidebarCard"
+        },
+        {
+            "UUID": "fb46e63b-6fcd-49cc-88f8-86b60cbcd5f3",
+            "rule": ".hide_messages_drawer div[data-testid='DMDrawer'] {display: none;}",
+            "group": "otherCard"
+        },
+        {
+            "UUID": "a2ac2b88-1934-4973-8557-08af9b21a0ee",
+            "rule": ".hide_grok_menu_item a[href='/i/grok'] {display: none;}",
+            "group": "menuCard"
+        },
+        {
+            "UUID": "811f41cd-7c36-4a03-9c42-daf20a2b76d3",
+            "rule": ".hide_verified_orgs_menu_item a[href='/i/verified-orgs-signup'] {display: none;}",
+            "group": "menuCard"
+        },
+        {
+            "UUID": "c5b8237d-3c7d-461d-bf5b-5382e7f4eff1",
+            "rule": ".hide_communities_menu_item a[aria-label='Communities'] {display: none;}",
+            "group": "menuCard"
+        }
+    ],
+    "oldRules": {
+     "0": [
+      {
+       "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
+       "hash": "4d0adad1c53c9a1f0f172d702fdeb1786663033d233bad3901ff57cf11a0d085"
+      },
+      {
+       "UUID": "4f2a50c0-10a1-460a-b2e3-8909741c23b1",
+       "hash": "4f71fddc265b132ac34d55f85c2477cf663d06147018368541d2447fbbabbe70"
+      },
+      {
+       "UUID": "21bac13f-fa37-428c-b1db-c6f82a7c560c",
+       "hash": "455576091aacb66381270130c750fca7a47f20df00e9c41e22825c84dba458f2"
+      },
+      {
+       "UUID": "6a60761c-7806-4dc9-b96a-16be7a9db329",
+       "hash": "d0fd7e09cdc792711d69e56760eef4f401304e1de4b3647532d10e730cb64345"
+      },
+      {
+       "UUID": "5e98e03c-c16f-4e2f-9208-d966a69a8111",
+       "hash": "16bc866bba4ffa9a501e83d2bed14f41c512eb6b7cc6d62749676384137b0353"
+      },
+      {
+       "UUID": "0799879a-e14d-4b28-b23b-a73a9b2ba120",
+       "hash": "c4a2501e028e2063e29aeec40a031fc7d90dafeb5bba34306c22016e6bdbe664"
+      },
+      {
+       "UUID": "fb46e63b-6fcd-49cc-88f8-86b60cbcd5f3",
+       "hash": "56fb4917daa88d4879f8a24e11a9cb7e588c20c77e205f2e74cfc5544aad4c18"
+      }
+     ],
+     "1": [
+      {
+       "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
+       "hash": "4d0adad1c53c9a1f0f172d702fdeb1786663033d233bad3901ff57cf11a0d085"
+      },
+      {
+       "UUID": "4f2a50c0-10a1-460a-b2e3-8909741c23b1",
+       "hash": "bdacccea5a6c9edceccdbfdca33447d0d08ae3afc84d58ced49172363d531aef"
+      },
+      {
+       "UUID": "21bac13f-fa37-428c-b1db-c6f82a7c560c",
+       "hash": "455576091aacb66381270130c750fca7a47f20df00e9c41e22825c84dba458f2"
+      },
+      {
+       "UUID": "6a60761c-7806-4dc9-b96a-16be7a9db329",
+       "hash": "d0fd7e09cdc792711d69e56760eef4f401304e1de4b3647532d10e730cb64345"
+      },
+      {
+       "UUID": "5e98e03c-c16f-4e2f-9208-d966a69a8111",
+       "hash": "16bc866bba4ffa9a501e83d2bed14f41c512eb6b7cc6d62749676384137b0353"
+      },
+      {
+       "UUID": "0799879a-e14d-4b28-b23b-a73a9b2ba120",
+       "hash": "c4a2501e028e2063e29aeec40a031fc7d90dafeb5bba34306c22016e6bdbe664"
+      },
+      {
+       "UUID": "fb46e63b-6fcd-49cc-88f8-86b60cbcd5f3",
+       "hash": "56fb4917daa88d4879f8a24e11a9cb7e588c20c77e205f2e74cfc5544aad4c18"
+      }
+     ],
+     "2": [
+      {
+       "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
+       "hash": "4d0adad1c53c9a1f0f172d702fdeb1786663033d233bad3901ff57cf11a0d085"
+      },
+      {
+       "UUID": "4f2a50c0-10a1-460a-b2e3-8909741c23b1",
+       "hash": "042168524c99e282946baad9f439ce5575768bd9197fe781fe0fbd4b4336deb9"
+      },
+      {
+       "UUID": "21bac13f-fa37-428c-b1db-c6f82a7c560c",
+       "hash": "455576091aacb66381270130c750fca7a47f20df00e9c41e22825c84dba458f2"
+      },
+      {
+       "UUID": "6a60761c-7806-4dc9-b96a-16be7a9db329",
+       "hash": "d0fd7e09cdc792711d69e56760eef4f401304e1de4b3647532d10e730cb64345"
+      },
+      {
+       "UUID": "5e98e03c-c16f-4e2f-9208-d966a69a8111",
+       "hash": "16bc866bba4ffa9a501e83d2bed14f41c512eb6b7cc6d62749676384137b0353"
+      },
+      {
+       "UUID": "0799879a-e14d-4b28-b23b-a73a9b2ba120",
+       "hash": "c4a2501e028e2063e29aeec40a031fc7d90dafeb5bba34306c22016e6bdbe664"
+      },
+      {
+       "UUID": "fb46e63b-6fcd-49cc-88f8-86b60cbcd5f3",
+       "hash": "56fb4917daa88d4879f8a24e11a9cb7e588c20c77e205f2e74cfc5544aad4c18"
+      }
+     ],
+     "3": [
+      {
+       "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
+       "hash": "4d0adad1c53c9a1f0f172d702fdeb1786663033d233bad3901ff57cf11a0d085"
+      },
+      {
+       "UUID": "4f2a50c0-10a1-460a-b2e3-8909741c23b1",
+       "hash": "7c109d644acf9adc3765d4d1e491dc5a5f89f0344bd9afe9aa3a27b78ba80987"
+      },
+      {
+       "UUID": "21bac13f-fa37-428c-b1db-c6f82a7c560c",
+       "hash": "455576091aacb66381270130c750fca7a47f20df00e9c41e22825c84dba458f2"
+      },
+      {
+       "UUID": "6a60761c-7806-4dc9-b96a-16be7a9db329",
+       "hash": "d0fd7e09cdc792711d69e56760eef4f401304e1de4b3647532d10e730cb64345"
+      },
+      {
+       "UUID": "5e98e03c-c16f-4e2f-9208-d966a69a8111",
+       "hash": "16bc866bba4ffa9a501e83d2bed14f41c512eb6b7cc6d62749676384137b0353"
+      },
+      {
+       "UUID": "0799879a-e14d-4b28-b23b-a73a9b2ba120",
+       "hash": "c4a2501e028e2063e29aeec40a031fc7d90dafeb5bba34306c22016e6bdbe664"
+      },
+      {
+       "UUID": "fb46e63b-6fcd-49cc-88f8-86b60cbcd5f3",
+       "hash": "56fb4917daa88d4879f8a24e11a9cb7e588c20c77e205f2e74cfc5544aad4c18"
+      }
+     ],
+     "4": [
+      {
+       "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
+       "hash": "4d0adad1c53c9a1f0f172d702fdeb1786663033d233bad3901ff57cf11a0d085"
+      },
+      {
+       "UUID": "4f2a50c0-10a1-460a-b2e3-8909741c23b1",
+       "hash": "7c109d644acf9adc3765d4d1e491dc5a5f89f0344bd9afe9aa3a27b78ba80987"
+      },
+      {
+       "UUID": "21bac13f-fa37-428c-b1db-c6f82a7c560c",
+       "hash": "4cc5e9182832c7000a3f4a474c47b0143f46be9578f18170cb4d1831d4c3e71f"
+      },
+      {
+       "UUID": "6a60761c-7806-4dc9-b96a-16be7a9db329",
+       "hash": "d0fd7e09cdc792711d69e56760eef4f401304e1de4b3647532d10e730cb64345"
+      },
+      {
+       "UUID": "5e98e03c-c16f-4e2f-9208-d966a69a8111",
+       "hash": "16bc866bba4ffa9a501e83d2bed14f41c512eb6b7cc6d62749676384137b0353"
+      },
+      {
+       "UUID": "0799879a-e14d-4b28-b23b-a73a9b2ba120",
+       "hash": "c4a2501e028e2063e29aeec40a031fc7d90dafeb5bba34306c22016e6bdbe664"
+      },
+      {
+       "UUID": "fb46e63b-6fcd-49cc-88f8-86b60cbcd5f3",
+       "hash": "56fb4917daa88d4879f8a24e11a9cb7e588c20c77e205f2e74cfc5544aad4c18"
+      }
+     ]
+    }
+   }
