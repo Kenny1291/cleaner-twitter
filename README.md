@@ -2,7 +2,7 @@
 
 A Chromium extension to make Twitter UI cleaner by removing annoying pieces. Customizable.
 
-![](https://github.com/Kenny1291/readme-assets/blob/main/cleaner-twitter/cleaner_twitter_showcase.gif)
+![](https://github.com/Kenny1291/readme-assets/blob/main/cleaner-twitter/cleaner-twitter-presentation.png)
 
 ## 📚 Features
 - Hide UI pieces (togglable)
