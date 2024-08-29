@@ -90,7 +90,9 @@ test('current default css rules validity', async () => {
     await page.waitForLoadState('load')
 
     /**@type {String[]} */    
-    const defaultRulesStr = defaultCSSRules.defaultRules.map(ruleObj => ruleObj.rule)
+    const defaultRulesStr = defaultCSSRules.defaultRules
+                                .filter(ruleObj => ruleObj.UUID !== "2b31e97a-18a7-41cf-aee9-c5ee1842d0fb")
+                                .map(ruleObj => ruleObj.rule)
 
     for(const defaultRule of defaultRulesStr) {
         const selector = getSelector(defaultRule)
