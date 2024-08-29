@@ -168,7 +168,7 @@ export function addRules(UUIDSOfRulesToAdd, currentCSSRule, newDefaultRules) {
             }
         }
         const name = getRuleName(rule)
-        currentCSSRule.push({ name, rule, active: false, group: group})
+        currentCSSRule.push({ name, rule, active: true, group: group})
     }
 }
 
