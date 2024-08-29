@@ -8,7 +8,7 @@ import { getSelector } from './utils.js'
 // @ts-ignore
 import { test, expect } from '@playwright/test'
 // @ts-ignore
-import defaultCSSRules from '../../../data/defaultCSSRules.json' assert { type: 'json' }
+import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' assert { type: 'json' }
 
 let suspiciousLoginMessage = false
 async function checkAndDealWithSuspiciousLogin() {
@@ -86,7 +86,10 @@ test.beforeAll(async ({ browser }) => {
 test('current default css rules validity', async () => {
     await page.waitForLoadState('load')
 
-    for(const defaultRule of Object.values(defaultCSSRules.defaultRules)) {
+    /**@type {String[]} */    
+    const defaultRulesStr = defaultCSSRules.defaultRules.map(ruleObj => ruleObj.rule)
+
+    for(const defaultRule of defaultRulesStr) {
         const selector = getSelector(defaultRule)
         await page.waitForSelector(selector, { timeout: 5000 })
     }
