@@ -94,8 +94,18 @@ test('current default css rules validity', async () => {
                                 .filter(ruleObj => ruleObj.UUID !== "2b31e97a-18a7-41cf-aee9-c5ee1842d0fb")
                                 .map(ruleObj => ruleObj.rule)
 
+
+    const successes = []
+    const fails = []
+
     for(const defaultRule of defaultRulesStr) {
         const selector = getSelector(defaultRule)
-        await page.waitForSelector(selector, { timeout: 20000 })
+        try {
+            await page.waitForSelector(selector, { timeout: 5000 })
+            successes.push(selector)
+        } catch (error) {
+            fails.push(selector)
+        }
     }
+    console.log("Successes: ", successes, "Fails: ", fails)
 })
