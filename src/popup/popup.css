@@ -26,6 +26,10 @@ label {
     margin-bottom: 1rem;
 }
 
+#update-now-container {
+    display: flex;
+}
+
 button {
     font-size: 13px !important;
     width: 50% !important;
@@ -35,4 +39,17 @@ button {
 details {
     margin-left: 0.5rem;
     margin-top: 1.5rem;
+}
+
+#enableDisableAllButton {
+    padding: 0.1rem;
+    margin-bottom: 0.3rem !important;
+}
+
+#enableDisableAllButton-Container {
+    display: flex;
+}
+
+.advancedSettingsBtn {
+    padding: 0.3rem;
 }

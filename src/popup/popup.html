@@ -5,25 +5,26 @@
     </head>
     <body>
         <h2>Cleaner Twitter</h2>
+        <div id="enableDisableAllButton-Container">
+            <button id="enableDisableAllButton"></button>
+        </div>
+        <article id="menuCard">Menu</article>
+        <article id="timelineCard">Timeline</article>
+        <article id="sidebarCard">Sidebar</article>
+        <article id="otherCard">Other</article>
         <details>
             <summary>Advanced settings</summary>
-            <div id="button-container">
-                <button id="editCSSRules" class="outline">Edit CSS rules</button>
-            </div>
             <div class="switch-container">
                 <label for="rules-auto-updates">Auto update rules</label>
                 <input id="rules-auto-updates" type="checkbox" role="switch" />
             </div>
-            <div>
-                <button class="secondary outline" id="update-now">Update now</button>
+            <div id="update-now-container">
+                <button class="outline advancedSettingsBtn" id="update-now">Update now</button>
+            </div>
+            <div id="button-container">
+                <button id="editCSSRules" class="secondary outline advancedSettingsBtn">Edit CSS rules</button>
             </div>
         </details>
     </body>
     <script src="popup.js" type="module"></script>
-
-    <!-- The following script does not work inside popup.js -->
-    <script>
-        const accordion = document.querySelector('details')
-        accordion.addEventListener('click', () => accordion.toggleAttribute('open'))
-    </script>
 </html>

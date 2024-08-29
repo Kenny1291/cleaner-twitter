@@ -5,15 +5,15 @@
   "main": "background.js",
   "type": "module",
   "scripts": {
-    "zip": "node scripts/make-publish-zip.js",
-    "folder": "node scripts/make-test-folder.js",
+    "zip": "node -e \"import('./scripts/make-publish-zip.js').then(({ createZip, filesToAdd, foldersToAdd }) => createZip(filesToAdd, foldersToAdd))\"",
+    "folder": "node -e \"import('./scripts/make-test-folder.js').then(({ make }) => make())\"",
     "build": "npm run zip && npm run folder"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kenny1291/cleaner-twitter.git"
   },
-  "author": "Raiquen Guidotti <raiquen@guidotti.solutions>",
+  "author": "Raiquen Guidotti <raiqueng@live.com>",
   "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/Kenny1291/cleaner-twitter/issues"

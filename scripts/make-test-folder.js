@@ -1,5 +1,6 @@
 import { filesToAdd, foldersToAdd } from './make-publish-zip.js';
 import fs from 'fs-extra';
+import path from 'path';
 
 const destinationFolder = 'dist/cleaner-twitter/'
 
@@ -7,10 +8,11 @@ const destinationFolder = 'dist/cleaner-twitter/'
  * @param {string} fileOrFolder 
  */
 async function copyToDestDir(fileOrFolder) {
-    await fs.copy(fileOrFolder, destinationFolder + fileOrFolder);
+    const fileName = path.basename(fileOrFolder)
+    await fs.copy(fileOrFolder, destinationFolder + fileName)
 }
 
-async function make() {
+export async function make() {
     for (const file of filesToAdd) {
         await copyToDestDir(file)
     }
@@ -18,5 +20,3 @@ async function make() {
         await copyToDestDir(folder)
     }
 }
-
-make()

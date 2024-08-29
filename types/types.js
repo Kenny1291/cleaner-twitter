@@ -3,6 +3,7 @@
  * @property {string} name - The name of the CSS rule.
  * @property {string} rule - The CSS rule as a string.
  * @property {boolean} active - A boolean indicating whether the rule is active or not.
+ * @property {string} group - The ID of the group of the rule
  */
 
 /**
@@ -12,8 +13,10 @@
  */
 
 /**
- * @typedef {Object} defaultRules
- * @property {string} UUID - The rule
+ * @typedef {Object} defaultRule
+ * @property {string} UUID - The UUID of the rule
+ * @property {string} rule - The actual rule
+ * @property {string} group - The group of the rule   
  */
 
 /**
@@ -30,7 +33,7 @@
 /**
  * @typedef {Object} defaultCSSRules
  * @property {Number} version - The version of the object
- * @property {defaultRules} defaultRules - UUID as key
+ * @property {defaultRule[]} defaultRules - An Array of {@link defaultRule}
  * @property {oldRulesHashes} oldRules - An object containing array of oldRules objects
  */
 

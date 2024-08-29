@@ -4,11 +4,11 @@ import { updateDefaultCSSRules } from "../utils/defaultRulesUpdate.js";
 chrome.webNavigation.onCommitted.addListener(async () => {
         await updateDefaultCSSRules()
     }, 
-    { url: [{ urlMatches: 'https://*.twitter.com/*' }] 
+    { url: [{ urlMatches: 'https://*.twitter.com/*' }, { urlMatches: 'https://*.x.com/*' }] 
 })
 
 chrome.runtime.onInstalled.addListener(async () => {
-    const openTwitterTabs = await chrome.tabs.query({ url: 'https://*.twitter.com/*' })
+    const openTwitterTabs = await chrome.tabs.query({ url: ['https://*.twitter.com/*', 'https://*.x.com/*'] })
 
     const versionInStorage = await chrome.storage.sync.get('version')
     const foundVersionInStorage = Object.keys(versionInStorage).length === 1
@@ -100,7 +100,7 @@ function getRulesThatChangedState(oldValue, newValue) {
  * @param {message} messageObj - The message to send.
  */
 async function sendMessageToTwitterTabs(messageObj) {
-    const tabs = await chrome.tabs.query({ url: 'https://*.twitter.com/*' })
+    const tabs = await chrome.tabs.query({ url: ['https://*.twitter.com/*', 'https://*.x.com/*'] })
     tabs.forEach(async tab => {
         await chrome.tabs.sendMessage(tab.id, {
             [messageObj.name]: messageObj.active,

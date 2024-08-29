@@ -4,8 +4,42 @@ import { getCSSRulesFromStorage } from "../utils/utils.js";
 /**@type {CSSRuleObject[]} */
 const CSSRules = await getCSSRulesFromStorage()
 
-/**@type {HTMLHeadingElement} */
-const h2 = document.querySelector('h2')
+//Enable / disable all button -->
+/**@type {HTMLButtonElement} */
+const enableDisableAllButton = document.querySelector('#enableDisableAllButton')
+
+const disableAllText = "Disable All"
+const enableAllText = "Enable All"
+
+function setEnableDisableAllButtonText() {
+    if(CSSRules.some(CSSRuleObject => CSSRuleObject.active)) {
+        enableDisableAllButton.textContent = disableAllText
+        enableDisableAllButton.className = "outline secondary"
+    } else {
+        enableDisableAllButton.textContent = enableAllText
+        enableDisableAllButton.className = "outline"
+    }
+}
+
+setEnableDisableAllButtonText()
+
+enableDisableAllButton.addEventListener('click', () => {
+    const enabledOrDisabledState = enableDisableAllButton.textContent === enableAllText
+
+    for (const CSSRuleObject of CSSRules) {
+        CSSRuleObject.active = enabledOrDisabledState
+    }
+
+    chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
+        .then(() => {
+            setEnableDisableAllButtonText()
+
+            /**@type {NodeListOf<HTMLInputElement>} */
+            const switches = document.querySelectorAll('input[role="switch"]')
+            switches.forEach(input => input.checked = enabledOrDisabledState)
+        })
+})
+//Enable / disable all button <--
 
 /**
  * Iterates over each CSSRule in CSSRules array.
@@ -13,14 +47,25 @@ const h2 = document.querySelector('h2')
  * The toggle switch's state is based on the 'active' property of the CSSRule.
  * When the toggle switch is clicked, it calls the {@link toggleStorageKey} function with the CSSRule's name.
  */
+let cardElement
+
 CSSRules.forEach(CSSRule => {
+    const userSectionId = "userCustomRules"
+    if (CSSRule.group === "" && !document.getElementById(userSectionId)) {
+        const otherArticle = document.getElementById("otherCard")
+        otherArticle.insertAdjacentHTML('afterend', `<article id="${userSectionId}">My Rules</article>`)
+    }
+
+    cardElement = document.getElementById(CSSRule.group)
+    if (!cardElement) cardElement = document.getElementById(userSectionId)
+
     const toggleName = CSSRule.name
         .split('_')
         .map(word => word[0].toUpperCase() + word.slice(1))
         .join(' ')
 
-    h2.insertAdjacentHTML(
-        'afterend',
+        cardElement.insertAdjacentHTML(
+        'beforeend',
         `
             <div class="switch-container">
             <label for=${CSSRule.name}>${toggleName}</label>
@@ -77,14 +122,14 @@ autoUpdatesToggle.addEventListener('click', async () => {
 //Auto updates setting <--
 
 //Update now button -->
-const updateNowButton = document.getElementById('update-now')
+const updateNowContainer = document.getElementById('update-now-container')
 let updateNowClicked = false
-updateNowButton.addEventListener('click', async () => {
+updateNowContainer.addEventListener('click', async () => {
     if(updateNowClicked) return
     
     updateNowClicked = true
     const response = await updateDefaultCSSRules(true)
-    updateNowButton.insertAdjacentHTML(
+    updateNowContainer.insertAdjacentHTML(
         'beforebegin', 
         `<div 
             style="

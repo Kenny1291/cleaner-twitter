@@ -23,7 +23,7 @@ async function addFolder(zip, folderPath) {
     }
 }
 
-async function createZip(files, folders) {
+export async function createZip(files, folders) {
     const zip = new JSZip()
 
     for (const file of files) {
@@ -32,6 +32,9 @@ async function createZip(files, folders) {
     for (const folder of folders) {
         await addFolder(zip, folder)
     }
+
+    //Remove tests folder inside utils
+    zip.remove('utils/tests')
 
     zip.generateAsync({type: 'nodebuffer'}).then((content) => {
         fs.writeFileSync('dist/cleaner-twitter.zip', content)
@@ -49,5 +52,3 @@ export const foldersToAdd = [
     'src/utils',
     'src/vendor'
 ]
-
-createZip(filesToAdd, foldersToAdd)
