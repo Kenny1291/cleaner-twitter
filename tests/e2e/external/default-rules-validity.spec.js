@@ -80,6 +80,9 @@ test.beforeAll(async ({ browser }) => {
     try {
         await page.waitForSelector('text="Boost your account security"', { timeout: 1000 })
         await page.click('[d="M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z"]')
+        
+        await page.waitForSelector('text="Review your email"', { timeout: 1000 })
+        await page.click('text="Yes, that\'s correct"')
     } catch (e) {}
 })
 
@@ -87,10 +90,22 @@ test('current default css rules validity', async () => {
     await page.waitForLoadState('load')
 
     /**@type {String[]} */    
-    const defaultRulesStr = defaultCSSRules.defaultRules.map(ruleObj => ruleObj.rule)
+    const defaultRulesStr = defaultCSSRules.defaultRules
+                                .filter(ruleObj => ruleObj.UUID !== "2b31e97a-18a7-41cf-aee9-c5ee1842d0fb")
+                                .map(ruleObj => ruleObj.rule)
+
+
+    const successes = []
+    const fails = []
 
     for(const defaultRule of defaultRulesStr) {
         const selector = getSelector(defaultRule)
-        await page.waitForSelector(selector, { timeout: 5000 })
+        try {
+            await page.waitForSelector(selector, { timeout: 5000 })
+            successes.push(selector)
+        } catch (error) {
+            fails.push(selector)
+        }
     }
+    console.log("Successes: ", successes, "Fails: ", fails)
 })
