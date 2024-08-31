@@ -1,4 +1,4 @@
-import { setDefaultRules } from "../utils/utils.js"
+import { setDefaultRules } from "../../utils/utils.js"
 
 chrome.runtime.onInstalled.addListener(async () => {
     const openTwitterTabs = await chrome.tabs.query({ url: ['https://*.twitter.com/*', 'https://*.x.com/*'] })

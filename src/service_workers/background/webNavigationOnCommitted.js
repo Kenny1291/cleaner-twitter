@@ -1,4 +1,4 @@
-import { updateDefaultCSSRules } from "../utils/defaultRulesUpdate.js"
+import { updateDefaultCSSRules } from "../../utils/defaultRulesUpdate.js"
 
 chrome.webNavigation.onCommitted.addListener(async () => {
     await updateDefaultCSSRules()
