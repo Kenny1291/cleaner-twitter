@@ -48,7 +48,7 @@ export async function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArr, fet
     return CSSRulesArr.map(rule => processCSSRule(rule, CSSRules))
 }
 
-//TODO: device if keep; doc accordingly; create new types if needed
+//TODO: decide if keep; doc accordingly; create new types if needed
 function processCSSRuleDefaultObject(ruleObject) {
     delete ruleObject.UUID
     ruleObject.name = getRuleName(ruleObject.rule)
@@ -75,4 +75,18 @@ export async function fetchDefaultCSSRulesJSON() {
             .then(response => response.json())
             .then(data => defaultRules = data)
     return defaultRules
+}
+
+/**
+ * Toggles the 'active' property of a CSS rule in Chrome storage.
+ * 
+ * @param {string} CSSRuleName - The name of the CSS rule to toggle.
+ */
+export function toggleStorageKey(CSSRuleName) {
+    chrome.storage.sync.get().then(result => {
+        const CSSRules = result.CSSRulesArrayOfObjectsWithNames
+        const CSSRule = CSSRules.find(rule => rule.name === CSSRuleName)
+        CSSRule.active = !CSSRule.active
+        chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
+    })
 }
