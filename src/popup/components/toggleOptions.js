@@ -1,4 +1,4 @@
-import { toggleStorageKey } from "../../utils/utils.js"
+import { getToggleName, toggleStorageKey } from "../../utils/utils.js"
 import CSSRules from "../popup.js"
 
 let cardElement
@@ -13,12 +13,9 @@ CSSRules.forEach(CSSRule => {
     cardElement = document.getElementById(CSSRule.group)
     if (!cardElement) cardElement = document.getElementById(userSectionId)
 
-    const toggleName = CSSRule.name
-        .split('_')
-        .map(word => word[0].toUpperCase() + word.slice(1))
-        .join(' ')
+    const toggleName = getToggleName(CSSRule.name)
 
-        cardElement.insertAdjacentHTML(
+    cardElement.insertAdjacentHTML(
         'beforeend',
         `
             <div class="switch-container">
