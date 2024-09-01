@@ -20,6 +20,18 @@ export function getRuleName(rule) {
 }
 
 /**
+ * Transform a CSS class to a name for the toggle switch
+ * 
+ * @param {string} ruleClass 
+ * @returns {string}
+ */
+export function getToggleName(ruleClass) {
+    return ruleClass.split('_')
+                    .map(word => word[0].toUpperCase() + word.slice(1))
+                    .join(' ')
+}
+
+/**
  * Processes a CSS rule and returns a {@link CSSRuleObject}
  * 
  * @param {string} rule - The CSS rule to be processed.
