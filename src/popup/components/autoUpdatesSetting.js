@@ -1,5 +1,5 @@
 let autoUpdateItem = await chrome.storage.sync.get('autoUpdate')
-if(Object.keys(autoUpdateItem).length === 0) {
+if (Object.keys(autoUpdateItem).length === 0) {
     await chrome.storage.sync.set({ autoUpdate: true })
     autoUpdateItem.autoUpdate = true
 }

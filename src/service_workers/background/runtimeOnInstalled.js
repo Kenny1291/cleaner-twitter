@@ -5,7 +5,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 
     const versionInStorage = await chrome.storage.sync.get('version')
     const foundVersionInStorage = Object.keys(versionInStorage).length === 1
-    if(!foundVersionInStorage) {
+    if (!foundVersionInStorage) {
         await chrome.storage.sync.clear()
         setDefaultRules()
 

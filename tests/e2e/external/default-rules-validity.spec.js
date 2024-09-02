@@ -31,7 +31,7 @@ test('current default css rules validity', async () => {
     const successes = []
     const fails = []
 
-    for(const defaultRule of defaultRulesStr) {
+    for (const defaultRule of defaultRulesStr) {
         const selector = getSelector(defaultRule)
         try {
             await page.waitForSelector(selector, { timeout: 5000 })

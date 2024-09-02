@@ -4,7 +4,7 @@ const updateNowContainer = document.getElementById('update-now-container')
 
 let updateNowClicked = false
 updateNowContainer.addEventListener('click', async () => {
-    if(updateNowClicked) return
+    if (updateNowClicked) return
     
     updateNowClicked = true
     const response = await updateDefaultCSSRules(true)

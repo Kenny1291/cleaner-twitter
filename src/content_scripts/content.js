@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     /**@type {boolean} */
     const messageState = Object.values(message)[0]
 
-    if(messageName === 'rulesChanged') {
+    if (messageName === 'rulesChanged') {
         injectStylesAndSetClasses()
     } else {
         document.body.classList.toggle(messageName, messageState)
@@ -28,7 +28,7 @@ function injectStylesAndSetClasses() {
     // @ts-ignore
     const oldStyle =  document.getElementById('cleanerTwitterStyles')
 
-    if(oldStyle) oldStyle.remove()
+    if (oldStyle) oldStyle.remove()
 
     /**@type {HTMLStyleElement} */
     const style = document.createElement('style')

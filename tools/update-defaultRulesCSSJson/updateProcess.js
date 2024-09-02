@@ -14,7 +14,7 @@ async function processDefaultRulesUpdate(newDefaultRules, oldDefaultRulesJson) {
     removeRules(newDefaultRules, oldDefaultRulesJson)
     // pushStatusUpdateToUser('Replacing rules...')
     replaceRules(newDefaultRules, oldDefaultRulesJson)
-    if(rulesModified) {
+    if (rulesModified) {
         // pushStatusUpdateToUser('Updating version and adding old default rules...')
         await updateOldDefaultRulesJson(oldDefaultRulesJson, oldRules)
         // pushStatusUpdateToUser('Creating new branch remotely...')
@@ -42,12 +42,12 @@ function addRules(newDefaultRules, oldDefaultRulesJson) {
         const newUUID = newDefaultRule.UUID
         let matchFound = false
         for (const oldDefaultRule of oldDefaultRulesJson.defaultRules) {
-            if(newUUID === oldDefaultRule.UUID) {
+            if (newUUID === oldDefaultRule.UUID) {
                 matchFound = true
                 break
             }
         }
-        if(!matchFound) {
+        if (!matchFound) {
             rulesModified = true
             oldDefaultRulesJson.defaultRules.push(
                 { UUID: newUUID, rule: newDefaultRule.rule, group: newDefaultRule.group }
@@ -65,13 +65,13 @@ function removeRules(newDefaultRules, oldDefaultRulesJson) {
         let matchFound = false
         let indexObj = 0
         for (const newRule of newDefaultRules) {
-            if(oldDefaultRule.UUID === newRule.UUID) {
+            if (oldDefaultRule.UUID === newRule.UUID) {
                 matchFound = true
                 break
             }
             indexObj++
         }
-        if(!matchFound) {
+        if (!matchFound) {
             rulesModified = true
             oldDefaultRulesJson.defaultRules.splice(indexObj, 1)
         }
@@ -88,12 +88,12 @@ function replaceRules(newDefaultRules, oldDefaultRulesJson) {
         const oldRuleUUID = oldDefaultRule.UUID
         const oldRule = oldDefaultRule.rule
         for (const newRule of newDefaultRules) {
-            if(oldRuleUUID === newRule.UUID) {
-                if(oldRule !== newRule.rule) {
+            if (oldRuleUUID === newRule.UUID) {
+                if (oldRule !== newRule.rule) {
                     rulesModified = true
                     oldDefaultRulesJson.defaultRules[indexObj].rule = newRule.rule
                 }
-                if(oldDefaultRule.group !== newRule.group) {
+                if (oldDefaultRule.group !== newRule.group) {
                     rulesModified = true
                     oldDefaultRulesJson.defaultRules[indexObj].group = newRule.group
                 }
@@ -133,12 +133,12 @@ let lastCallTime
  */
 function pushStatusUpdateToUser(status) {
     const timeElapsedSinceLastCall = Date.now() - lastCallTime
-    if(timeElapsedSinceLastCall < 1000) {
+    if (timeElapsedSinceLastCall < 1000) {
         setTimeout(() => pushStatusUpdateToUser(status), 1000 - timeElapsedSinceLastCall)
         return  
     }
     const p = document.getElementById('updateStatus')
-    if(p) p.remove()
+    if (p) p.remove()
     document.getElementById('applyUpdateBtn').insertAdjacentHTML(
         'beforebegin',
         `
