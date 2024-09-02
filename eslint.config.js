@@ -2,6 +2,8 @@
 import babelParser from "@babel/eslint-parser"
 // @ts-ignore
 import globals from "globals"
+// @ts-ignore
+import stylisticJs from '@stylistic/eslint-plugin-js'
 
 export default [
     {
@@ -30,6 +32,9 @@ export default [
                 ace: "readonly",
                 process: "readonly"
             }
+        },
+        plugins: {
+            '@stylistic/js': stylisticJs
         },
         rules: {
             "prefer-const": "error",
@@ -131,6 +136,7 @@ export default [
             "no-with": "error", 
             "prefer-object-has-own": "error", 
             "prefer-spread": "error", 
+            "@stylistic/js/keyword-spacing": "error", 
         },
     }
 ]
