@@ -1,3 +1,4 @@
+// @ts-ignore
 import { test as base, chromium } from '@playwright/test'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
