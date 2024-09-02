@@ -8,8 +8,10 @@ A Chromium extension to hide annoying elements from the Twitter UI. Customizable
 - Hide annoying UI elements from Twitter/X
 - Always up to date
   - When Twitter/X changes their UI we can ship updates instantly!
+     > The rules update system is designed to preserve any modification you make.
+     When you modify or delete a default rule it will not be updated or re-added when a new version of default rules is released.
 -  Want to hide other elements?
-   - You can create custom toggle options with our embedded CSS editor!   
+   - You can create custom toggle options with our embedded CSS editor!
   
 ## 📲 Installation
 1. Download [latest release](https://github.com/Kenny1291/cleaner-twitter/releases)
