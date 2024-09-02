@@ -135,17 +135,16 @@ function composeNewCSSRulesArray(currentCSSRules, oldRulesIndexAndNewRulesUUID, 
  */
 export function updateRules(oldRulesIndexAndNewRulesUUID, currentCSSRule, newDefaultRules) {
     for (const oldRuleIndexAndNewRuleUUID of oldRulesIndexAndNewRulesUUID) {
-        let newRuleObj
         for (const newDefaultRule of newDefaultRules) {
             if (newDefaultRule.UUID === oldRuleIndexAndNewRuleUUID.newRuleUUID) {
-                newRuleObj = newDefaultRule
+                currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].rule = newDefaultRule.rule
+                const newName = getRuleName(newDefaultRule.rule)
+                currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].name = newName
+                currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].group = newDefaultRule.group
                 break
             }
         }
-        currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].rule = newRuleObj.rule
-        const newName = getRuleName(newRuleObj.rule)
-        currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].name = newName
-        currentCSSRule[oldRuleIndexAndNewRuleUUID.oldRuleIndex].group = newRuleObj.group
+
     }
 }
 
