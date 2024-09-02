@@ -11,8 +11,7 @@ import {
     getSingleRulesFromCSSFileString,
     formatRuleForStorage
 } from '../CSSRulesParser.js'
-// @ts-ignore
-import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
+import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' with { type: 'json' }
 
 
 describe('getSingleRulesFromCSSFileString()', () => {

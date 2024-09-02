@@ -1,3 +1,5 @@
+/* global GitHubApiCall, HTTPMethod, defaultCSSRulesJson */
+
 /**
  * @returns {Promise<string|boolean>}
  */

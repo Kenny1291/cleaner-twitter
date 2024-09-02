@@ -1,3 +1,5 @@
+/* global toggleModal */
+
 import { createCSSRulesArrayOfObjectsWithRuleNames, getCSSRulesFromStorage, setDefaultRules } from "../utils/utils.js";
 import { fromCSSStringToArrayOfFormattedRules, fromArrayOfFormattedRulesToCSSFileString } from "../utils/CSSRulesParser.js";
 

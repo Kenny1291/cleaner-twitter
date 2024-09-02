@@ -1,3 +1,5 @@
+/* global createNewBranch, commitUpdateDefaultCSSRulesJson, openPullRequest, defaultCSSRulesJson, sha256Hash  */
+
 let rulesModified = false
 
 /**
@@ -120,7 +122,8 @@ async function composeOldRulesArr(oldRules) {
  * @param {defaultCSSRules["defaultRules"]} oldRules 
  */
 async function updateOldDefaultRulesJson(oldDefaultRulesJson, oldRules) {
-    oldDefaultRulesJson.oldRules[oldDefaultRulesJson.version] = await composeOldRulesArr(oldRules)
+    const _composedOldRulesArr = await composeOldRulesArr(oldRules)
+    oldDefaultRulesJson.oldRules[oldDefaultRulesJson.version] = _composedOldRulesArr    
     oldDefaultRulesJson.version += 1 
 }
 

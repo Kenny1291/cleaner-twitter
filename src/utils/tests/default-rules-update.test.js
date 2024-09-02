@@ -10,14 +10,10 @@ import {
     getCurrentRulesHashed,
     sha256Hash
 } from '../defaultRulesUpdate.js'
-// @ts-ignore
-import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
-// @ts-ignore
-import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' assert { type: 'json' }
-// @ts-ignore
-import defaultRulesV2Hashed from '../../../tests/unit/static-data/default-rules-v2-hashed.json' assert { type: 'json' }
-// @ts-ignore
-import defaultRulesV2 from '../../../tests/unit/static-data/default-rules-v2.json' assert { type: 'json' }
+import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' with { type: 'json' }
+import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' with { type: 'json' }
+import defaultRulesV2Hashed from '../../../tests/unit/static-data/default-rules-v2-hashed.json' with { type: 'json' }
+import defaultRulesV2 from '../../../tests/unit/static-data/default-rules-v2.json' with { type: 'json' }
 import { group } from 'node:console'
 
 describe('getRulesToReplace()', () => {

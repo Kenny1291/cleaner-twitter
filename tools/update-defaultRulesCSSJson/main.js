@@ -1,3 +1,5 @@
+/* global processDefaultRulesUpdate */
+
 const fieldSet = document.querySelector('form')
 /**@type {defaultCSSRules} */
 let defaultCSSRulesJson

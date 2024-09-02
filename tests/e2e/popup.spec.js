@@ -1,7 +1,6 @@
 import { test, expect } from './fixtures'
 import { signIn } from './utils/twitterSignIn'
-// @ts-ignore
-import defaultCSSRules from '../../data/defaultCSSRulesV2.json' assert { type: 'json' }
+import defaultCSSRules from '../../data/defaultCSSRulesV2.json' with { type: 'json' }
 import { getRuleName, getToggleName } from '../../src/utils/utils'
 import { getSelector } from './utils/utils'       
                             
