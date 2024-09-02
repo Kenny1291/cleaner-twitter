@@ -115,7 +115,7 @@ export default [
                 "message": "Regex is the root of all evil!"
                 }
             ],
-            "no-return-assign": "error", 
+            // "no-return-assign": "error", 
             "no-script-url": "error", 
             "no-sequences": "error", 
             "no-throw-literal": "error", 
