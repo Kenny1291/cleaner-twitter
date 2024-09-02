@@ -1,14 +1,10 @@
-// @ts-ignore
 import dotenv from 'dotenv';
 dotenv.config();
 
-// @ts-ignore
 import { getSelector } from '../utils/utils.js'
 
-// @ts-ignore
 import { test, expect } from '@playwright/test'
-// @ts-ignore
-import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' assert { type: 'json' }
+import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' with { type: 'json' }
 
 import { signIn } from "../utils/twitterSignIn.js"
 
