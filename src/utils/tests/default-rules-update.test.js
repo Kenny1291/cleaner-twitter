@@ -31,9 +31,9 @@ describe('getRulesToReplace()', () => {
         const actual = getRulesToUpdate(defaultCSSRules.oldRules["0"], currentRulesHashed)
         assert.equal(
             Array.isArray(actual) && (arrOfObjs => { 
-                for(let i = 0; i < arrOfObjs.length; i++) { 
+                for (let i = 0; i < arrOfObjs.length; i++) { 
                     // @ts-ignore
-                    if(!Object.hasOwn(arrOfObjs[i], 'oldRuleIndex')
+                    if (!Object.hasOwn(arrOfObjs[i], 'oldRuleIndex')
                     || typeof arrOfObjs[i].oldRuleIndex !== "number"
                     // @ts-ignore
                     || !Object.hasOwn(arrOfObjs[i], 'newRuleUUID')
@@ -64,14 +64,14 @@ describe('getRulesToAdd()', () => {
         const actual = getRulesToAdd(defaultRulesV2Mod, defaultCSSRules.oldRules["4"])
         assert.equal(
             (arr => {
-                for(const el of arr) {
-                    if(typeof el !== "string") return false
+                for (const el of arr) {
+                    if (typeof el !== "string") return false
                 }
                 return true
             })(actual),
             true
         )
-        for(const el of actual) {
+        for (const el of actual) {
             // eslint-disable-next-line no-restricted-syntax
             assert.match(el, /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/)
         }
@@ -92,8 +92,8 @@ describe('getRulesToRemove()', () => {
         const actual = getRulesToRemove(oldRulesMod, defaultRulesV2)
         assert.equal(
             (arr => {
-                for(const el of arr) {
-                    if(typeof el !== "number") return false
+                for (const el of arr) {
+                    if (typeof el !== "number") return false
                 }
                 return true
             })(actual),

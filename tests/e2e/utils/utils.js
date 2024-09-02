@@ -5,7 +5,7 @@
  */
 function secondLastIndexOf(str, char) {
     const lastIndex = str.lastIndexOf(char)
-    if(lastIndex === -1) return lastIndex
+    if (lastIndex === -1) return lastIndex
     return str.lastIndexOf(char, lastIndex - 1)
 }
 
