@@ -88,6 +88,7 @@ export function getRulesToAdd(defaultRules, oldRules) {
 
 /**
  * Identifies and returns the indexes of old rules not found in the default rules
+ * in descending order
  * 
  * @param {oldRules[]} oldRules 
  * @param {defaultRule[]} defaultRules 
@@ -105,6 +106,7 @@ export function getRulesToRemove(oldRules, defaultRules) {
         }  
         if(!matchFound) indexesOfRulesToRemove.push(i)      
     }
+    indexesOfRulesToRemove.sort((a, b) => b - a)
     return indexesOfRulesToRemove
 }
 
@@ -178,6 +180,7 @@ export function addRules(UUIDSOfRulesToAdd, currentCSSRule, newDefaultRules) {
  * @param {CSSRuleObject[]} currentCSSRule 
  */
 export function removeRules(indexesOfRulesToRemove, currentCSSRule) {
+
     for (const indexOfRuleToRemove of indexesOfRulesToRemove) {
         currentCSSRule.splice(indexOfRuleToRemove, 1)
     }
