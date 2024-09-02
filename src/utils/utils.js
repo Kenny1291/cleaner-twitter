@@ -15,7 +15,6 @@ export async function getCSSRulesFromStorage() {
  * @returns {string}
  */
 export function getRuleName(rule) {
-    // eslint-disable-next-line no-restricted-syntax
     const match = rule.match(/\.([a-z0-9_-]+)/i);
     return match ? match[1] : ''; 
 }
