@@ -8,6 +8,8 @@ export async function getCSSRulesFromStorage() {
     return CSSRulesArrayOfObjectsWithNamesItem.CSSRulesArrayOfObjectsWithNames
 }
 
+
+
 /**
  * Extracts the class from a CSS rule
  * 
