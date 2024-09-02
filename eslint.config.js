@@ -20,6 +20,9 @@ export default [
                 }
             }
         },
+        linterOptions: {
+            noInlineConfig: true
+        },
         rules: {
             "prefer-const": "error"
         },
