@@ -66,16 +66,19 @@ export function formatRuleForStorage(CSSRule) {
     for (let i = 0; i < CSSRule.length; i++) {
         const char = CSSRule[i]
         if (char === '\n' || char === '\t' || (char === ' ' && (i + 1 < CSSRule.length && CSSRule[i + 1] === ' '))) {
+            // eslint-disable-next-line no-param-reassign
             CSSRule = CSSRule.substring(0, i) + CSSRule.substring(i + 1)
             i--
         }
         const indexOfOpeningBracket = CSSRule.indexOf('{')
         if(indexOfOpeningBracket + 1 < CSSRule.length && CSSRule[indexOfOpeningBracket + 1] === ' ') {
+            // eslint-disable-next-line no-param-reassign
             CSSRule = CSSRule.substring(0, indexOfOpeningBracket + 1) + CSSRule.substring(indexOfOpeningBracket + 2)
             i--
         }
         const indexOfClosingBracket = CSSRule.indexOf('}')
         if(indexOfClosingBracket - 1 >= 0 && CSSRule[indexOfClosingBracket - 1] === ' ') {
+            // eslint-disable-next-line no-param-reassign
             CSSRule = CSSRule.substring(0, indexOfClosingBracket - 1) + CSSRule.substring(indexOfClosingBracket)
             i--
         }

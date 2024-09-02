@@ -32,9 +32,11 @@ describe('getRulesToReplace()', () => {
         assert.equal(
             Array.isArray(actual) && (arrOfObjs => { 
                 for(let i = 0; i < arrOfObjs.length; i++) { 
-                    if(!arrOfObjs[i].hasOwnProperty('oldRuleIndex') 
+                    // @ts-ignore
+                    if(!Object.hasOwn(arrOfObjs[i], 'oldRuleIndex')
                     || typeof arrOfObjs[i].oldRuleIndex !== "number"
-                    || !arrOfObjs[i].hasOwnProperty('newRuleUUID')
+                    // @ts-ignore
+                    || !Object.hasOwn(arrOfObjs[i], 'newRuleUUID')
                     || typeof arrOfObjs[i].newRuleUUID !== "string") return false
                 } 
                 return true 
@@ -70,6 +72,7 @@ describe('getRulesToAdd()', () => {
             true
         )
         for(const el of actual) {
+            // eslint-disable-next-line no-restricted-syntax
             assert.match(el, /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/)
         }
     })
