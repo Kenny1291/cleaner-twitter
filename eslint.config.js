@@ -131,7 +131,6 @@ export default [
             "no-with": "error", 
             "prefer-object-has-own": "error", 
             "prefer-spread": "error", 
-            "prefer-template": "error", 
         },
     }
 ]
