@@ -180,7 +180,6 @@ export function addRules(UUIDSOfRulesToAdd, currentCSSRule, newDefaultRules) {
  * @param {CSSRuleObject[]} currentCSSRule 
  */
 export function removeRules(indexesOfRulesToRemove, currentCSSRule) {
-
     for (const indexOfRuleToRemove of indexesOfRulesToRemove) {
         currentCSSRule.splice(indexOfRuleToRemove, 1)
     }
