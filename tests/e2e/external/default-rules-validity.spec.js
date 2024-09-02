@@ -40,5 +40,6 @@ test('current default css rules validity', async () => {
             fails.push(selector)
         }
     }
+    // eslint-disable-next-line no-console
     console.log("Successes: ", successes, "Fails: ", fails)
 })
