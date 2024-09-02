@@ -1,3 +1,5 @@
+/* global Enum */
+
 class HTTPMethod extends Enum {
     static GET = new HTTPMethod('GET')
     static POST = new HTTPMethod('POST')

@@ -1,3 +1,5 @@
+/* global XHR, GITHUB_TOKEN */
+
 class GitHubApiCall extends XHR {
     static username = 'Kenny1291'
     static #repoName = 'cleaner-twitter'
