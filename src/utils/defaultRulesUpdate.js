@@ -159,17 +159,14 @@ export function updateRules(oldRulesIndexAndNewRulesUUID, currentCSSRule, newDef
  */
 export function addRules(UUIDSOfRulesToAdd, currentCSSRule, newDefaultRules) {
     for (const UUIDOfRulesToAdd of UUIDSOfRulesToAdd) {
-        let rule
-        let group
         for (const newDefaultRule of newDefaultRules) {
             if (newDefaultRule.UUID === UUIDOfRulesToAdd) {
-                rule = newDefaultRule.rule
-                group = newDefaultRule.group
+                const name = getRuleName(rule)
+                currentCSSRule.push({ name, rule: newDefaultRule.rule, active: true, group: newDefaultRule.group})
                 break
             }
         }
-        const name = getRuleName(rule)
-        currentCSSRule.push({ name, rule, active: true, group: group})
+
     }
 }
 
