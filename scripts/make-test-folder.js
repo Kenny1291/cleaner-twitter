@@ -1,11 +1,11 @@
-import { filesToAdd, foldersToAdd } from './make-publish-zip.js';
-import fs from 'fs-extra';
-import path from 'path';
+import { filesToAdd, foldersToAdd } from './make-publish-zip.js'
+import fs from 'fs-extra'
+import path from 'path'
 
 const destinationFolder = 'dist/cleaner-twitter/'
 
 /**
- * @param {string} fileOrFolder 
+ * @param {string} fileOrFolder
  */
 async function copyToDestDir(fileOrFolder) {
     const fileName = path.basename(fileOrFolder)

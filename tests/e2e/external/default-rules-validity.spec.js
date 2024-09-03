@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import dotenv from 'dotenv'
+dotenv.config()
 
 import { getSelector } from '../utils/utils.js'
 
@@ -12,7 +12,7 @@ let page
 
 test.beforeAll(async ({ browser }) => {
     test.setTimeout(240000)
-    
+
     const context = await browser.newContext()
     page = await context.newPage()
 
@@ -22,11 +22,10 @@ test.beforeAll(async ({ browser }) => {
 test('current default css rules validity', async () => {
     await page.waitForLoadState('load')
 
-    /**@type {String[]} */    
+    /**@type {String[]} */
     const defaultRulesStr = defaultCSSRules.defaultRules
                                 .filter(ruleObj => ruleObj.UUID !== "2b31e97a-18a7-41cf-aee9-c5ee1842d0fb")
                                 .map(ruleObj => ruleObj.rule)
-
 
     const successes = []
     const fails = []

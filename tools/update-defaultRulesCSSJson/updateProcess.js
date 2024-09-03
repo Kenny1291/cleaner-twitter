@@ -3,8 +3,8 @@
 let rulesModified = false
 
 /**
- * @param {updatedDefaultRules[]} newDefaultRules 
- * @param {defaultCSSRules} oldDefaultRulesJson 
+ * @param {updatedDefaultRules[]} newDefaultRules
+ * @param {defaultCSSRules} oldDefaultRulesJson
  */
 async function processDefaultRulesUpdate(newDefaultRules, oldDefaultRulesJson) {
     const oldRules = JSON.parse(JSON.stringify(oldDefaultRulesJson.defaultRules))
@@ -34,8 +34,8 @@ async function processDefaultRulesUpdate(newDefaultRules, oldDefaultRulesJson) {
 }
 
 /**
- * @param {updatedDefaultRules[]} newDefaultRules 
- * @param {defaultCSSRules} oldDefaultRulesJson 
+ * @param {updatedDefaultRules[]} newDefaultRules
+ * @param {defaultCSSRules} oldDefaultRulesJson
  */
 function addRules(newDefaultRules, oldDefaultRulesJson) {
     for (const newDefaultRule of newDefaultRules) {
@@ -57,8 +57,8 @@ function addRules(newDefaultRules, oldDefaultRulesJson) {
 }
 
 /**
- * @param {updatedDefaultRules[]} newDefaultRules 
- * @param {defaultCSSRules} oldDefaultRulesJson 
+ * @param {updatedDefaultRules[]} newDefaultRules
+ * @param {defaultCSSRules} oldDefaultRulesJson
  */
 function removeRules(newDefaultRules, oldDefaultRulesJson) {
     for (const oldDefaultRule of defaultCSSRulesJson.defaultRules) {
@@ -79,8 +79,8 @@ function removeRules(newDefaultRules, oldDefaultRulesJson) {
 }
 
 /**
- * @param {updatedDefaultRules[]} newDefaultRules 
- * @param {defaultCSSRules} oldDefaultRulesJson 
+ * @param {updatedDefaultRules[]} newDefaultRules
+ * @param {defaultCSSRules} oldDefaultRulesJson
  */
 function replaceRules(newDefaultRules, oldDefaultRulesJson) {
     let indexObj = 0
@@ -104,7 +104,7 @@ function replaceRules(newDefaultRules, oldDefaultRulesJson) {
 }
 
 /**
- * @param {defaultRule[]} oldRules 
+ * @param {defaultRule[]} oldRules
  * @returns {Promise<oldRules[]>}
  */
 async function composeOldRulesArr(oldRules) {
@@ -118,24 +118,24 @@ async function composeOldRulesArr(oldRules) {
 }
 
 /**
- * @param {defaultCSSRules} oldDefaultRulesJson 
- * @param {defaultCSSRules["defaultRules"]} oldRules 
+ * @param {defaultCSSRules} oldDefaultRulesJson
+ * @param {defaultCSSRules["defaultRules"]} oldRules
  */
 async function updateOldDefaultRulesJson(oldDefaultRulesJson, oldRules) {
     const _composedOldRulesArr = await composeOldRulesArr(oldRules)
-    oldDefaultRulesJson.oldRules[oldDefaultRulesJson.version] = _composedOldRulesArr    
-    oldDefaultRulesJson.version += 1 
+    oldDefaultRulesJson.oldRules[oldDefaultRulesJson.version] = _composedOldRulesArr
+    oldDefaultRulesJson.version += 1
 }
 
 let lastCallTime
 /**
- * @param {string} status 
+ * @param {string} status
  */
 function pushStatusUpdateToUser(status) {
     const timeElapsedSinceLastCall = Date.now() - lastCallTime
     if(timeElapsedSinceLastCall < 1000) {
         setTimeout(() => pushStatusUpdateToUser(status), 1000 - timeElapsedSinceLastCall)
-        return  
+        return
     }
     const p = document.getElementById('updateStatus')
     if(p) p.remove()

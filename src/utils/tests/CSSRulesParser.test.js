@@ -1,18 +1,17 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
-import { 
-    CSSFileAsString ,
+import {
+    CSSFileAsString,
     CSSFileAsStringArr,
     CSSRulesFormattedArr
 } from '../../../tests/unit/static-data/CSSRuleParserFixtures.js'
-import { 
+import {
     fromArrayOfFormattedRulesToCSSFileString,
     fromCSSStringToArrayOfFormattedRules,
     getSingleRulesFromCSSFileString,
     formatRuleForStorage
 } from '../CSSRulesParser.js'
 import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' with { type: 'json' }
-
 
 describe('getSingleRulesFromCSSFileString()', () => {
     it('should return an array with all the rules separated', () => {
