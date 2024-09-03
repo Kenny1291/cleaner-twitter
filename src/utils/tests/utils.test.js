@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
-import { 
+import {
     getRuleName,
     processCSSRule,
     fetchDefaultCSSRulesJSON
@@ -22,7 +22,7 @@ describe('processCSSRule()', () => {
     it('should return a "CSSRuleObject"', () => {
         const expected = CSSRulesArrayOfObjectsWithNames[0]
         const actual = processCSSRule(exampleRule, CSSRulesArrayOfObjectsWithNames)
-        assert.deepEqual(actual, expected) 
+        assert.deepEqual(actual, expected)
     })
 
     it('should match the active property value if the rule is found', () => {

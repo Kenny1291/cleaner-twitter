@@ -16,7 +16,7 @@
  * @typedef {Object} defaultRule
  * @property {string} UUID - The UUID of the rule
  * @property {string} rule - The actual rule
- * @property {string} group - The group of the rule   
+ * @property {string} group - The group of the rule
  */
 
 /**

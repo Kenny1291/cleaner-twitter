@@ -1,7 +1,7 @@
 /**
  * Computes and returns the SHA-256 hash of a given string
- * 
- * @param {string} string 
+ *
+ * @param {string} string
  * @returns {Promise<string>}
  */
 async function sha256Hash(string) {

@@ -26,7 +26,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 function injectStylesAndSetClasses() {
     /**@type {?HTMLStyleElement} */
     // @ts-ignore
-    const oldStyle =  document.getElementById('cleanerTwitterStyles')
+    const oldStyle = document.getElementById('cleanerTwitterStyles')
 
     if (oldStyle) oldStyle.remove()
 
@@ -38,7 +38,7 @@ function injectStylesAndSetClasses() {
     chrome.storage.sync.get().then(result => {
         result.CSSRulesArrayOfObjectsWithNames.forEach(CSSRule => {
             style.innerHTML += CSSRule.rule
-            document.body.classList.toggle(CSSRule.name, CSSRule.active )
+            document.body.classList.toggle(CSSRule.name, CSSRule.active)
         })
     })
     document.head.appendChild(style)

@@ -1,4 +1,4 @@
-/** 
+/**
  *@typedef {Object} header
  *@property {string} name
  *@property {string} value
@@ -19,10 +19,10 @@ class XHR {
     #responsePromiseResolve
 
     /**
-     * @param {HTTPMethod} method 
-     * @param {string} url 
-     * @param {header[]} headers 
-     * @param {Object<string, *>} body 
+     * @param {HTTPMethod} method
+     * @param {string} url
+     * @param {header[]} headers
+     * @param {Object<string, *>} body
      */
     constructor(method, url, headers = null, body = null) {
         this.#method = method.toString()
@@ -33,7 +33,7 @@ class XHR {
 
     /**
      * Makes the XHR request
-     * 
+     *
      * @returns {this}
      */
     send() {
@@ -43,13 +43,13 @@ class XHR {
         this.#setEventsHandler()
         if (this.#body) this.#request.send(this.#body)
         else this.#request.send()
-        
+
         return this
     }
 
     /**
-     * Get the request response. A JSON if successful, false if not. 
-     * 
+     * Get the request response. A JSON if successful, false if not.
+     *
      * @returns {Promise<JSON|boolean>}
      */
     getResponse() {
@@ -59,7 +59,7 @@ class XHR {
             } else {
                 this.#responsePromiseResolve = resolve
             }
-        }) 
+        })
     }
 
     #setHeaders() {
@@ -73,7 +73,7 @@ class XHR {
     }
 
     #setEventsHandler() {
-        this.#request.onloadend = (event) => {
+        this.#request.onloadend = event => {
             const status = this.#request.status
             const successful = status >= 200 || status <= 299
             if (successful) {
