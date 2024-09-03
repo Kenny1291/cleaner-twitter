@@ -29,12 +29,12 @@ fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/def
                         <button class="outline deleteBtn" type="button">Delete</button>
                     </fieldset>
                 `
-                )    
+                )
         }
 
         for (const deleteBtn of document.getElementsByClassName('deleteBtn')) {
             //@ts-ignore
-            deleteBtn.addEventListener('click', (event) => event.target.parentElement.remove())
+            deleteBtn.addEventListener('click', event => event.target.parentElement.remove())
         }
     })
 
@@ -57,12 +57,12 @@ document.getElementById('addBtn').addEventListener('click', () => {
         `
         )
     //@ts-ignore
-    document.getElementById('newDeleteBtn' + counter++).addEventListener('click', (event) => event.target.parentElement.remove())
+    document.getElementById('newDeleteBtn' + counter++).addEventListener('click', event => event.target.parentElement.remove())
 })
 
-document.getElementById('applyUpdateBtn').addEventListener('click', (event) => {
+document.getElementById('applyUpdateBtn').addEventListener('click', event => {
     //@ts-ignore
-    event.target.disabled = true;
+    event.target.disabled = true
     const newDefaultRules = getNewDefaultRules()
     processDefaultRulesUpdate(newDefaultRules, defaultCSSRulesJson)
 })

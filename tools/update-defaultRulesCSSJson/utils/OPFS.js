@@ -4,9 +4,9 @@ class OPFS {
 
     /**
      * Write to a file. Creates the file if it doesn't exist
-     * 
-     * @param {string} fileName 
-     * @param {string} content 
+     *
+     * @param {string} fileName
+     * @param {string} content
      * @returns {Promise<boolean>}
      */
     static async writeFile(fileName, content) {
@@ -38,7 +38,3 @@ class OPFS {
             .catch(() => false)
     }
 }
-
-
-
-

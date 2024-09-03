@@ -5,11 +5,11 @@ const updateNowContainer = document.getElementById('update-now-container')
 let updateNowClicked = false
 updateNowContainer.addEventListener('click', async () => {
     if (updateNowClicked) return
-    
+
     updateNowClicked = true
     const response = await updateDefaultCSSRules(true)
     updateNowContainer.insertAdjacentHTML(
-        'beforebegin', 
+        'beforebegin',
         `<div 
             style="
                 display: flex;
@@ -32,7 +32,7 @@ updateNowContainer.addEventListener('click', async () => {
             >
                 ${response}
             </p>
-        </div>`    
+        </div>`
     )
 })
 

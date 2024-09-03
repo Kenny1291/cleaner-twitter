@@ -7,7 +7,7 @@ class GitHubApiCall extends XHR {
     /**
      * @param {HTTPMethod} method
      * @param {string} relativeUrl
-     * @param {Object<string, *>} body 
+     * @param {Object<string, *>} body
      */
     constructor(method, relativeUrl, body = null) {
         super(
@@ -21,7 +21,7 @@ class GitHubApiCall extends XHR {
             body
         )
     }
-    
+
     /**Makes the API call */
     make() {
         return super.send()

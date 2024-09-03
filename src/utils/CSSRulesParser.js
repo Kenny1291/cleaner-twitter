@@ -1,34 +1,33 @@
 //TODO: Doc this functions
 /**
- * 
+ *
  * @param {CSSRuleObject[]} CSSRules
- * @returns {string} 
+ * @returns {string}
  */
 export function fromArrayOfFormattedRulesToCSSFileString(CSSRules) {
     /**@var {string[]} */
     const CSSRulesArr = CSSRules.map(CSSRuleObject => CSSRuleObject.rule)
-    let CSSRulesString = "";
+    let CSSRulesString = ""
     for (let i = CSSRulesArr.length - 1; i >= 0; i--) {
-        let rule = "";
+        let rule = ""
         for (let j = CSSRulesArr[i].length - 1; j >= 0; j--) {
-            const char = CSSRulesArr[i][j];
+            const char = CSSRulesArr[i][j]
             if (char === '}') {
-                rule = '\n' + char + rule + '\n';
+                rule = '\n' + char + rule + '\n'
             } else if (char === '{') {
-                rule = char + '\n\t' + rule;
+                rule = char + '\n\t' + rule
             } else {
-                rule = char + rule;
+                rule = char + rule
             }
         }
-        CSSRulesString = rule + CSSRulesString;
+        CSSRulesString = rule + CSSRulesString
     }
-    return CSSRulesString;
+    return CSSRulesString
 }
 
-
 /**
- * 
- * @param {string} CSSFileString 
+ *
+ * @param {string} CSSFileString
  * @returns {string[]}
  */
 export function fromCSSStringToArrayOfFormattedRules(CSSFileString) {
@@ -41,8 +40,8 @@ export function fromCSSStringToArrayOfFormattedRules(CSSFileString) {
 }
 
 /**
- * 
- * @param {string} CSSFileString 
+ *
+ * @param {string} CSSFileString
  * @returns {string[]}
  */
 export function getSingleRulesFromCSSFileString(CSSFileString) {
@@ -58,8 +57,8 @@ export function getSingleRulesFromCSSFileString(CSSFileString) {
 }
 
 /**
- * 
- * @param {string} CSSRule 
+ *
+ * @param {string} CSSRule
  * @returns {string}
  */
 export function formatRuleForStorage(CSSRule) {

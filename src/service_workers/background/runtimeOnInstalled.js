@@ -17,19 +17,19 @@ chrome.runtime.onInstalled.addListener(async () => {
     const rulesInStorage = await chrome.storage.sync.get('CSSRulesArrayOfObjectsWithNames')
     const foundStoredRules = Object.keys(rulesInStorage).length > 0
     if (!foundStoredRules) setDefaultRules()
-    
+
     injectContentScriptInOpenTwitterTabs(openTwitterTabs)
 })
 
 /**
- * 
- * @param {chrome.tabs.Tab[]} tabs 
+ *
+ * @param {chrome.tabs.Tab[]} tabs
  */
 function injectContentScriptInOpenTwitterTabs(tabs) {
     for (const tab of tabs) {
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
-            files: ['src/content_scripts/content.js'] 
+            files: ['src/content_scripts/content.js']
         })
     }
 }

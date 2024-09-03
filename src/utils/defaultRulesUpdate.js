@@ -1,17 +1,16 @@
-import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from "./utils.js";
+import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from "./utils.js"
 /**
  * NOTES:
- * 
+ *
  * - For every old rule hash if I find it in the user rule, that rule is to replace with the one that corresponds to the UUID in my json
  * - For every UUID in the defaultRules that is not in the old default rules I add it
  * - For every UUID in the old default rules that is not in the (new) default rules I remove it
  */
 
-
 /**
  * Updates default CSS rules in storage if the remote version is newer, by replacing, adding, and removing rules as necessary.
  * Only if the auto update setting is enabled
- * 
+ *
  * @param {boolean} manual - Indicates wether the updates is manually triggered or not
  * @returns {Promise<string>} A message indicating if the update is performed
  */
@@ -46,14 +45,14 @@ export async function updateDefaultCSSRules(manual = false) {
 
 /**
  * Identifies matching rules and returns their indexes and UUIDs
- * 
- * @param {oldRules[]} oldRulesHashed 
- * @param {string[]} currentRulesHashed 
+ *
+ * @param {oldRules[]} oldRulesHashed
+ * @param {string[]} currentRulesHashed
  * @returns {oldRuleIndexAndNewRuleUUID[]}
  */
 export function getRulesToUpdate(oldRulesHashed, currentRulesHashed) {
     const oldRulesIndexAndNewRulesUUID = []
-    for (const oldRule  of oldRulesHashed) {
+    for (const oldRule of oldRulesHashed) {
         for (let i = 0; i < currentRulesHashed.length; i++) {
             if (oldRule.hash === currentRulesHashed[i]) {
                 oldRulesIndexAndNewRulesUUID.push({ oldRuleIndex: i, newRuleUUID: oldRule.UUID })
@@ -66,9 +65,9 @@ export function getRulesToUpdate(oldRulesHashed, currentRulesHashed) {
 
 /**
  * Determines and returns the UUIDs of default rules not present in the old rules
- * 
- * @param {defaultRule[]} defaultRules 
- * @param {oldRules[]} oldRules 
+ *
+ * @param {defaultRule[]} defaultRules
+ * @param {oldRules[]} oldRules
  * @returns {string[]}
  */
 export function getRulesToAdd(defaultRules, oldRules) {
@@ -79,7 +78,7 @@ export function getRulesToAdd(defaultRules, oldRules) {
             if (defaultRule.UUID === oldRule.UUID) {
                 matchFound = true
                 break
-            } 
+            }
         }
         if (!matchFound) UUIDSOfRulesToAdd.push(defaultRule.UUID)
     }
@@ -89,9 +88,9 @@ export function getRulesToAdd(defaultRules, oldRules) {
 /**
  * Identifies and returns the indexes of old rules not found in the default rules
  * in descending order
- * 
- * @param {oldRules[]} oldRules 
- * @param {defaultRule[]} defaultRules 
+ *
+ * @param {oldRules[]} oldRules
+ * @param {defaultRule[]} defaultRules
  * @returns {Number[]}
  */
 export function getRulesToRemove(oldRules, defaultRules) {
@@ -103,8 +102,8 @@ export function getRulesToRemove(oldRules, defaultRules) {
                 matchFound = true
                 break
             }
-        }  
-        if (!matchFound) indexesOfRulesToRemove.push(i)      
+        }
+        if (!matchFound) indexesOfRulesToRemove.push(i)
     }
     indexesOfRulesToRemove.sort((a, b) => b - a)
     return indexesOfRulesToRemove
@@ -112,11 +111,11 @@ export function getRulesToRemove(oldRules, defaultRules) {
 
 /**
  * Replaces, adds, and removes CSS rules as needed to compose a new array of CSS rules
- * 
- * @param {CSSRuleObject[]} currentCSSRules 
- * @param {oldRuleIndexAndNewRuleUUID[]} oldRulesIndexAndNewRulesUUID 
- * @param {string[]} UUIDSOfRulesToAdd 
- * @param {Number[]} indexesOfRulesToRemove 
+ *
+ * @param {CSSRuleObject[]} currentCSSRules
+ * @param {oldRuleIndexAndNewRuleUUID[]} oldRulesIndexAndNewRulesUUID
+ * @param {string[]} UUIDSOfRulesToAdd
+ * @param {Number[]} indexesOfRulesToRemove
  * @param {defaultRule[]} newDefaultRules
  * @returns {CSSRuleObject[]}
  */
@@ -130,9 +129,9 @@ function composeNewCSSRulesArray(currentCSSRules, oldRulesIndexAndNewRulesUUID, 
 
 /**
  * Updates CSS rule object at specified indexes
- * 
- * @param {oldRuleIndexAndNewRuleUUID[]} oldRulesIndexAndNewRulesUUID 
- * @param {CSSRuleObject[]} currentCSSRule 
+ *
+ * @param {oldRuleIndexAndNewRuleUUID[]} oldRulesIndexAndNewRulesUUID
+ * @param {CSSRuleObject[]} currentCSSRule
  * @param {defaultRule[]} newDefaultRules
  */
 export function updateRules(oldRulesIndexAndNewRulesUUID, currentCSSRule, newDefaultRules) {
@@ -146,15 +145,14 @@ export function updateRules(oldRulesIndexAndNewRulesUUID, currentCSSRule, newDef
                 break
             }
         }
-
     }
 }
 
 /**
  * Adds new CSS rule objects to the current CSS rules using specified UUIDs
- * 
- * @param {string[]} UUIDSOfRulesToAdd 
- * @param {CSSRuleObject[]} currentCSSRule 
+ *
+ * @param {string[]} UUIDSOfRulesToAdd
+ * @param {CSSRuleObject[]} currentCSSRule
  * @param {defaultRule[]} newDefaultRules
  */
 export function addRules(UUIDSOfRulesToAdd, currentCSSRule, newDefaultRules) {
@@ -163,19 +161,18 @@ export function addRules(UUIDSOfRulesToAdd, currentCSSRule, newDefaultRules) {
             if (newDefaultRule.UUID === UUIDOfRulesToAdd) {
                 const rule = newDefaultRule.rule
                 const name = getRuleName(rule)
-                currentCSSRule.push({ name, rule, active: true, group: newDefaultRule.group})
+                currentCSSRule.push({ name, rule, active: true, group: newDefaultRule.group })
                 break
             }
         }
-
     }
 }
 
 /**
  * Removes CSS rule objects from the current CSS rules at specified indexes
- * 
- * @param {Number[]} indexesOfRulesToRemove 
- * @param {CSSRuleObject[]} currentCSSRule 
+ *
+ * @param {Number[]} indexesOfRulesToRemove
+ * @param {CSSRuleObject[]} currentCSSRule
  */
 export function removeRules(indexesOfRulesToRemove, currentCSSRule) {
     for (const indexOfRuleToRemove of indexesOfRulesToRemove) {
@@ -185,9 +182,9 @@ export function removeRules(indexesOfRulesToRemove, currentCSSRule) {
 
 /**
  * Adds group key if missing
- * 
- * @param {CSSRuleObject[]} currentCSSRules 
- * @param {oldRuleIndexAndNewRuleUUID[]} matchingRules 
+ *
+ * @param {CSSRuleObject[]} currentCSSRules
+ * @param {oldRuleIndexAndNewRuleUUID[]} matchingRules
  * @param {defaultRule[]} newDefaultRules
  */
 function handleEventualCSSRulesArrayOldStructure(currentCSSRules, matchingRules, newDefaultRules) {
@@ -216,7 +213,7 @@ function handleEventualCSSRulesArrayOldStructure(currentCSSRules, matchingRules,
 
 /**
  * Generates and returns an array of SHA-256 hashes for each rule in the current CSS rules
- * 
+ *
  * @param {CSSRuleObject[]} currentCSSRules
  * @returns {Promise<string[]>}
  */
@@ -231,8 +228,8 @@ export async function getCurrentRulesHashed(currentCSSRules) {
 
 /**
  * Computes and returns the SHA-256 hash of a given string
- * 
- * @param {string} string 
+ *
+ * @param {string} string
  * @returns {Promise<string>}
  */
 export async function sha256Hash(string) {

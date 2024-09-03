@@ -1,6 +1,6 @@
 /**
- * @param {string} str 
- * @param {string} char 
+ * @param {string} str
+ * @param {string} char
  * @returns {number}
  */
 function secondLastIndexOf(str, char) {
@@ -10,9 +10,9 @@ function secondLastIndexOf(str, char) {
 }
 
 /**
- * @param {string} rule 
+ * @param {string} rule
  * @returns {string}
  */
-export function getSelector (rule) {
+export function getSelector(rule) {
     return rule.substring(rule.indexOf(' ') + 1, secondLastIndexOf(rule, ' '))
 }

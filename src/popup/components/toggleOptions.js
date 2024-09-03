@@ -31,7 +31,7 @@ CSSRules.forEach(CSSRule => {
 
     ruleToggle.checked = CSSRule.active
 
-    ruleToggle.addEventListener('click', function () {
+    ruleToggle.addEventListener('click', function() {
         toggleStorageKey(CSSRule.name)
     })
 })

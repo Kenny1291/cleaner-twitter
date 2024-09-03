@@ -10,20 +10,20 @@ export async function getCSSRulesFromStorage() {
 
 /**
  * Extracts the class from a CSS rule
- * 
- * @param {string} rule 
+ *
+ * @param {string} rule
  * @returns {string}
  */
 export function getRuleName(rule) {
     // eslint-disable-next-line no-restricted-syntax
-    const match = rule.match(/\.([a-z0-9_-]+)/i);
-    return match ? match[1] : ''; 
+    const match = rule.match(/\.([a-z0-9_-]+)/i)
+    return match ? match[1] : ''
 }
 
 /**
  * Transform a CSS class to a name for the toggle switch
- * 
- * @param {string} ruleClass 
+ *
+ * @param {string} ruleClass
  * @returns {string}
  */
 export function getToggleName(ruleClass) {
@@ -34,7 +34,7 @@ export function getToggleName(ruleClass) {
 
 /**
  * Processes a CSS rule and returns a {@link CSSRuleObject}
- * 
+ *
  * @param {string} rule - The CSS rule to be processed.
  * @param {CSSRuleObject[]} CSSRules - An array of {@link CSSRuleObject}.
  * @returns {CSSRuleObject} NOTE: If the rule is found in the 'CSSRules' array,
@@ -43,7 +43,7 @@ export function getToggleName(ruleClass) {
  */
 export function processCSSRule(rule, CSSRules) {
     const name = getRuleName(rule)
-    const CSSRule = CSSRules.find(rule => rule.name === name);
+    const CSSRule = CSSRules.find(rule => rule.name === name)
     return { name, rule, active: CSSRule ? CSSRule.active : true, group: CSSRule ? CSSRule.group : "" }
 }
 
@@ -54,7 +54,7 @@ export function processCSSRule(rule, CSSRules) {
  * @param {string[]} CSSRulesArr - An array of CSS rules. Each rule is a string representing a CSS rule.
  * @param {boolean} [fetchStateFromStorage=false] - A boolean indicating whether to fetch the CSS rules from the Chrome storage.
  * If false, the function will use an empty array.
- * @returns {Promise<CSSRuleObject[]>} 
+ * @returns {Promise<CSSRuleObject[]>}
  */
 export async function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArr, fetchStateFromStorage = false) {
     const CSSRules = fetchStateFromStorage ? await getCSSRulesFromStorage() : []
@@ -79,7 +79,7 @@ export async function setDefaultRules() {
 
 //TODO: handle errors
 /**
- * 
+ *
  * @returns {Promise<defaultCSSRules>}
  */
 export async function fetchDefaultCSSRulesJSON() {
@@ -92,7 +92,7 @@ export async function fetchDefaultCSSRulesJSON() {
 
 /**
  * Toggles the 'active' property of a CSS rule in Chrome storage.
- * 
+ *
  * @param {string} CSSRuleName - The name of the CSS rule to toggle.
  */
 export function toggleStorageKey(CSSRuleName) {
