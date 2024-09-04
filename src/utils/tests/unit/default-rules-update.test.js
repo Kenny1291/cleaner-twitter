@@ -122,8 +122,8 @@ describe('updateRules()', () => {
 describe('addRules()', () => {
     it('should add a newly created CSSRuleObject to the Array', () => {
         const expected = JSON.parse(JSON.stringify(CSSRulesArrayOfObjectsWithNames))
-        expected.push({ active: false, group: "testGroup", name: "test_rule1_name", rule: ".test_rule1_name testRule" })
-        expected.push({ active: false, group: "testGroup", name: "test_rule2_name", rule: ".test_rule2_name testRule" })
+        expected.push({ active: true, group: "testGroup", name: "test_rule1_name", rule: ".test_rule1_name testRule" })
+        expected.push({ active: true, group: "testGroup", name: "test_rule2_name", rule: ".test_rule2_name testRule" })
         const actual = JSON.parse(JSON.stringify(CSSRulesArrayOfObjectsWithNames))
         const UUIDOfRulesToAdd = ["testUUID1", "testUUID2"]
         const newDefaultRules = [
