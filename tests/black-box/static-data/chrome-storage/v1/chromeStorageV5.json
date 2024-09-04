@@ -1,0 +1,55 @@
+{
+    "CSSRulesArrayOfObjectsWithNames": [
+        {
+            "active": true,
+            "name": "hide_tweet_analytics",
+            "rule": ".hide_tweet_analytics div:has(> a[aria-label$='View post analytics']) {display: none;}"
+        },
+        {
+            "active": true,
+            "name": "hide_premium_menu_item",
+            "rule": ".hide_premium_menu_item a[href='/i/premium_sign_up'] {display: none;}"
+        },
+        {
+            "active": true,
+            "name": "hide_subscribe_to_premium",
+            "rule": ".hide_subscribe_to_premium div:has(> aside[aria-label='Subscribe to Premium']) {display: none;}"
+        },
+        {
+            "active": true,
+            "name": "hide_trends_for_you",
+            "rule": ".hide_trends_for_you div:has(> div > section > div[aria-label='Timeline: Trending now']) {display: none;}"
+        },
+        {
+            "active": true,
+            "name": "hide_who_to_follow",
+            "rule": ".hide_who_to_follow div:has(> div > aside[aria-label='Who to follow']) {display: none;}"
+        },
+        {
+            "active": true,
+            "name": "hide_footer",
+            "rule": ".hide_footer nav[aria-label='Footer'] {display: none;}"
+        },
+        {
+            "active": true,
+            "name": "hide_messages_drawer",
+            "rule": ".hide_messages_drawer div[data-testid='DMDrawer'] {display: none;}"
+        },
+        {
+            "active": true,
+            "name": "hide_grok_menu_item",
+            "rule": ".hide_grok_menu_item a[href='/i/grok'] {display: none;}"
+        },
+        {
+            "active": true,
+            "name": "hide_verified_orgs_menu_item",
+            "rule": ".hide_verified_orgs_menu_item a[href='/i/verified-orgs-signup'] {display: none;}"
+        },
+        {
+            "active": true,
+            "name": "hide_communities_menu_item",
+            "rule": ".hide_communities_menu_item a[aria-label='Communities'] {display: none;}"
+        }
+    ],
+    "version": 5
+}
