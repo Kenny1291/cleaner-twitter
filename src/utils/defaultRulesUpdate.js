@@ -12,31 +12,46 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from ".
  * Only if the auto update setting is enabled
  *
  * @param {boolean} manual - Indicates wether the updates is manually triggered or not
- * @returns {Promise<string>} A message indicating if the update is performed
+ * @param {defaultCSSRules} defaultCSSRulesJsonMOCK - Only for testing
+ * @param {{ version: number }} versionItemMOCK - Only for testing
+ * @param {{ CSSRulesArrayOfObjectsWithNames: CSSRuleObject[] }} CSSRulesFromStorageMOCK - Only for testing
+ * @param {((obj: { CSSRulesArrayOfObjectsWithNames: CSSRuleObject[], version: number }) => void)} setStorageMOCK - Only for testing
+ * @returns {Promise<string>} A message indicating if the update was performed
  */
-export async function updateDefaultCSSRules(manual = false) {
-    if (!manual) {
-        const autoUpdateItem = await chrome.storage.sync.get('autoUpdate')
-        const autoUpdateState = autoUpdateItem.autoUpdate
-        if (!autoUpdateState) return
-    }
+    export async function updateDefaultCSSRules(
+        manual = false,
+        defaultCSSRulesJsonMOCK = undefined,
+        versionItemMOCK = undefined,
+        CSSRulesFromStorageMOCK = undefined,
+        setStorageMOCK = undefined
+    ) {
+        if (!manual) {
+            const autoUpdateItem = await chrome.storage.sync.get('autoUpdate')
+            const autoUpdateState = autoUpdateItem.autoUpdate
+            if (!autoUpdateState) return
+        }
 
-    const defaultCSSRulesJson = await fetchDefaultCSSRulesJSON()
-    const versionItem = await chrome.storage.sync.get('version')
-    const currentRulesVersion = versionItem.version
-    const defaultRulesVersion = defaultCSSRulesJson.version
+        const defaultCSSRulesJson = defaultCSSRulesJsonMOCK ? defaultCSSRulesJsonMOCK : await fetchDefaultCSSRulesJSON()
+        const versionItem = versionItemMOCK ? versionItemMOCK : await chrome.storage.sync.get('version')
+        const currentRulesVersion = versionItem.version
+        const defaultRulesVersion = defaultCSSRulesJson.version
 
-    if (defaultRulesVersion > currentRulesVersion) {
-        const currentCSSRulesArray = await getCSSRulesFromStorage()
-        const currentRulesHashed = await getCurrentRulesHashed(currentCSSRulesArray)
-        const remoteOldRules = defaultCSSRulesJson.oldRules[String(currentRulesVersion)]
-        const remoteNewRules = defaultCSSRulesJson.defaultRules
-        const oldRulesIndexAndNewRulesUUID = getRulesToUpdate(remoteOldRules, currentRulesHashed)
-        const UUIDSOfRulesToAdd = getRulesToAdd(remoteNewRules, remoteOldRules)
-        const indexesOfRulesToRemove = getRulesToRemove(remoteOldRules, remoteNewRules)
-        const CSSRulesArrayOfObjectsWithNames = composeNewCSSRulesArray(currentCSSRulesArray, oldRulesIndexAndNewRulesUUID, UUIDSOfRulesToAdd, indexesOfRulesToRemove, remoteNewRules)
+        if (defaultRulesVersion > currentRulesVersion) {
+            const currentCSSRulesArray = CSSRulesFromStorageMOCK ? CSSRulesFromStorageMOCK.CSSRulesArrayOfObjectsWithNames : await getCSSRulesFromStorage()
+            const currentRulesHashed = await getCurrentRulesHashed(currentCSSRulesArray)
+            const remoteOldRules = defaultCSSRulesJson.oldRules[String(currentRulesVersion)]
+            const remoteNewRules = defaultCSSRulesJson.defaultRules
+            const oldRulesIndexAndNewRulesUUID = getRulesToUpdate(remoteOldRules, currentRulesHashed)
+            const UUIDSOfRulesToAdd = getRulesToAdd(remoteNewRules, remoteOldRules)
+            const indexesOfRulesToRemove = getRulesToRemove(remoteOldRules, remoteNewRules)
+            const CSSRulesArrayOfObjectsWithNames = composeNewCSSRulesArray(currentCSSRulesArray, oldRulesIndexAndNewRulesUUID, UUIDSOfRulesToAdd, indexesOfRulesToRemove, remoteNewRules)
 
-        chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames, version: defaultRulesVersion })
+            const objToSet = { CSSRulesArrayOfObjectsWithNames, version: defaultRulesVersion }
+            if (setStorageMOCK) {
+                setStorageMOCK(objToSet)
+            } else {
+                chrome.storage.sync.set(objToSet)
+            }
 
         return `Default rules updated from version ${currentRulesVersion} to version ${defaultRulesVersion}`
     }
