@@ -26,7 +26,7 @@ document.getElementById('saveButton').addEventListener('click', async () => {
 
 //Reset button -->
 document.getElementById('resetButton').addEventListener('click', () => toggleModal(event))
-const closeModelAnchors = document.getElementsByClassName('closeModalAnchor')
-for (const closeModelAnchor of closeModelAnchors) closeModelAnchor.addEventListener('click', () => toggleModal(event))
+const closeModalAnchors = document.getElementsByClassName('closeModalAnchor')
+for (const closeModelAnchor of closeModalAnchors) closeModelAnchor.addEventListener('click', () => toggleModal(event))
 document.getElementById('confirmResetButton').addEventListener('click', () => setDefaultRules().then(() => window.close()))
 //Save button <--
