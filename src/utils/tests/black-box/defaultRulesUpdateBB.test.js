@@ -2,6 +2,19 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
 import { updateDefaultCSSRules } from '../../defaultRulesUpdate.js'
 
+/**
+ * @param {defaultCSSRules} oldJson 
+ * @param {number} version 
+ * @returns {newAndOldCSSRules}
+ */
+function transformOldJsonToNew(oldJson, version) {
+    const newJson = {}
+    newJson.version = oldJson.version
+    newJson.defaultRules = oldJson.defaultRules
+    newJson.oldRules = oldJson.oldRules[version]
+    return newJson
+}
+
 describe('defaultRulesUpdate()', () => {
     it('should update the rules correctly between V2 data', async () => {
         for (let i = 6; i < 8; i++) {
@@ -10,7 +23,7 @@ describe('defaultRulesUpdate()', () => {
             const input = await import(`../../../../tests/black-box/static-data/chrome-storage/v2/chromeStorageV${i}.json`, { with: { type: 'json' } }).then(mod => mod.default)
             await updateDefaultCSSRules(
                 true,
-                defaultCSSRulesV2,
+                transformOldJsonToNew(defaultCSSRulesV2, i),
                 { version: input.version },
                 input,
                 obj => output = obj
@@ -27,7 +40,7 @@ describe('defaultRulesUpdate()', () => {
         const input = await import(`../../../../tests/black-box/static-data/chrome-storage/v1/chromeStorageV5.json?bustCache=${Date.now()}`, { with: { type: 'json' } }).then(mod => mod.default)
         await updateDefaultCSSRules(
             true,
-            defaultCSSRulesV2,
+            transformOldJsonToNew(defaultCSSRulesV2, 5),
             { version: input.version },
             input,
             obj => output = obj
