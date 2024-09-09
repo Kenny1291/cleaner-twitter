@@ -83,7 +83,6 @@ export async function setDefaultRules() {
     chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
 }
 
-//TODO: handle errors
 /**
  * @returns {Promise<defaultCSSRules>}
  */
