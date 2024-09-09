@@ -3,8 +3,8 @@ import assert from 'node:assert/strict'
 import { updateDefaultCSSRules } from '../../defaultRulesUpdate.js'
 
 /**
- * @param {defaultCSSRules} oldJson 
- * @param {number} version 
+ * @param {defaultCSSRules} oldJson
+ * @param {number} version
  * @returns {newAndOldCSSRules}
  */
 function transformOldJsonToNew(oldJson, version) {
