@@ -28,7 +28,6 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 })
 
 /**
- *
  * @param {chrome.tabs.Tab[]} tabs
  */
 function injectContentScriptInOpenTwitterTabs(tabs) {
