@@ -1,6 +1,5 @@
-//TODO: Doc this functions
-/**
- *
+
+/** 
  * @param {CSSRuleObject[]} CSSRules
  * @returns {string}
  */
@@ -26,7 +25,6 @@ export function fromArrayOfFormattedRulesToCSSFileString(CSSRules) {
 }
 
 /**
- *
  * @param {string} CSSFileString
  * @returns {string[]}
  */
@@ -40,7 +38,6 @@ export function fromCSSStringToArrayOfFormattedRules(CSSFileString) {
 }
 
 /**
- *
  * @param {string} CSSFileString
  * @returns {string[]}
  */
@@ -57,7 +54,6 @@ export function getSingleRulesFromCSSFileString(CSSFileString) {
 }
 
 /**
- *
  * @param {string} CSSRule
  * @returns {string}
  */
