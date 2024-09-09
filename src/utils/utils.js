@@ -112,8 +112,7 @@ export async function fetchNewAndOldRulesJSON(version) {
  * @param {string} CSSRuleName - The name of the CSS rule to toggle.
  */
 export function toggleStorageKey(CSSRuleName) {
-    chrome.storage.sync.get().then(result => {
-        const CSSRules = result.CSSRulesArrayOfObjectsWithNames
+    getCSSRulesFromStorage().then(CSSRules => {
         const CSSRule = CSSRules.find(rule => rule.name === CSSRuleName)
         CSSRule.active = !CSSRule.active
         chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
