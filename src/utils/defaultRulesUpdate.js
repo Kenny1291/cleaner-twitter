@@ -1,4 +1,4 @@
-import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from "./utils.js"
+import { fetchNewAndOldRulesJSON, getCSSRulesFromStorage, getRuleName } from "./utils.js"
 /**
  * NOTES:
  *
@@ -12,7 +12,7 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from ".
  * Only if the auto update setting is enabled
  *
  * @param {boolean} manual - Indicates wether the updates is manually triggered or not
- * @param {defaultCSSRules} defaultCSSRulesJsonMOCK - Only for testing
+ * @param {newAndOldCSSRules} defaultCSSRulesJsonMOCK - Only for testing
  * @param {{ version: number }} versionItemMOCK - Only for testing
  * @param {{ CSSRulesArrayOfObjectsWithNames: CSSRuleObject[] }} CSSRulesFromStorageMOCK - Only for testing
  * @param {((obj: { CSSRulesArrayOfObjectsWithNames: CSSRuleObject[], version: number }) => void)} setStorageMOCK - Only for testing
@@ -31,15 +31,15 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from ".
             if (!autoUpdateState) return
         }
 
-        const defaultCSSRulesJson = defaultCSSRulesJsonMOCK ? defaultCSSRulesJsonMOCK : await fetchDefaultCSSRulesJSON()
         const versionItem = versionItemMOCK ? versionItemMOCK : await chrome.storage.sync.get('version')
         const currentRulesVersion = versionItem.version
+        const defaultCSSRulesJson = defaultCSSRulesJsonMOCK ? defaultCSSRulesJsonMOCK : await fetchNewAndOldRulesJSON(currentRulesVersion)
         const defaultRulesVersion = defaultCSSRulesJson.version
 
         if (defaultRulesVersion > currentRulesVersion) {
             const currentCSSRulesArray = CSSRulesFromStorageMOCK ? CSSRulesFromStorageMOCK.CSSRulesArrayOfObjectsWithNames : await getCSSRulesFromStorage()
             const currentRulesHashed = await getCurrentRulesHashed(currentCSSRulesArray)
-            const remoteOldRules = defaultCSSRulesJson.oldRules[String(currentRulesVersion)]
+            const remoteOldRules = defaultCSSRulesJson.oldRules
             const remoteNewRules = defaultCSSRulesJson.defaultRules
             const oldRulesIndexAndNewRulesUUID = getRulesToUpdate(remoteOldRules, currentRulesHashed)
             const UUIDSOfRulesToAdd = getRulesToAdd(remoteNewRules, remoteOldRules)

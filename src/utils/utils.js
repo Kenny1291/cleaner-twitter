@@ -91,6 +91,19 @@ export async function fetchDefaultCSSRulesJSON() {
 }
 
 /**
+ *
+ * @param {string} version
+ * @returns {Promise<newAndOldCSSRules>}
+ */
+export async function fetchNewAndOldRulesJSON(version) {
+    let newOldRules
+    await fetch(`https://cleaner-twitter-one.vercel.app?v=${version}`)
+            .then(response => response.json())
+            .then(data => newOldRules = data)
+    return newOldRules
+}
+
+/**
  * Toggles the 'active' property of a CSS rule in Chrome storage.
  *
  * @param {string} CSSRuleName - The name of the CSS rule to toggle.
