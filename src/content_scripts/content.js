@@ -1,13 +1,9 @@
 import { getCSSRulesFromStorage } from "../utils/utils"
 
-/**
- * Call when content.js is injected (when Twitter is visited)
- */
+/**Call when content.js is injected (when Twitter is visited) */
 injectStylesAndSetClasses()
 
-/**
- * Listens for messages from tabs
- */
+/**Listens for messages from tabs */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     /**@type {string} */
     const messageName = Object.keys(message)[0]
@@ -22,11 +18,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
 })
 
-/**
- * Injects CSS styles into the page (body) and sets classes based on the stored CSS rules.
- */
+/**Injects CSS styles into the page (body) and sets classes based on the stored CSS rules. */
 function injectStylesAndSetClasses() {
-    /**@type {?HTMLStyleElement} */
+    /**@type {HTMLStyleElement} */
     // @ts-ignore
     const oldStyle = document.getElementById('cleanerTwitterStyles')
 
