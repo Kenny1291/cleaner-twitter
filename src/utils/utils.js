@@ -85,7 +85,6 @@ export async function setDefaultRules() {
 
 //TODO: handle errors
 /**
- *
  * @returns {Promise<defaultCSSRules>}
  */
 export async function fetchDefaultCSSRulesJSON() {
@@ -97,7 +96,6 @@ export async function fetchDefaultCSSRulesJSON() {
 }
 
 /**
- *
  * @param {string} version
  * @returns {Promise<newAndOldCSSRules>}
  */
