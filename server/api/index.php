@@ -6,4 +6,5 @@ $response = new stdClass();
 $response->version = $defaultCSSRulesV2OBJ->version;
 $response->defaultRules = $defaultCSSRulesV2OBJ->defaultRules;
 $response->oldRules = $defaultCSSRulesV2OBJ->oldRules->{$version};
+header('Access-Control-Allow-Origin: *');
 echo json_encode($response);
