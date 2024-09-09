@@ -61,10 +61,16 @@ export async function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArr, fet
     return CSSRulesArr.map(rule => processCSSRule(rule, CSSRules))
 }
 
-//TODO: decide if keep; doc accordingly; create new types if needed
+/**
+ * Mutates a {@link defaultRule} into a {@link CSSRuleObject}
+ * 
+ * @param {defaultRule} ruleObject 
+ */
 function processCSSRuleDefaultObject(ruleObject) {
     delete ruleObject.UUID
+    // @ts-ignore
     ruleObject.name = getRuleName(ruleObject.rule)
+    // @ts-ignore
     ruleObject.active = true
 }
 
