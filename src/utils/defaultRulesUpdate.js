@@ -12,7 +12,7 @@ import { fetchNewAndOldRulesJSON, getCSSRulesFromStorage, getRuleName } from "./
  * Only if the auto update setting is enabled
  *
  * @param {boolean} manual - Indicates wether the updates is manually triggered or not
- * @param {defaultCSSRules} defaultCSSRulesJsonMOCK - Only for testing
+ * @param {newAndOldCSSRules} defaultCSSRulesJsonMOCK - Only for testing
  * @param {{ version: number }} versionItemMOCK - Only for testing
  * @param {{ CSSRulesArrayOfObjectsWithNames: CSSRuleObject[] }} CSSRulesFromStorageMOCK - Only for testing
  * @param {((obj: { CSSRulesArrayOfObjectsWithNames: CSSRuleObject[], version: number }) => void)} setStorageMOCK - Only for testing

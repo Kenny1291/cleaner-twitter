@@ -93,7 +93,7 @@ export async function fetchDefaultCSSRulesJSON() {
 /**
  * 
  * @param {string} version 
- * @returns 
+ * @returns {Promise<newAndOldCSSRules>}
  */
 export async function fetchNewAndOldRulesJSON(version) {
     let newOldRules

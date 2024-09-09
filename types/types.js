@@ -38,6 +38,13 @@
  */
 
 /**
+ * @typedef {Object} newAndOldCSSRules
+ * @property {number} version - The version of the rules
+ * @property {defaultRule[]} defaultRules - An Array of {@link defaultRule}
+ * @property {?oldRules[]} oldRules - The old rules
+ */
+
+/**
  * @typedef {Object} oldRuleIndexAndNewRuleUUID
  * @property {Number} oldRuleIndex
  * @property {string} newRuleUUID
