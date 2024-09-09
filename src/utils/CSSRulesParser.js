@@ -1,5 +1,4 @@
-
-/** 
+/**
  * @param {CSSRuleObject[]} CSSRules
  * @returns {string}
  */

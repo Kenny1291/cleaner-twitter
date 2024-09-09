@@ -63,8 +63,8 @@ export async function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArr, fet
 
 /**
  * Mutates a {@link defaultRule} into a {@link CSSRuleObject}
- * 
- * @param {defaultRule} ruleObject 
+ *
+ * @param {defaultRule} ruleObject
  */
 function processCSSRuleDefaultObject(ruleObject) {
     delete ruleObject.UUID
