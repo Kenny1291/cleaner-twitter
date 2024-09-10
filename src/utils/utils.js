@@ -118,3 +118,16 @@ export function toggleStorageKey(CSSRuleName) {
         chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
     })
 }
+
+/**
+ * @param {Function} fn
+ * @param {...*} args
+ * @returns {Function} A new function with the same name as `fn` and preset arguments.
+ */
+export function makeNamedFn(fn, ...args) {
+    return {
+        [fn.name]: function() {
+            return fn(...args)
+        }
+    }[fn.name]
+}  
