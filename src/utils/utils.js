@@ -127,7 +127,6 @@ async function httpGet(url) {
 export async function fetchDefaultCSSRulesJSON() {
     return new RetryHandler(async () => {
         return httpGet('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
-                        .then(response => response.json())
     }).run()
 }
 
