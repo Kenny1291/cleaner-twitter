@@ -109,11 +109,24 @@ export async function setDefaultRules() {
 }
 
 /**
+ * @param {string} url
+ * @returns {Promise<any>}
+ */
+async function httpGet(url) {
+    return fetch(url).then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+        return response.json()
+    })
+}
+
+/**
  * @returns {Promise<defaultCSSRules>}
  */
 export async function fetchDefaultCSSRulesJSON() {
     return new RetryHandler(async () => {
-        return fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
+        return httpGet('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
                         .then(response => response.json())
     }).run()
 }
