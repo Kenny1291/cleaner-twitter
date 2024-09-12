@@ -1,12 +1,35 @@
 import RetryHandler from "./RetryHandler/RetryHandler.js"
 
 /**
+ * @param {string} key
+ * @returns {Promise<{[key: string]: any}>}
+ */
+export async function chromeStorageSyncGet(key) {
+    return new RetryHandler(async () => chrome.storage.sync.get(key)).run()
+}
+
+/**
+ * @param {{[key: string]: any}} items
+ * @returns {Promise<void>}
+ */
+export async function chromeStorageSyncSet(items) {
+    return new RetryHandler(async () => chrome.storage.sync.set(items)).run()
+}
+
+/**
+ * @returns {Promise<void>}
+ */
+export async function chromeStorageSyncClear() {
+    return new RetryHandler(async () => chrome.storage.sync.clear()).run()
+}
+
+/**
  * Asynchronously retrieves CSS rules from the Chrome storage.
  *
  * @returns {Promise<CSSRuleObject[]>}
  */
 export async function getCSSRulesFromStorage() {
-    const CSSRulesArrayOfObjectsWithNamesItem = await chrome.storage.sync.get('CSSRulesArrayOfObjectsWithNames')
+    const CSSRulesArrayOfObjectsWithNamesItem = await chromeStorageSyncGet('CSSRulesArrayOfObjectsWithNames')
     return CSSRulesArrayOfObjectsWithNamesItem.CSSRulesArrayOfObjectsWithNames
 }
 
@@ -82,7 +105,7 @@ function processCSSRuleDefaultObject(ruleObject) {
 export async function setDefaultRules() {
     const defaultRulesJSON = await fetchDefaultCSSRulesJSON()//TODO: call a server api
     defaultRulesJSON.defaultRules.forEach(ruleObj => processCSSRuleDefaultObject(ruleObj))
-    chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
+    chromeStorageSyncSet({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
 }
 
 /**
@@ -105,7 +128,7 @@ export function toggleStorageKey(CSSRuleUUID) {
         const CSSRules = result.CSSRulesArrayOfObjectsWithNames
         const CSSRule = CSSRules.find(rule => rule.UUID === CSSRuleUUID)
         CSSRule.active = !CSSRule.active
-        chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
+        chromeStorageSyncSet({ CSSRulesArrayOfObjectsWithNames: CSSRules })
     })
 }
 
