@@ -130,4 +130,4 @@ export function makeNamedFn(fn, ...args) {
             return fn(...args)
         }
     }[fn.name]
-}  
+}

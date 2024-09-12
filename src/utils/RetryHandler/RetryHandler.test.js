@@ -3,7 +3,6 @@ import assert from 'node:assert/strict'
 import RetryHandler from "./RetryHandler.js"
 import TooManyAttemptsError from "./TooManyAttemptsError.js"
 
-
 describe('Retry Handler', () => {
     it('should retry the call if it fails', async () => {
         const fn = mock.fn(async () => {
@@ -27,4 +26,4 @@ describe('Retry Handler', () => {
             new TooManyAttemptsError("namedFn exceeded max number of tries (3)")
         )
     })
-})  
+})
