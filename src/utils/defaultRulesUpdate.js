@@ -33,7 +33,16 @@ import { fetchNewAndOldRulesJSON, getCSSRulesFromStorage, getRuleName } from "./
 
         const versionItem = versionItemMOCK ? versionItemMOCK : await chrome.storage.sync.get('version')
         const currentRulesVersion = versionItem.version
-        const defaultCSSRulesJson = defaultCSSRulesJsonMOCK ? defaultCSSRulesJsonMOCK : await fetchNewAndOldRulesJSON(currentRulesVersion)
+        let defaultCSSRulesJson
+        if (defaultCSSRulesJsonMOCK) {
+            defaultCSSRulesJson = defaultCSSRulesJsonMOCK
+        } else {
+            try {
+                defaultCSSRulesJson = await fetchNewAndOldRulesJSON(currentRulesVersion)
+            } catch (error) {
+                return "An error occurred. Try again later"
+            }
+        }
         const defaultRulesVersion = defaultCSSRulesJson.version
 
         if (defaultRulesVersion > currentRulesVersion) {
