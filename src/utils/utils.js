@@ -2,7 +2,7 @@ import RetryHandler from "./RetryHandler/RetryHandler.js"
 
 /**
  * @param {string} key
- * @returns {Promise<{[key: string]: any}>} 
+ * @returns {Promise<{[key: string]: any}>}
  */
 export async function chromeStorageSyncGet(key) {
     return new RetryHandler(async () => chrome.storage.sync.get(key)).run()
@@ -10,7 +10,7 @@ export async function chromeStorageSyncGet(key) {
 
 /**
  * @param {{[key: string]: any}} items
- * @returns {Promise<void>} 
+ * @returns {Promise<void>}
  */
 export async function chromeStorageSyncSet(items) {
     return new RetryHandler(async () => chrome.storage.sync.set(items)).run()
