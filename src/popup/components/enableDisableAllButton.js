@@ -1,3 +1,4 @@
+import { chromeStorageSyncSet } from "../../utils/utils.js"
 import CSSRules from "../popup.js"
 
 /**@type {HTMLButtonElement} */
@@ -25,7 +26,7 @@ enableDisableAllButton.addEventListener('click', () => {
         CSSRuleObject.active = enabledOrDisabledState
     }
 
-    chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
+    chromeStorageSyncSet({ CSSRulesArrayOfObjectsWithNames: CSSRules })
         .then(() => {
             setEnableDisableAllButtonText()
 
