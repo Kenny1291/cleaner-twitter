@@ -62,7 +62,7 @@ export default [
             "no-irregular-whitespace": "error",
             "no-loss-of-precision": "error",
             "no-misleading-character-class": "error",
-            "no-promise-executor-return": "warn",
+            // "no-promise-executor-return": "error",
             "no-prototype-builtins": "error",
             "no-self-assign": "error",
             "no-self-compare": "error",
