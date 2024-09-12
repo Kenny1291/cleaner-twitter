@@ -6,7 +6,7 @@ $version = $_GET["v"] ?? null;
 $response = new stdClass();
 $response->version = $defaultCSSRulesV2OBJ->version;
 $response->defaultRules = $defaultCSSRulesV2OBJ->defaultRules;
-if (is_null($version)) {
+if (!is_null($version)) {
     if (isset($defaultCSSRulesV2OBJ->oldRules->{$version})) {
         $response->oldRules = $defaultCSSRulesV2OBJ->oldRules->{$version};
     }
