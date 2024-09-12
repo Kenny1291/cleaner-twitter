@@ -1,3 +1,5 @@
+import RetryHandler from "./RetryHandler/RetryHandler.js"
+
 /**
  * Asynchronously retrieves CSS rules from the Chrome storage.
  *
@@ -78,7 +80,7 @@ function processCSSRuleDefaultObject(ruleObject) {
  * Asynchronously creates a {@link CSSRuleObject} Array and then sets it in the Chrome storage.
  */
 export async function setDefaultRules() {
-    const defaultRulesJSON = await fetchDefaultCSSRulesJSON()
+    const defaultRulesJSON = await fetchDefaultCSSRulesJSON()//TODO: call a server api
     defaultRulesJSON.defaultRules.forEach(ruleObj => processCSSRuleDefaultObject(ruleObj))
     chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
 }
@@ -87,11 +89,10 @@ export async function setDefaultRules() {
  * @returns {Promise<defaultCSSRules>}
  */
 export async function fetchDefaultCSSRulesJSON() {
-    let defaultRules
-    await fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
-            .then(response => response.json())
-            .then(data => defaultRules = data)
-    return defaultRules
+    return new RetryHandler(async () => {
+        return fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
+                        .then(response => response.json())
+    }).run()
 }
 
 /**
@@ -99,11 +100,10 @@ export async function fetchDefaultCSSRulesJSON() {
  * @returns {Promise<newAndOldCSSRules>}
  */
 export async function fetchNewAndOldRulesJSON(version) {
-    let newOldRules
-    await fetch(`https://cleaner-twitter-one.vercel.app?v=${version}`)
-            .then(response => response.json())
-            .then(data => newOldRules = data)
-    return newOldRules
+    return new RetryHandler(async () => {
+        return fetch(`https://cleaner-twitter-one.vercel.app?v=${version}`)
+                        .then(response => response.json())
+    }).run()
 }
 
 /**
