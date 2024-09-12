@@ -1,5 +1,3 @@
-import { getCSSRulesFromStorage } from "../utils/utils"
-
 /**Call when content.js is injected (when Twitter is visited) */
 injectStylesAndSetClasses()
 
@@ -31,8 +29,11 @@ function injectStylesAndSetClasses() {
 
     style.id = 'cleanerTwitterStyles'
 
-    getCSSRulesFromStorage().then(CSSRulesArrayOfObjectsWithNames => {
-        CSSRulesArrayOfObjectsWithNames.forEach(CSSRule => {
+    //Note: Not using util getCSSRulesFromStorage() intentionally
+    chrome.storage.sync.get().then(result => {
+        /**@type {CSSRuleObject[]} */
+        const CSSRulesArr = result.CSSRulesArrayOfObjectsWithNames
+        CSSRulesArr.forEach(CSSRule => {
             style.innerHTML += CSSRule.rule
             document.body.classList.toggle(CSSRule.name, CSSRule.active)
         })
