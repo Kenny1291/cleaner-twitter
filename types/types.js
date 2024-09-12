@@ -20,6 +20,12 @@
  */
 
 /**
+ * @typedef {Object} newDefaultRules
+ * @property {Number} version
+ * @property {defaultRule[]} defaultRules
+ */
+
+/**
  * @typedef {Object} oldRules
  * @property {string} UUID - The UUID of the rule
  * @property {string} hash - The hash of the rule

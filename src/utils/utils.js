@@ -103,9 +103,16 @@ function processCSSRuleDefaultObject(ruleObject) {
  * Asynchronously creates a {@link CSSRuleObject} Array and then sets it in the Chrome storage.
  */
 export async function setDefaultRules() {
-    const defaultRulesJSON = await fetchDefaultCSSRulesJSON()//TODO: call a server api
+    const defaultRulesJSON = await fetchNewDefaultRulesJSON()
     defaultRulesJSON.defaultRules.forEach(ruleObj => processCSSRuleDefaultObject(ruleObj))
     chromeStorageSyncSet({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
+}
+
+/**
+ * @returns {Promise<newDefaultRules>}
+ */
+async function fetchNewDefaultRulesJSON() {
+    return new RetryHandler(async () => fetch('https://cleaner-twitter-one.vercel.app').then(response => response.json())).run()
 }
 
 /**
