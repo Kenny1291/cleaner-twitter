@@ -1,6 +1,6 @@
 /* global toggleModal */
 
-import { createCSSRulesArrayOfObjectsWithRuleNames, getCSSRulesFromStorage, setDefaultRules } from "../utils/utils.js"
+import { createCSSRulesArrayOfObjectsWithRuleNames, getCSSRulesFromStorage, setDefaultRules, chromeStorageSyncSet } from "../utils/utils.js"
 import { fromCSSStringToArrayOfFormattedRules, fromArrayOfFormattedRulesToCSSFileString } from "../utils/CSSRulesParser.js"
 
 /**@type {CSSRuleObject[]} */
@@ -20,7 +20,7 @@ document.getElementById('saveButton').addEventListener('click', async () => {
     const css = editor.getValue()
     const CSSRulesArray = fromCSSStringToArrayOfFormattedRules(css)
     const CSSRulesArrayOfObjectsWithNames = await createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArray, true)
-    chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames }).then(() => window.close())
+    chromeStorageSyncSet({ CSSRulesArrayOfObjectsWithNames }).then(() => window.close())
 })
 //Save button <--
 
