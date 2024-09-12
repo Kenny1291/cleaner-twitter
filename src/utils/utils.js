@@ -112,10 +112,7 @@ export async function setDefaultRules() {
  * @returns {Promise<newDefaultRules>}
  */
 async function fetchNewDefaultRulesJSON() {
-    return new RetryHandler(async () => {
-        return fetch('https://cleaner-twitter-one.vercel.app')
-                        .then(response => response.json())
-    }).run()
+    return new RetryHandler(async () => fetch('https://cleaner-twitter-one.vercel.app').then(response => response.json())).run()
 }
 
 /**
