@@ -61,5 +61,6 @@ function collectLogs() {
 
 #[Route('test/headers')]
 function test() {
+    echo "test";
     echo getallheaders();
 }
