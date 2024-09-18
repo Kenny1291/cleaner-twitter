@@ -59,8 +59,7 @@ function collectLogs() {
     curl_close($ch);
 }
 
-#[Route('test/headers')]
+#[Route('/test/headers')]
 function test() {
-    echo "test";
     echo getallheaders();
 }
