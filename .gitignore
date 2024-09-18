@@ -7,3 +7,4 @@ dist/
 twitterCredentials.js
 .env
 /tools/env.js
+.vercel
