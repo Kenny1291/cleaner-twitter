@@ -62,6 +62,12 @@ function collectLogs() {
 #[Route('/test/headers')]
 function test() {
     var_dump(getallheaders());
+    
+    $requiredHeaders = [];
+    if (!empty(array_diff_assoc($requiredHeaders, $requestHeaders))) {
+        //Http error
+    }
+
     //Api key (bearer token) - The same one for everyone right?
     
     //Has to be a specific HTTP method (GET) - 405 Method not allowed
@@ -72,7 +78,7 @@ function test() {
     //Headers:
         //REQUEST
         //Accept
-        //Origin
+        //Origin: chrome-extension://iplodopmopkmkpblangcjomcdfiidneo
 
         //RESPONSE:
         //Cache-Control: no-store
