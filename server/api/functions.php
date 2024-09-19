@@ -61,7 +61,28 @@ function collectLogs() {
 
 #[Route('/test/headers')]
 function test() {
-    echo '<pre>';
     var_dump(getallheaders());
-    echo '</pre>';
+    //Api key (bearer token) - The same one for everyone right?
+    
+    //Has to be a specific HTTP method (GET) - 405 Method not allowed
+
+    //As of right now am I matching the route exactly? 
+    //I don' think so. This one should be matched exactly.
+
+    //Headers:
+        //REQUEST
+        //Accept
+        //Origin
+
+        //RESPONSE:
+        //Cache-Control: no-store
+        //Content-Security-Policy: frame-ancestors 'none'
+        //Content-Type
+        //Strict-Transport-Security
+        //X-Content-Type-Options: nosniff
+        //Content-Security-Policy: default-src 'none'
+        //Referrer-Policy: no-referrer
+
+
+
 }
