@@ -17,7 +17,7 @@ class Router {
     function dispatch() {
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            header('HTTP/1.1 200 OK');
+            http_response_code(200);
         }
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Headers: Accept, Authorization");
