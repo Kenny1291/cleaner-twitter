@@ -1,6 +1,9 @@
 <?php
 require 'utils.php';
 
+echo getallheaders()["Origin"];
+exit;
+
 if (!areRequestHeadersSet(['Origin' => 'chrome-extension://iplodopmopkmkpblangcjomcdfiidneo'])) {
     response400();
 }
