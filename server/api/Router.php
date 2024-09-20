@@ -20,7 +20,7 @@ class Router {
         header("Access-Control-Allow-Headers: Accept, Authorization");
         header("Cache-Control: no-store");
         header("Content-Security-Policy: frame-ancestors 'none'");
-        header("Strict-Transport-Security");
+        header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
         header("X-Content-Type-Options: nosniff");
         header("Content-Security-Policy: default-src 'none'");
         header("Referrer-Policy: no-referrer");
