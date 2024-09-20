@@ -20,9 +20,6 @@ function collectLogs() {
     //Read raw data from the POST request body
     $error = file_get_contents('php://input');
 
-    echo $error;
-    exit;
-
     $errorDecoded = json_decode($error);
     $d = [
         'name' => '',
@@ -33,7 +30,7 @@ function collectLogs() {
     //TODO: input validation
     //Log keys and values type/format
     $isInputValid = fn () => match (true) {
-            !json_validate($error), !empty(array_diff_key($errorDecoded, $d)) => false,
+            !json_validate($errorDecoded), !empty(array_diff_key($errorDecoded, $d)) => false,
             default => true
         };
 
@@ -67,8 +64,7 @@ function collectLogs() {
             ['type' => 'close']
         ]
     ];
-    //TODO: Probably this curl request is wrong or maybe the $data is wrongly formatted
-    //In any way lookup the docs for curl and writ the request yourself
+    
     $ch = curl_init($_ENV['TURSO_DB_HTTP_URL']);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
