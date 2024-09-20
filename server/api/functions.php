@@ -19,7 +19,10 @@ function data() {
 function collectLogs() {
     //Read raw data from the POST request body
     $error = file_get_contents('php://input');
-    $error = json_decode($error);
+
+    echo $error;
+
+    $errorDecoded = json_decode($error);
     $d = [
         'name' => '',
         'message' => '',
@@ -29,7 +32,7 @@ function collectLogs() {
     //TODO: input validation
     //Log keys and values type/format
     $isInputValid = fn () => match (true) {
-            !json_validate($error), !empty(array_diff_key($error, $d)) => false,
+            !json_validate($error), !empty(array_diff_key($errorDecoded, $d)) => false,
             default => true
         };
 
