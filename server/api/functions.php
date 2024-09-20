@@ -27,7 +27,7 @@ function collectLogs() {
         'stack' => ''
     ];
     
-    //TODO: input validation
+    //TODO: input validation. Something is wrong
     //Log keys and values type/format
     // $isInputValid = fn () => match (true) {
     //         !json_validate($errorDecoded), !empty(array_diff_key($errorDecoded, $d)) => false,
@@ -72,7 +72,7 @@ function collectLogs() {
         'Content-Type: application/json'
     ]);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
     $response = curl_exec($ch);
 
     echo $response;
