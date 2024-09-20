@@ -1,6 +1,8 @@
 <?php
 require 'utils.php';
 
+header('Access-Control-Allow-Origin: *');
+
 echo '<pre>';
 var_dump(getallheaders());
 echo '</pre>'; 
