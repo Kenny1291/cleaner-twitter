@@ -1,12 +1,12 @@
 <?php
 require 'utils.php';
 
-header('Access-Control-Allow-Origin: *');
+// header('Access-Control-Allow-Origin: *');
 
-echo '<pre>';
-var_dump(getallheaders());
-echo '</pre>'; 
-exit;
+// echo '<pre>';
+// var_dump(getallheaders());
+// echo '</pre>'; 
+// exit;
 
 if (!areRequestHeadersSet(['origin' => 'chrome-extension://iplodopmopkmkpblangcjomcdfiidneo'])) {
     response400();
