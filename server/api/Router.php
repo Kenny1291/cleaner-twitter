@@ -17,6 +17,13 @@ class Router {
     function dispatch() {
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Headers: Accept, Authorization");
+        header("Cache-Control: no-store");
+        header("Content-Security-Policy: frame-ancestors 'none'");
+        header("Strict-Transport-Security");
+        header("X-Content-Type-Options: nosniff");
+        header("Content-Security-Policy: default-src 'none'");
+        header("Referrer-Policy: no-referrer");
         if (array_key_exists($url, $this->routes)) {
             return call_user_func($this->routes[$url]);
         }
