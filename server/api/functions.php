@@ -78,10 +78,18 @@ function test() {
 
     switch (true) {
         case $_SERVER['REQUEST_METHOD'] !== 'GET':
+            echo "1";
+            break;
         case isset($parsedUrl['query']):
+            echo "2";
+            break;
         case isset($parsedUrl['fragment']):
+            echo "3";
+            break;
         case !areRequestHeadersSet(['Accept' => 'text/plain']):
-            response400();
+            echo "4";
+            break;
+            // response400();
     }
 
     header("Content-Type: text/plain");
