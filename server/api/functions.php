@@ -73,7 +73,9 @@ function collectLogs() {
     ]);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    curl_exec($ch);
+    $response = curl_exec($ch);
+
+    echo $response;
 }
 
 #[Route('/logs/setup')]
