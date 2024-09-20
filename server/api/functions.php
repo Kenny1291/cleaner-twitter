@@ -92,7 +92,7 @@ function test() {
             // response400();
     }
 
-    // header("Content-Type: text/plain");
+    header("Content-Type: text/plain");
 
     echo $_ENV['LOG_KEY'];
 }
