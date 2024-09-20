@@ -19,14 +19,17 @@ function data() {
 function collectLogs() {
     //Read raw data from the POST request body
     $error = file_get_contents('php://input');
-
-    echo $error;
-    exit;
+    $error = json_decode($error);
+    $d = [
+        'name' => '',
+        'message' => '',
+        'stack' => ''
+    ];
     
     //TODO: input validation
     //Log keys and values type/format
     $isInputValid = fn () => match (true) {
-            !json_validate($error), => false,
+            !json_validate($error), !empty(array_diff_key($error, $d)) => false,
             default => true
         };
 
@@ -34,7 +37,7 @@ function collectLogs() {
         case $_SERVER['REQUEST_METHOD'] !== 'POST':
         case isset($parsedUrl['query']):
         case isset($parsedUrl['fragment']):
-        case !areRequestHeadersSet(['Authorization: Bearer' => $_ENV['LOG_KEY']]):
+        case !areRequestHeadersSet(['Authorization' => 'Bearer ' . $_ENV['LOG_KEY']]):
         case !$isInputValid():
             response400();
     }
@@ -60,6 +63,8 @@ function collectLogs() {
             ['type' => 'close']
         ]
     ];
+    //TODO: Probably this curl request is wrong or maybe the $data is wrongly formatted
+    //In any way lookup the docs for curl and writ the request yourself
     $ch = curl_init($_ENV['TURSO_DB_HTTP_URL']);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -67,9 +72,8 @@ function collectLogs() {
         'Content-Type: application/json'
     ]);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_exec($ch);
-    curl_close($ch);
 }
 
 #[Route('/logs/setup')]
@@ -94,6 +98,7 @@ function test() {
             // response400();
     }
 
+    //TODO: Find out why when I put the header() here PHP throws
 
     echo $_ENV['LOG_KEY'];
 }
