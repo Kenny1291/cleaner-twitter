@@ -18,6 +18,7 @@ class Router {
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Headers: Accept, Authorization");
+        header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
         header("Cache-Control: no-store");
         header("Content-Security-Policy: frame-ancestors 'none'");
         header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
