@@ -1,7 +1,9 @@
 <?php
 require 'utils.php';
 
-echo getallheaders()["origin"];
+echo '<pre>';
+var_dump(getallheaders());
+echo '</pre>'; 
 exit;
 
 if (!areRequestHeadersSet(['origin' => 'chrome-extension://iplodopmopkmkpblangcjomcdfiidneo'])) {
