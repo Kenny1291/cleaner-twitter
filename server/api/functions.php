@@ -21,6 +21,7 @@ function collectLogs() {
     $error = file_get_contents('php://input');
 
     echo $error;
+    exit;
 
     $errorDecoded = json_decode($error);
     $d = [
