@@ -19,11 +19,24 @@ function data() {
 function collectLogs() {
     //Read raw data from the POST request body
     $error = file_get_contents('php://input');
+
+    echo $error;
+    exit;
     
-    if (!json_validate($error)) {
-        http_response_code(400);
-        echo '400 Bad Request';
-        return;
+    //TODO: input validation
+    //Log keys and values type/format
+    $isInputValid = fn () => match (true) {
+            !json_validate($error), => false,
+            default => true
+        };
+
+    switch (true) {
+        case $_SERVER['REQUEST_METHOD'] !== 'POST':
+        case isset($parsedUrl['query']):
+        case isset($parsedUrl['fragment']):
+        case !areRequestHeadersSet(['Authorization: Bearer' => $_ENV['LOG_KEY']]):
+        case !$isInputValid():
+            response400();
     }
 
     $data = [
@@ -59,36 +72,19 @@ function collectLogs() {
     curl_close($ch);
 }
 
-#[Route('/test/headers')]
+#[Route('/logs/setup')]
 function test() {
-    var_dump(getallheaders());
-    
-    $requiredHeaders = [];
-    if (!empty(array_diff_assoc($requiredHeaders, $requestHeaders))) {
-        //Http error
+    $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
+
+    switch (true) {
+        case $_SERVER['REQUEST_METHOD'] !== 'GET':
+        case isset($parsedUrl['query']):
+        case isset($parsedUrl['fragment']):
+        case !areRequestHeadersSet(['Accept' => 'text/plain']):
+            response400();
     }
 
-    //Api key (bearer token) - The same one for everyone right?
-    
-    //Has to be a specific HTTP method (GET) - 405 Method not allowed
+    header("Content-Type: text/plain");
 
-    //As of right now am I matching the route exactly? 
-    //I don' think so. This one should be matched exactly.
-
-    //Headers:
-        //REQUEST
-        //Accept
-        //Origin: chrome-extension://iplodopmopkmkpblangcjomcdfiidneo
-
-        //RESPONSE:
-        //Cache-Control: no-store
-        //Content-Security-Policy: frame-ancestors 'none'
-        //Content-Type
-        //Strict-Transport-Security
-        //X-Content-Type-Options: nosniff
-        //Content-Security-Policy: default-src 'none'
-        //Referrer-Policy: no-referrer
-
-
-
+    echo $_ENV['LOG_KEY'];
 }
