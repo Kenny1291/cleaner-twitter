@@ -8,9 +8,9 @@ require 'utils.php';
 // echo '</pre>'; 
 // exit;
 
-if (!areRequestHeadersSet(['origin' => 'chrome-extension://iplodopmopkmkpblangcjomcdfiidneo'])) {
-    response400();
-}
+// if (!areRequestHeadersSet(['origin' => 'chrome-extension://iplodopmopkmkpblangcjomcdfiidneo'])) {
+//     response400();
+// }
 
 require 'Route.php';
 require 'Router.php';
