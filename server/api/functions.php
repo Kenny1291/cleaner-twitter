@@ -76,6 +76,8 @@ function collectLogs() {
 function test() {
     $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
 
+    header("Content-Type: text/plain");
+
     switch (true) {
         case $_SERVER['REQUEST_METHOD'] !== 'GET':
             echo "1";
@@ -92,7 +94,6 @@ function test() {
             // response400();
     }
 
-    header("Content-Type: text/plain");
 
     echo $_ENV['LOG_KEY'];
 }
