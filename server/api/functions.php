@@ -54,7 +54,7 @@ function collectLogs() {
                             "name" => "error",
                             "value" => [
                                 "type" => "text",
-                                "value" => $error 
+                                "value" => "testValue1" 
                             ]
                         ],
                         
