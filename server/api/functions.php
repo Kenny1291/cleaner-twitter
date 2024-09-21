@@ -48,17 +48,17 @@ function collectLogs() {
             [
                 'type' => 'execute', 
                 'stmt' => [
-                    'sql' => 'INSERT INTO logs (error) VALUES ("testValue")'
-                    // "named_args" => [
-                    //     [
-                    //         "name" => "error",
-                    //         "value" => [
-                    //             "type" => "text",
-                    //             "value" => $error
-                    //         ]
-                    //     ],
+                    'sql' => 'INSERT INTO logs (error) VALUES (@error)',
+                    "named_args" => [
+                        [
+                            "name" => "error",
+                            "value" => [
+                                "type" => "text",
+                                "value" => $error
+                            ]
+                        ],
                         
-                    // ]
+                    ]
                 ]
             ],
             ['type' => 'close']

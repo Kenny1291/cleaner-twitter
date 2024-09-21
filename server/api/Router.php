@@ -16,12 +16,12 @@ class Router {
 
     function dispatch() {
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        // if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-        //     http_response_code(200);
-        // }
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Headers: Accept, Authorization");
         header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            exit;
+        }
         header("Cache-Control: no-store");
         header("Content-Security-Policy: frame-ancestors 'none'");
         header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
