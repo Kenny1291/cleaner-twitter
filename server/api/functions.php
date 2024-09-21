@@ -48,7 +48,7 @@ function collectLogs() {
             [
                 'type' => 'execute', 
                 'stmt' => [
-                    'sql' => "INSERT INTO logs (error) VALUES @error",
+                    'sql' => "INSERT INTO logs (error) VALUES '{\"name\":\"Error\",\"message\":\"Anonymous function exceeded max number of tries (3)\",\"stack\":\"Error: Anonymous function exceeded max number of tries (3)\\n    at RetryHandler.run (chrome-extension:\/\/iplodopmopkmkpblangcjomcdfiidneo\/utils\/RetryHandler\/RetryHandler.js:29:27)\\n    at async updateDefaultCSSRules (chrome-extension:\/\/iplodopmopkmkpblangcjomcdfiidneo\/utils\/defaultRulesUpdate.js:41:39)\\n    at async HTMLDivElement.<anonymous> (chrome-extension:\/\/iplodopmopkmkpblangcjomcdfiidneo\/popup\/components\/updateNowButton.js:10:22)\"}'",
                     "named_args" => [
                         [
                             "name" => "error",
@@ -65,19 +65,19 @@ function collectLogs() {
         ]
     ];
 
-    echo json_encode($data);
+    // echo json_encode($data);
 
-    // $ch = curl_init($_ENV['TURSO_DB_HTTP_URL']);
-    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    // curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    //     'Authorization: Bearer ' . $_ENV['TURSO_DB_AUTH_TOKEN'],
-    //     'Content-Type: application/json'
-    // ]);
-    // curl_setopt($ch, CURLOPT_POST, true);
-    // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-    // $response = curl_exec($ch);
+    $ch = curl_init($_ENV['TURSO_DB_HTTP_URL']);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . $_ENV['TURSO_DB_AUTH_TOKEN'],
+        'Content-Type: application/json'
+    ]);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    $response = curl_exec($ch);
 
-    // echo $response;
+    echo $response;
 }
 
 #[Route('/logs/setup')]
