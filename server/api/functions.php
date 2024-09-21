@@ -65,17 +65,19 @@ function collectLogs() {
         ]
     ];
 
-    $ch = curl_init($_ENV['TURSO_DB_HTTP_URL']);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Authorization: Bearer ' . $_ENV['TURSO_DB_AUTH_TOKEN'],
-        'Content-Type: application/json'
-    ]);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-    $response = curl_exec($ch);
+    echo json_encode($data);
 
-    echo $response;
+    // $ch = curl_init($_ENV['TURSO_DB_HTTP_URL']);
+    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    //     'Authorization: Bearer ' . $_ENV['TURSO_DB_AUTH_TOKEN'],
+    //     'Content-Type: application/json'
+    // ]);
+    // curl_setopt($ch, CURLOPT_POST, true);
+    // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    // $response = curl_exec($ch);
+
+    // echo $response;
 }
 
 #[Route('/logs/setup')]
