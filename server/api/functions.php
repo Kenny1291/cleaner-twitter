@@ -48,7 +48,7 @@ function collectLogs() {
             [
                 'type' => 'execute', 
                 'stmt' => [
-                    'sql' => "INSERT INTO logs (error) VALUES "{\"name\":\"Error\",\"message\":\"Anonymous function exceeded max number of tries (3)\",\"stack\":\"Error: Anonymous function exceeded max number of tries (3)\\n    at RetryHandler.run (chrome-extension:\/\/iplodopmopkmkpblangcjomcdfiidneo\/utils\/RetryHandler\/RetryHandler.js:29:27)\\n    at async updateDefaultCSSRules (chrome-extension:\/\/iplodopmopkmkpblangcjomcdfiidneo\/utils\/defaultRulesUpdate.js:41:39)\\n    at async HTMLDivElement.<anonymous> (chrome-extension:\/\/iplodopmopkmkpblangcjomcdfiidneo\/popup\/components\/updateNowButton.js:10:22)\"}"",
+                    'sql' => 'INSERT INTO logs (error) VALUES @error',
                     "named_args" => [
                         [
                             "name" => "error",
