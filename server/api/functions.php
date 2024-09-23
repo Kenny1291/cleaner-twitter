@@ -88,21 +88,11 @@ function test() {
 
     switch (true) {
         case $_SERVER['REQUEST_METHOD'] !== 'GET':
-            echo "1";
-            break;
         case isset($parsedUrl['query']):
-            echo "2";
-            break;
         case isset($parsedUrl['fragment']):
-            echo "3";
-            break;
         case !areRequestHeadersSet(['Accept' => 'text/plain']):
-            echo "4";
-            break;
-            // response400();
+            response400();
     }
-
-    //TODO: Find out why when I put the header() here PHP throws
 
     echo $_ENV['LOG_KEY'];
 }
