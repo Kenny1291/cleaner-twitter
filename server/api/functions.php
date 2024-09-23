@@ -86,13 +86,15 @@ function test() {
 
     header("Content-Type: text/plain");
 
-    switch (true) {
-        case $_SERVER['REQUEST_METHOD'] !== 'GET':
-        case isset($parsedUrl['query']):
-        case isset($parsedUrl['fragment']):
-        case !areRequestHeadersSet(['Accept' => 'text/plain']):
-            response400();
-    }
+    // switch (true) {
+    //     case $_SERVER['REQUEST_METHOD'] !== 'GET':
+    //     case isset($parsedUrl['query']):
+    //     case isset($parsedUrl['fragment']):
+    //     case !areRequestHeadersSet(['Accept' => 'text/plain']):
+    //         response400();
+    // }
 
-    echo $_ENV['LOG_KEY'];
+    echo array_diff_assoc(['Accept' => 'text/plain'], getallheaders());
+
+    // echo $_ENV['LOG_KEY'];
 }
