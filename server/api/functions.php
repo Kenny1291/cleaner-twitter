@@ -29,7 +29,7 @@ function collectLogs() {
     //TODO: input validation. Something is wrong
     //Log keys and values type/format
     $isInputValid = fn () => match (true) {
-            !json_validate($error), !empty(array_diff_key(json_decode($error, true);, $d)) => false,
+            !json_validate($error), !empty(array_diff_key(json_decode($error, true), $d)) => false,
             default => true
         };
 
