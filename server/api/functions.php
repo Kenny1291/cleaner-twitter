@@ -94,7 +94,7 @@ function test() {
     //         response400();
     // }
 
-    echo array_diff_assoc(['Accept' => 'text/plain'], getallheaders());
+    var_dump(array_diff_assoc(['Accept' => 'text/plain'], getallheaders()));
 
     // echo $_ENV['LOG_KEY'];
 }
