@@ -1,16 +1,9 @@
 <?php
 require 'utils.php';
 
-// header('Access-Control-Allow-Origin: *');
-
-// echo '<pre>';
-// var_dump(getallheaders());
-// echo '</pre>'; 
-// exit;
-
-// if (!areRequestHeadersSet(['origin' => 'chrome-extension://iplodopmopkmkpblangcjomcdfiidneo'])) {
-//     response400();
-// }
+if (!areRequestHeadersSet(['origin' => 'chrome-extension://iplodopmopkmkpblangcjomcdfiidneo'])) {
+    response400();
+}
 
 require 'Route.php';
 require 'Router.php';
