@@ -90,7 +90,7 @@ function test() {
         case $_SERVER['REQUEST_METHOD'] !== 'GET':
         case isset($parsedUrl['query']):
         case isset($parsedUrl['fragment']):
-        case !areRequestHeadersSet(['Accept' => 'text/plain']):
+        // case !areRequestHeadersSet(['Accept' => 'text/plain']):
             response400();
     }
 
