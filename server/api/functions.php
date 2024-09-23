@@ -19,11 +19,26 @@ function data() {
 function collectLogs() {
     //Read raw data from the POST request body
     $error = file_get_contents('php://input');
+
+    $d = [
+        'name' => '',
+        'message' => '',
+        'stack' => ''
+    ];
     
-    if (!json_validate($error)) {
-        http_response_code(400);
-        echo '400 Bad Request';
-        return;
+    //TODO: validate value type
+    $isInputValid = fn () => match (true) {
+            !json_validate($error), !empty(array_diff_key(json_decode($error, true), $d)) => false,
+            default => true
+        };
+
+    switch (true) {
+        case $_SERVER['REQUEST_METHOD'] !== 'POST':
+        case isset($parsedUrl['query']):
+        case isset($parsedUrl['fragment']):
+        case !areRequestHeadersSet(['authorization' => 'Bearer ' . $_ENV['LOG_KEY']]):
+        case !$isInputValid():
+            response400();
     }
 
     $data = [
@@ -31,13 +46,13 @@ function collectLogs() {
             [
                 'type' => 'execute', 
                 'stmt' => [
-                    'sql' => "INSERT INTO logs (error) VALUES @error",
+                    'sql' => 'INSERT INTO logs (error) VALUES (@error)',
                     "named_args" => [
                         [
                             "name" => "error",
                             "value" => [
                                 "type" => "text",
-                                "value" => $error 
+                                "value" => $error
                             ]
                         ],
                         
@@ -47,6 +62,8 @@ function collectLogs() {
             ['type' => 'close']
         ]
     ];
+
+
     $ch = curl_init($_ENV['TURSO_DB_HTTP_URL']);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -55,6 +72,24 @@ function collectLogs() {
     ]);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-    curl_exec($ch);
-    curl_close($ch);
+    $response = curl_exec($ch);
+
+    echo $response;
+}
+
+#[Route('/logs/setup')]
+function test() {
+    $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
+
+    header("Content-Type: text/plain");
+
+    switch (true) {
+        case $_SERVER['REQUEST_METHOD'] !== 'GET':
+        case isset($parsedUrl['query']):
+        case isset($parsedUrl['fragment']):
+        case !areRequestHeadersSet(['accept' => 'text/plain']):
+            response400();
+    }
+
+    echo $_ENV['LOG_KEY'];
 }
