@@ -29,19 +29,19 @@ function collectLogs() {
     
     //TODO: input validation. Something is wrong
     //Log keys and values type/format
-    // $isInputValid = fn () => match (true) {
-    //         !json_validate($errorDecoded), !empty(array_diff_key($errorDecoded, $d)) => false,
-    //         default => true
-    //     };
+    $isInputValid = fn () => match (true) {
+            !json_validate($errorDecoded), !empty(array_diff_key($errorDecoded, $d)) => false,
+            default => true
+        };
 
-    // switch (true) {
-    //     case $_SERVER['REQUEST_METHOD'] !== 'POST':
-    //     case isset($parsedUrl['query']):
-    //     case isset($parsedUrl['fragment']):
-    //     case !areRequestHeadersSet(['Authorization' => 'Bearer ' . $_ENV['LOG_KEY']]):
-    //     case !$isInputValid():
-    //         response400();
-    // }
+    switch (true) {
+        case $_SERVER['REQUEST_METHOD'] !== 'POST':
+        case isset($parsedUrl['query']):
+        case isset($parsedUrl['fragment']):
+        case !areRequestHeadersSet(['authorization' => 'Bearer ' . $_ENV['LOG_KEY']]):
+        case !$isInputValid():
+            response400();
+    }
 
     $data = [
         'requests' => [
@@ -65,7 +65,6 @@ function collectLogs() {
         ]
     ];
 
-    // echo json_encode($data);
 
     $ch = curl_init($_ENV['TURSO_DB_HTTP_URL']);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
