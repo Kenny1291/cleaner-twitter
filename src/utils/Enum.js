@@ -1,4 +1,4 @@
-class Enum {
+export default class Enum {
     /**@type {string} */
     #name
 
