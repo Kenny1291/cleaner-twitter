@@ -5,7 +5,7 @@ import RetryHandler from "./RetryHandler/RetryHandler.js"
  * @returns {Promise<{[key: string]: any}>}
  */
 export async function chromeStorageSyncGet(key) {
-    return new RetryHandler(async () => chrome.storage.sync.get(key)).run()
+    return await new RetryHandler(async () => await chrome.storage.sync.get(key)).run()
 }
 
 /**
@@ -13,14 +13,14 @@ export async function chromeStorageSyncGet(key) {
  * @returns {Promise<void>}
  */
 export async function chromeStorageSyncSet(items) {
-    return new RetryHandler(async () => chrome.storage.sync.set(items)).run()
+    return await new RetryHandler(async () => await chrome.storage.sync.set(items)).run()
 }
 
 /**
  * @returns {Promise<void>}
  */
 export async function chromeStorageSyncClear() {
-    return new RetryHandler(async () => chrome.storage.sync.clear()).run()
+    return await new RetryHandler(async () => await chrome.storage.sync.clear()).run()
 }
 
 /**
@@ -112,8 +112,8 @@ export async function setDefaultRules() {
  * @returns {Promise<newDefaultRules>}
  */
 async function fetchNewDefaultRulesJSON() {
-    return new RetryHandler(async () => {
-        return httpGet('https://cleaner-twitter-one.vercel.app/data')
+    return await new RetryHandler(async () => {
+        return await httpGet('https://cleaner-twitter-one.vercel.app/data')
     }).run()
 }
 
@@ -122,7 +122,7 @@ async function fetchNewDefaultRulesJSON() {
  * @returns {Promise<any>}
  */
 async function httpGet(url) {
-    return fetch(url).then(response => {
+    return await fetch(url).then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`)
         }
@@ -134,8 +134,8 @@ async function httpGet(url) {
  * @returns {Promise<defaultCSSRules>}
  */
 export async function fetchDefaultCSSRulesJSON() {
-    return new RetryHandler(async () => {
-        return httpGet('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
+    return await new RetryHandler(async () => {
+        return await httpGet('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
     }).run()
 }
 
@@ -144,8 +144,8 @@ export async function fetchDefaultCSSRulesJSON() {
  * @returns {Promise<newAndOldCSSRules>}
  */
 export async function fetchNewAndOldRulesJSON(version) {
-    return new RetryHandler(async () => {
-        return httpGet(`https://cleaner-twitter-one.vercel.app?v=${version}`)
+    return await new RetryHandler(async () => {
+        return await httpGet(`https://cleaner-twitter-one.vercel.app?v=${version}`)
     }).run()
 }
 
