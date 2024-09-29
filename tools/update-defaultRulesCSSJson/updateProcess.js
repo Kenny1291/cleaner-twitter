@@ -25,7 +25,6 @@ async function processDefaultRulesUpdate(newDefaultRules, oldDefaultRulesJson) {
         // pushStatusUpdateToUser('Opening a pull request...')
         await commitUpdateDefaultCSSRulesJson(branchName, commitMessage)
         const pullReq = await openPullRequest(commitMessage + " [AUTOMATED]", branchName)
-        //TODO: The following message was not printed
         //@ts-ignore
         pushStatusUpdateToUser(`Done! You can now review and accept the changes on GitHub. <a href=${pullReq.html_url}>Pull request</a>`)
     } else {
