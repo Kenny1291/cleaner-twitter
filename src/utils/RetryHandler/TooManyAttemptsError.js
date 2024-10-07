@@ -4,5 +4,6 @@ export default class TooManyAttemptsError extends Error {
      */
     constructor(message) {
         super(message)
+        this.name = 'TooManyAttemptsError'
     }
 }
