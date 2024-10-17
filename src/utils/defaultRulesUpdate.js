@@ -27,6 +27,21 @@ export async function updateDefaultCSSRules(manual = false) {
     const currentRulesVersion = versionItem.version
     const defaultRulesVersion = defaultCSSRulesJson.version
 
+    //Temp check -->
+    if (defaultRulesVersion === currentRulesVersion) {
+        const currentCSSRulesArray = await getCSSRulesFromStorage()
+        const remoteDefaultRules = defaultCSSRulesJson.defaultRules
+        for (const localCSSRule of currentCSSRulesArray) {
+            // @ts-ignore
+            if (!Object.hasOwn(localCSSRule, 'UUID')) {
+                const defaultRule = remoteDefaultRules.find(defaultRule => localCSSRule.rule === defaultRule.rule)
+                localCSSRule.UUID = defaultRule ? defaultRule.UUID : crypto.randomUUID()
+            }
+        }
+        return
+    }
+    // <--
+
     if(defaultRulesVersion > currentRulesVersion) {
         const currentCSSRulesArray = await getCSSRulesFromStorage()
         const currentRulesHashed = await getCurrentRulesHashed(currentCSSRulesArray)
@@ -163,7 +178,8 @@ export function addRules(UUIDSOfRulesToAdd, currentCSSRule, newDefaultRules) {
             if (newDefaultRule.UUID === UUIDOfRulesToAdd) {
                 const rule = newDefaultRule.rule
                 const name = getRuleName(rule)
-                currentCSSRule.push({ name, rule, active: true, group: newDefaultRule.group})
+                const UUID = newDefaultRule.UUID
+                currentCSSRule.push({ UUID, name, rule, active: true, group: newDefaultRule.group})
                 break
             }
         }
