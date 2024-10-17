@@ -32,7 +32,7 @@ CSSRules.forEach(CSSRule => {
     ruleToggle.checked = CSSRule.active
 
     ruleToggle.addEventListener('click', function () {
-        toggleStorageKey(CSSRule.name)
+        toggleStorageKey(CSSRule.UUID)
     })
 })
 
