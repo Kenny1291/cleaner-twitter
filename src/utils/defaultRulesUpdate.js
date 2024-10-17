@@ -163,7 +163,8 @@ export function addRules(UUIDSOfRulesToAdd, currentCSSRule, newDefaultRules) {
             if (newDefaultRule.UUID === UUIDOfRulesToAdd) {
                 const rule = newDefaultRule.rule
                 const name = getRuleName(rule)
-                currentCSSRule.push({ name, rule, active: true, group: newDefaultRule.group})
+                const UUID = newDefaultRule.UUID
+                currentCSSRule.push({ UUID, name, rule, active: true, group: newDefaultRule.group})
                 break
             }
         }
