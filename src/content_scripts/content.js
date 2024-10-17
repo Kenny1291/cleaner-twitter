@@ -1,3 +1,5 @@
+import { getRuleWithUniqueClass, getRuleUniqueName } from '../utils/utils.js'
+
 /**
  * Call when content.js is injected (when Twitter is visited)
  */
@@ -37,8 +39,8 @@ function injectStylesAndSetClasses() {
 
     chrome.storage.sync.get().then(result => {
         result.CSSRulesArrayOfObjectsWithNames.forEach(CSSRule => {
-            style.innerHTML += CSSRule.rule
-            document.body.classList.toggle(CSSRule.name, CSSRule.active )
+            style.innerHTML += getRuleWithUniqueClass(CSSRule)
+            document.body.classList.toggle(getRuleUniqueName(CSSRule), CSSRule.active )
         })
     })
     document.head.appendChild(style)

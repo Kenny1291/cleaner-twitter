@@ -102,3 +102,22 @@ export function toggleStorageKey(CSSRuleName) {
         chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
     })
 }
+
+/**
+ * @param {CSSRuleObject} CSSRule
+ * @returns {string}
+ */
+export function getRuleWithUniqueClass(CSSRule) {
+    const ruleClass = getRuleName(CSSRule.rule)
+    return CSSRule.rule.replace(ruleClass, getRuleUniqueName(CSSRule))
+}
+
+/**
+ * 
+ * @param {CSSRuleObject} CSSRule
+ * @returns {string} 
+ */
+export function getRuleUniqueName(CSSRule) {
+    const ruleClass = getRuleName(CSSRule.rule)
+    return ruleClass + CSSRule.UUID
+}
