@@ -1,4 +1,4 @@
-import { getRuleUniqueName } from "../../utils/utils"
+import { getRuleUniqueName } from "../../utils/utils.js"
 
 chrome.storage.onChanged.addListener((changes, areaName) => {
     const [[key, { oldValue, newValue }]] = Object.entries(changes);
