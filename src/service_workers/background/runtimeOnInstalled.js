@@ -1,7 +1,7 @@
 import { updateDefaultCSSRules } from "../../utils/defaultRulesUpdate.js"
 import { setDefaultRules } from "../../utils/utils.js"
 
-chrome.runtime.onInstalled.addListener(async () => {
+chrome.runtime.onInstalled.addListener(async (details) => {
     const openTwitterTabs = await chrome.tabs.query({ url: ['https://*.twitter.com/*', 'https://*.x.com/*'] })
 
     const versionInStorage = await chrome.storage.sync.get('version')
@@ -20,7 +20,9 @@ chrome.runtime.onInstalled.addListener(async () => {
     if (!foundStoredRules) setDefaultRules()
 
     //Temporary check to update client storage that does not have UUIDs -->
-    await updateDefaultCSSRules(true)
+    if (details.reason === chrome.runtime.OnInstalledReason.UPDATE) {
+        await updateDefaultCSSRules(true)
+    }
     // <--
     injectContentScriptInOpenTwitterTabs(openTwitterTabs)
 })
