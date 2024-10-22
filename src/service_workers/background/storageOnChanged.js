@@ -1,3 +1,5 @@
+import { getRuleUniqueName } from "../../utils/utils.js"
+
 chrome.storage.onChanged.addListener((changes, areaName) => {
     const [[key, { oldValue, newValue }]] = Object.entries(changes);
 
@@ -44,7 +46,7 @@ function getRulesThatChangedState(oldValue, newValue) {
 
     for (let i = 0; i < oldValue.length; i++) {
         if (oldValue[i].active != newValue[i].active) {
-            rulesToggled.push({ name: newValue[i].name, active: newValue[i].active })
+            rulesToggled.push({ name: getRuleUniqueName(newValue[i]), active: newValue[i].active })
         }
     }
 
