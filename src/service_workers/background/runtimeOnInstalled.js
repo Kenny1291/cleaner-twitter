@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(async () => {
     const foundVersionInStorage = Object.keys(versionInStorage).length === 1
     if(!foundVersionInStorage) {
         await chrome.storage.sync.clear()
-        setDefaultRules()
+        await setDefaultRules()
 
         injectContentScriptInOpenTwitterTabs(openTwitterTabs)
 
@@ -16,7 +16,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 
     const rulesInStorage = await chrome.storage.sync.get('CSSRulesArrayOfObjectsWithNames')
     const foundStoredRules = Object.keys(rulesInStorage).length > 0
-    if (!foundStoredRules) setDefaultRules()
+    if (!foundStoredRules) await setDefaultRules()
     
     injectContentScriptInOpenTwitterTabs(openTwitterTabs)
 })
