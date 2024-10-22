@@ -20,7 +20,7 @@ chrome.runtime.onInstalled.addListener(async () => {
     if (!foundStoredRules) setDefaultRules()
 
     //Temporary check to update client storage that does not have UUIDs -->
-    updateDefaultCSSRules(true)
+    await updateDefaultCSSRules(true)
     // <--
     injectContentScriptInOpenTwitterTabs(openTwitterTabs)
 })
