@@ -62,7 +62,6 @@ export async function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArr, fet
 
 //TODO: decide if keep; doc accordingly; create new types if needed
 function processCSSRuleDefaultObject(ruleObject) {
-    delete ruleObject.UUID
     ruleObject.name = getRuleName(ruleObject.rule)
     ruleObject.active = true
 }
