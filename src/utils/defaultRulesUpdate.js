@@ -28,23 +28,23 @@ export async function updateDefaultCSSRules(manual = false) {
     const defaultRulesVersion = defaultCSSRulesJson.version
 
     //Temp check -->
-    if (defaultRulesVersion === currentRulesVersion) {
-        const currentCSSRulesArray = await getCSSRulesFromStorage()
-        const remoteDefaultRules = defaultCSSRulesJson.defaultRules
-        for (const localCSSRule of currentCSSRulesArray) {
-            // @ts-ignore
-            if (!Object.hasOwn(localCSSRule, 'UUID')) {
-                const defaultRule = remoteDefaultRules.find(defaultRule => localCSSRule.rule === defaultRule.rule)
-                localCSSRule.UUID = defaultRule ? defaultRule.UUID : crypto.randomUUID()
-            }
+    const currentCSSRulesArray = await getCSSRulesFromStorage()
+    const remoteDefaultRules = defaultCSSRulesJson.defaultRules
+    for (const localCSSRule of currentCSSRulesArray) {
+        // @ts-ignore
+        if (!Object.hasOwn(localCSSRule, 'UUID')) {
+            const defaultRule = remoteDefaultRules.find(defaultRule => localCSSRule.rule === defaultRule.rule)
+            localCSSRule.UUID = defaultRule ? defaultRule.UUID : crypto.randomUUID()
         }
+    }
+    if (defaultRulesVersion === currentRulesVersion) {
         chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: currentCSSRulesArray })
         return
     }
     // <--
 
     if(defaultRulesVersion > currentRulesVersion) {
-        const currentCSSRulesArray = await getCSSRulesFromStorage()
+        // const currentCSSRulesArray = await getCSSRulesFromStorage()
         const currentRulesHashed = await getCurrentRulesHashed(currentCSSRulesArray)
         const remoteOldRules = defaultCSSRulesJson.oldRules[String(currentRulesVersion)]
         const remoteNewRules = defaultCSSRulesJson.defaultRules
