@@ -42,8 +42,8 @@ export function getToggleName(ruleClass) {
  */
 export function processCSSRule(rule, CSSRules) {
     const name = getRuleName(rule)
-    const CSSRule = CSSRules.find(rule => rule.name === name);
-    return { name, rule, active: CSSRule ? CSSRule.active : true, group: CSSRule ? CSSRule.group : "" }
+    const CSSRule = CSSRules.find(CSSRule => CSSRule.rule === rule); //TODO: Is this reliable? (Only if the parses is I guess and if the are not duplicate rules lol)
+    return { UUID: CSSRule ? CSSRule.UUID : crypto.randomUUID(), name, rule, active: CSSRule ? CSSRule.active : true, group: CSSRule ? CSSRule.group : "" }
 }
 
 /**
@@ -62,7 +62,6 @@ export async function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArr, fet
 
 //TODO: decide if keep; doc accordingly; create new types if needed
 function processCSSRuleDefaultObject(ruleObject) {
-    delete ruleObject.UUID
     ruleObject.name = getRuleName(ruleObject.rule)
     ruleObject.active = true
 }
@@ -92,13 +91,32 @@ export async function fetchDefaultCSSRulesJSON() {
 /**
  * Toggles the 'active' property of a CSS rule in Chrome storage.
  * 
- * @param {string} CSSRuleName - The name of the CSS rule to toggle.
+ * @param {string} CSSRuleUUID - The UUID of the CSS rule to toggle.
  */
-export function toggleStorageKey(CSSRuleName) {
+export function toggleStorageKey(CSSRuleUUID) {
     chrome.storage.sync.get().then(result => {
         const CSSRules = result.CSSRulesArrayOfObjectsWithNames
-        const CSSRule = CSSRules.find(rule => rule.name === CSSRuleName)
+        const CSSRule = CSSRules.find(rule => rule.UUID === CSSRuleUUID)
         CSSRule.active = !CSSRule.active
         chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
     })
+}
+
+/**
+ * @param {CSSRuleObject} CSSRule
+ * @returns {string}
+ */
+export function getRuleWithUniqueClass(CSSRule) {
+    const ruleClass = getRuleName(CSSRule.rule)
+    return CSSRule.rule.replace(ruleClass, getRuleUniqueName(CSSRule))
+}
+
+/**
+ * 
+ * @param {CSSRuleObject} CSSRule
+ * @returns {string} 
+ */
+export function getRuleUniqueName(CSSRule) {
+    const ruleClass = getRuleName(CSSRule.rule)
+    return ruleClass + CSSRule.UUID
 }

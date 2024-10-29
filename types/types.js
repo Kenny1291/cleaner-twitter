@@ -1,5 +1,6 @@
 /**
  * @typedef {Object} CSSRuleObject
+ * @property {string} UUID - The UUID of the rule
  * @property {string} name - The name of the CSS rule.
  * @property {string} rule - The CSS rule as a string.
  * @property {boolean} active - A boolean indicating whether the rule is active or not.
