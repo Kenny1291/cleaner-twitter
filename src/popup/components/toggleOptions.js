@@ -19,15 +19,15 @@ CSSRules.forEach(CSSRule => {
         'beforeend',
         `
             <div class="switch-container">
-            <label for=${CSSRule.name}>${toggleName}</label>
-            <input id=${CSSRule.name} type="checkbox" role="switch" />
+            <label for=${CSSRule.UUID}>${toggleName}</label>
+            <input id=${CSSRule.UUID} type="checkbox" role="switch" />
             </div>
         `
     )
 
     /**@type {HTMLInputElement} */
     //@ts-ignore
-    const ruleToggle = document.getElementById(CSSRule.name)
+    const ruleToggle = document.getElementById(CSSRule.UUID)
 
     ruleToggle.checked = CSSRule.active
 
