@@ -38,6 +38,7 @@ export async function updateDefaultCSSRules(manual = false) {
                 localCSSRule.UUID = defaultRule ? defaultRule.UUID : crypto.randomUUID()
             }
         }
+        chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: currentCSSRulesArray })
         return
     }
     // <--
