@@ -39,7 +39,6 @@ export async function updateDefaultCSSRules(manual = false) {
     }
     if (defaultRulesVersion === currentRulesVersion) {
         chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: currentCSSRulesArray })
-        return
     }
     // <--
 
