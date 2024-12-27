@@ -9,12 +9,11 @@ import {
     removeRules,
     getCurrentRulesHashed,
     sha256Hash
-} from '../defaultRulesUpdate.js'
-import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' with { type: 'json' }
-import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' with { type: 'json' }
-import defaultRulesV2Hashed from '../../../tests/unit/static-data/default-rules-v2-hashed.json' with { type: 'json' }
-import defaultRulesV2 from '../../../tests/unit/static-data/default-rules-v2.json' with { type: 'json' }
-import { group } from 'node:console'
+} from '../../defaultRulesUpdate.js'
+import CSSRulesArrayOfObjectsWithNames from '../../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' with { type: 'json' }
+import defaultCSSRules from '../../../../data/defaultCSSRulesV2.json' with { type: 'json' }
+import defaultRulesV2Hashed from '../../../../tests/unit/static-data/default-rules-v2-hashed.json' with { type: 'json' }
+import defaultRulesV2 from '../../../../tests/unit/static-data/default-rules-v2.json' with { type: 'json' }
 
 describe('getRulesToReplace()', () => {
     const currentRulesHashed = JSON.parse(JSON.stringify(defaultRulesV2Hashed))
@@ -123,8 +122,8 @@ describe('updateRules()', () => {
 describe('addRules()', () => {
     it('should add a newly created CSSRuleObject to the Array', () => {
         const expected = JSON.parse(JSON.stringify(CSSRulesArrayOfObjectsWithNames))
-        expected.push({ active: false, group: "testGroup", name: "test_rule1_name", rule: ".test_rule1_name testRule" })
-        expected.push({ active: false, group: "testGroup", name: "test_rule2_name", rule: ".test_rule2_name testRule" })
+        expected.push({ active: true, group: "testGroup", name: "test_rule1_name", rule: ".test_rule1_name testRule" })
+        expected.push({ active: true, group: "testGroup", name: "test_rule2_name", rule: ".test_rule2_name testRule" })
         const actual = JSON.parse(JSON.stringify(CSSRulesArrayOfObjectsWithNames))
         const UUIDOfRulesToAdd = ["testUUID1", "testUUID2"]
         const newDefaultRules = [

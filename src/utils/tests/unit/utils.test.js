@@ -4,9 +4,9 @@ import {
     getRuleName,
     processCSSRule,
     fetchDefaultCSSRulesJSON
-} from '../utils.js'
-import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' with { type: 'json' }
-import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' with { type: 'json' }
+} from '../../utils.js'
+import defaultCSSRules from '../../../../data/defaultCSSRulesV2.json' with { type: 'json' }
+import CSSRulesArrayOfObjectsWithNames from '../../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' with { type: 'json' }
 
 const exampleRule = ".hide_tweet_analytics div:has(> a[aria-label$='View post analytics']) {display: none;}"
 
@@ -31,10 +31,10 @@ describe('processCSSRule()', () => {
         assert.equal(actual, expected)
     })
 
-    it('should set the active property to false if the rule is not found', () => {
+    it('should set the active property to true if the rule is not found', () => {
         const exampleRule = ".test_rule div:has(> a[aria-label$='thisIsATest']) {display: none;}"
         const expected = processCSSRule(exampleRule, CSSRulesArrayOfObjectsWithNames)
-        assert.equal(false, expected.active)
+        assert.equal(true, expected.active)
     })
 })
 
