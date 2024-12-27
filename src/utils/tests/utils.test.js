@@ -1,14 +1,12 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
-import { 
+import {
     getRuleName,
     processCSSRule,
     fetchDefaultCSSRulesJSON
 } from '../utils.js'
-// @ts-ignore
-import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' assert { type: 'json' }
-// @ts-ignore
-import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
+import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' with { type: 'json' }
+import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' with { type: 'json' }
 
 const exampleRule = ".hide_tweet_analytics div:has(> a[aria-label$='View post analytics']) {display: none;}"
 
@@ -24,7 +22,7 @@ describe('processCSSRule()', () => {
     it('should return a "CSSRuleObject"', () => {
         const expected = CSSRulesArrayOfObjectsWithNames[0]
         const actual = processCSSRule(exampleRule, CSSRulesArrayOfObjectsWithNames)
-        assert.deepEqual(actual, expected) 
+        assert.deepEqual(actual, expected)
     })
 
     it('should match the active property value if the rule is found', () => {

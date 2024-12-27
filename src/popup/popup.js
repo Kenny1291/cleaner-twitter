@@ -1,6 +1,5 @@
 import { getCSSRulesFromStorage } from "../utils/utils.js"
 
-/** @type {CSSRuleObject[]} */
 const CSSRules = await getCSSRulesFromStorage()
 
 export { CSSRules as default }

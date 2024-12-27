@@ -1,3 +1,5 @@
+/* global GitHubApiCall, HTTPMethod, defaultCSSRulesJson */
+
 /**
  * @returns {Promise<string|boolean>}
  */
@@ -9,7 +11,7 @@ async function getLatestCommitSHAFromMain() {
 }
 
 /**
- * @param {string} name 
+ * @param {string} name
  * @returns {Promise<JSON|boolean>}
  */
 async function createNewBranch(name) {
@@ -17,7 +19,7 @@ async function createNewBranch(name) {
     const req = new GitHubApiCall(
                     HTTPMethod.POST,
                     'git/refs',
-                    { 
+                    {
                         ref: `refs/heads/${name}`,
                         sha: latestCommitSHAFromMain
                     }
@@ -37,8 +39,8 @@ async function getDefaultCSSRulesJsonBlobSHA() {
 }
 
 /**
- * @param {string} branch 
- * @param {string} commitMessage 
+ * @param {string} branch
+ * @param {string} commitMessage
  * @returns {Promise<JSON|boolean>}
  */
 async function commitUpdateDefaultCSSRulesJson(branch, commitMessage) {
@@ -59,8 +61,8 @@ async function commitUpdateDefaultCSSRulesJson(branch, commitMessage) {
 }
 
 /**
- * @param {string} title 
- * @param {string} branchName 
+ * @param {string} title
+ * @param {string} branchName
  * @returns {Promise<JSON|boolean>}
  */
 async function openPullRequest(title, branchName) {

@@ -20,11 +20,16 @@
   },
   "homepage": "https://github.com/Kenny1291/cleaner-twitter#readme",
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.25.1",
+    "@babel/plugin-syntax-import-attributes": "^7.25.6",
+    "@babel/preset-env": "^7.25.4",
     "@playwright/test": "^1.41.1",
+    "@stylistic/eslint-plugin-js": "^2.7.2",
     "@types/chrome": "^0.0.258",
     "@types/node": "^20.11.5",
     "dotenv": "^16.4.1",
-    "eslint": "^8.57.0",
+    "eslint": "^9.9.1",
     "jszip": "^3.10.1"
   }
 }

@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
-import { 
+import {
     getRulesToUpdate,
     getRulesToAdd,
     getRulesToRemove,
@@ -10,19 +10,15 @@ import {
     getCurrentRulesHashed,
     sha256Hash
 } from '../defaultRulesUpdate.js'
-// @ts-ignore
-import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' assert { type: 'json' }
-// @ts-ignore
-import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' assert { type: 'json' }
-// @ts-ignore
-import defaultRulesV2Hashed from '../../../tests/unit/static-data/default-rules-v2-hashed.json' assert { type: 'json' }
-// @ts-ignore
-import defaultRulesV2 from '../../../tests/unit/static-data/default-rules-v2.json' assert { type: 'json' }
+import CSSRulesArrayOfObjectsWithNames from '../../../tests/unit/static-data/CSSRulesArrayOfObjectsWithNames.json' with { type: 'json' }
+import defaultCSSRules from '../../../data/defaultCSSRulesV2.json' with { type: 'json' }
+import defaultRulesV2Hashed from '../../../tests/unit/static-data/default-rules-v2-hashed.json' with { type: 'json' }
+import defaultRulesV2 from '../../../tests/unit/static-data/default-rules-v2.json' with { type: 'json' }
 import { group } from 'node:console'
 
 describe('getRulesToReplace()', () => {
     const currentRulesHashed = JSON.parse(JSON.stringify(defaultRulesV2Hashed))
-    const lastRule = currentRulesHashed[currentRulesHashed.length - 1] 
+    const lastRule = currentRulesHashed[currentRulesHashed.length - 1]
     currentRulesHashed.push(lastRule.substr(lastRule.length - 2) + "19")
 
     it('should return all the rules that have a matching hash', () => {
@@ -36,12 +32,14 @@ describe('getRulesToReplace()', () => {
         assert.equal(
             Array.isArray(actual) && (arrOfObjs => { 
                 for(let i = 0; i < arrOfObjs.length; i++) { 
-                    if(!arrOfObjs[i].hasOwnProperty('oldRuleIndex') 
+                    // @ts-ignore
+                    if(!Object.hasOwn(arrOfObjs[i], 'oldRuleIndex')
                     || typeof arrOfObjs[i].oldRuleIndex !== "number"
-                    || !arrOfObjs[i].hasOwnProperty('newRuleUUID')
+                    // @ts-ignore
+                    || !Object.hasOwn(arrOfObjs[i], 'newRuleUUID')
                     || typeof arrOfObjs[i].newRuleUUID !== "string") return false
-                } 
-                return true 
+                }
+                return true
             })(actual),
             true
         )
@@ -50,8 +48,8 @@ describe('getRulesToReplace()', () => {
 
 describe('getRulesToAdd()', () => {
     const defaultRulesV2Mod = JSON.parse(JSON.stringify(defaultRulesV2))
-    defaultRulesV2Mod.push({ 
-        UUID: "ca46e63b-6fcd-49cc-77f7-86b60cbcd5f3",  
+    defaultRulesV2Mod.push({
+        UUID: "ca46e63b-6fcd-49cc-77f7-86b60cbcd5f3",
         rule: "thisIsATestRule",
         group: 'testGroup'
     })
@@ -74,6 +72,7 @@ describe('getRulesToAdd()', () => {
             true
         )
         for(const el of actual) {
+            // eslint-disable-next-line no-restricted-syntax
             assert.match(el, /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/)
         }
     })
@@ -81,7 +80,7 @@ describe('getRulesToAdd()', () => {
 
 describe('getRulesToRemove()', () => {
     const oldRulesMod = JSON.parse(JSON.stringify(defaultCSSRules.oldRules["0"]))
-    oldRulesMod.push({ UUID: "ca46e63b-6fcd-49cc-77f7-86b60cbcd5f3", hash: "thisIsATestRule"})
+    oldRulesMod.push({ UUID: "ca46e63b-6fcd-49cc-77f7-86b60cbcd5f3", hash: "thisIsATestRule" })
 
     it('should return all the rules that do not have a matching UUID', () => {
         const expected = 1
@@ -101,7 +100,7 @@ describe('getRulesToRemove()', () => {
             true
         )
     })
-})  
+})
 
 describe('updateRules()', () => {
     it('should replace all the rules with the new ones provided', () => {
@@ -114,7 +113,7 @@ describe('updateRules()', () => {
         defaultRulesV2Mod.push({ UUID: "testUUID2", rule: ".testName2 testRule", group: "testGroup" })
         const expected = JSON.parse(JSON.stringify(CSSRulesArrayOfObjectsWithNames))
         expected[0] = { active: true, group: "testGroup", name: "testName1", rule: ".testName1 testRule" }
-        expected[3] = { active: true, group: "testGroup", name: "testName2",rule: ".testName2 testRule" }
+        expected[3] = { active: true, group: "testGroup", name: "testName2", rule: ".testName2 testRule" }
         const actual = JSON.parse(JSON.stringify(CSSRulesArrayOfObjectsWithNames))
         updateRules(oldRulesIndexAndNewRulesUUID, actual, defaultRulesV2Mod)
         assert.deepEqual(actual, expected)
@@ -122,7 +121,7 @@ describe('updateRules()', () => {
 })
 
 describe('addRules()', () => {
-    it('should add a newly created CSSRuleObject to the Array', () =>  {
+    it('should add a newly created CSSRuleObject to the Array', () => {
         const expected = JSON.parse(JSON.stringify(CSSRulesArrayOfObjectsWithNames))
         expected.push({ active: false, group: "testGroup", name: "test_rule1_name", rule: ".test_rule1_name testRule" })
         expected.push({ active: false, group: "testGroup", name: "test_rule2_name", rule: ".test_rule2_name testRule" })
@@ -130,7 +129,7 @@ describe('addRules()', () => {
         const UUIDOfRulesToAdd = ["testUUID1", "testUUID2"]
         const newDefaultRules = [
             { UUID: "testUUID1", rule: ".test_rule1_name testRule", group: "testGroup" },
-            { UUID: "testUUID2", rule: ".test_rule2_name testRule", group: "testGroup" } 
+            { UUID: "testUUID2", rule: ".test_rule2_name testRule", group: "testGroup" }
         ]
         // @ts-ignore
         addRules(UUIDOfRulesToAdd, actual, newDefaultRules)
@@ -139,7 +138,7 @@ describe('addRules()', () => {
 })
 
 describe('removeRules()', () => {
-    it('should remove all the rules at the provided indexes', () =>  {
+    it('should remove all the rules at the provided indexes', () => {
         const expected = JSON.parse(JSON.stringify(CSSRulesArrayOfObjectsWithNames))
         expected.splice(0, 1)
         expected.splice(3, 1)
@@ -151,7 +150,7 @@ describe('removeRules()', () => {
 })
 
 describe('getCurrentRulesHashed()', () => {
-    it('should return an Array of strings containing all the current rules hashed', async () =>  {
+    it('should return an Array of strings containing all the current rules hashed', async () => {
         const expected = defaultRulesV2Hashed
         const actual = await getCurrentRulesHashed(defaultRulesV2)
         assert.deepEqual(actual, expected)

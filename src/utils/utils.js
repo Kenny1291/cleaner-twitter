@@ -10,19 +10,20 @@ export async function getCSSRulesFromStorage() {
 
 /**
  * Extracts the class from a CSS rule
- * 
- * @param {string} rule 
+ *
+ * @param {string} rule
  * @returns {string}
  */
 export function getRuleName(rule) {
-    const match = rule.match(/\.([a-z0-9_-]+)/i);
-    return match ? match[1] : ''; 
+    // eslint-disable-next-line no-restricted-syntax
+    const match = rule.match(/\.([a-z0-9_-]+)/i)
+    return match ? match[1] : ''
 }
 
 /**
  * Transform a CSS class to a name for the toggle switch
- * 
- * @param {string} ruleClass 
+ *
+ * @param {string} ruleClass
  * @returns {string}
  */
 export function getToggleName(ruleClass) {
@@ -33,7 +34,7 @@ export function getToggleName(ruleClass) {
 
 /**
  * Processes a CSS rule and returns a {@link CSSRuleObject}
- * 
+ *
  * @param {string} rule - The CSS rule to be processed.
  * @param {CSSRuleObject[]} CSSRules - An array of {@link CSSRuleObject}.
  * @returns {CSSRuleObject} NOTE: If the rule is found in the 'CSSRules' array,
@@ -53,16 +54,23 @@ export function processCSSRule(rule, CSSRules) {
  * @param {string[]} CSSRulesArr - An array of CSS rules. Each rule is a string representing a CSS rule.
  * @param {boolean} [fetchStateFromStorage=false] - A boolean indicating whether to fetch the CSS rules from the Chrome storage.
  * If false, the function will use an empty array.
- * @returns {Promise<CSSRuleObject[]>} 
+ * @returns {Promise<CSSRuleObject[]>}
  */
 export async function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArr, fetchStateFromStorage = false) {
     const CSSRules = fetchStateFromStorage ? await getCSSRulesFromStorage() : []
     return CSSRulesArr.map(rule => processCSSRule(rule, CSSRules))
 }
 
-//TODO: decide if keep; doc accordingly; create new types if needed
+/**
+ * Mutates a {@link defaultRule} into a {@link CSSRuleObject}
+ *
+ * @param {defaultRule} ruleObject
+ */
 function processCSSRuleDefaultObject(ruleObject) {
+    delete ruleObject.UUID
+    // @ts-ignore
     ruleObject.name = getRuleName(ruleObject.rule)
+    // @ts-ignore
     ruleObject.active = true
 }
 
@@ -75,9 +83,7 @@ export async function setDefaultRules() {
     chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
 }
 
-//TODO: handle errors
 /**
- * 
  * @returns {Promise<defaultCSSRules>}
  */
 export async function fetchDefaultCSSRulesJSON() {

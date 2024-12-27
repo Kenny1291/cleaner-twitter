@@ -1,7 +1,7 @@
 import { getRuleUniqueName } from "../../utils/utils.js"
 
 chrome.storage.onChanged.addListener((changes, areaName) => {
-    const [[key, { oldValue, newValue }]] = Object.entries(changes);
+    const [[key, { oldValue, newValue }]] = Object.entries(changes)
 
     const rulesChanged = checkIfRulesChanged(oldValue, newValue)
 
@@ -14,10 +14,10 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 })
 
 /**
- * Check wether the number of rules or the rules changed 
- * 
- * @param {CSSRuleObject[]} oldValue 
- * @param {CSSRuleObject[]} newValue 
+ * Check wether the number of rules or the rules changed
+ *
+ * @param {CSSRuleObject[]} oldValue
+ * @param {CSSRuleObject[]} newValue
  * @returns {boolean} true if rules changed, false otherwise
  */
 function checkIfRulesChanged(oldValue, newValue) {
@@ -36,9 +36,9 @@ function checkIfRulesChanged(oldValue, newValue) {
 
 /**
  * Finds the rules that have been toggled
- *  
- * @param {CSSRuleObject[]} oldValue 
- * @param {CSSRuleObject[]} newValue 
+ *
+ * @param {CSSRuleObject[]} oldValue
+ * @param {CSSRuleObject[]} newValue
  * @returns {message[]} An array of messages
  */
 function getRulesThatChangedState(oldValue, newValue) {
@@ -54,8 +54,8 @@ function getRulesThatChangedState(oldValue, newValue) {
 }
 
 /**
- * Sends a {@link message} to all open Twitter tabs 
- * 
+ * Sends a {@link message} to all open Twitter tabs
+ *
  * @param {message} messageObj - The message to send.
  */
 async function sendMessageToTwitterTabs(messageObj) {
