@@ -37,7 +37,7 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from ".
         const defaultRulesVersion = defaultCSSRulesJson.version
 
         //Temp check -->
-        const currentCSSRulesArray = await getCSSRulesFromStorage()
+        const currentCSSRulesArray = CSSRulesFromStorageMOCK ? CSSRulesFromStorageMOCK.CSSRulesArrayOfObjectsWithNames : await getCSSRulesFromStorage()
         const remoteDefaultRules = defaultCSSRulesJson.defaultRules
         for (const localCSSRule of currentCSSRulesArray) {
             // @ts-ignore
@@ -52,7 +52,7 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from ".
         // <--
 
         if (defaultRulesVersion > currentRulesVersion) {
-            const currentCSSRulesArray = CSSRulesFromStorageMOCK ? CSSRulesFromStorageMOCK.CSSRulesArrayOfObjectsWithNames : await getCSSRulesFromStorage()
+            //const currentCSSRulesArray = CSSRulesFromStorageMOCK ? CSSRulesFromStorageMOCK.CSSRulesArrayOfObjectsWithNames : await getCSSRulesFromStorage()
             const currentRulesHashed = await getCurrentRulesHashed(currentCSSRulesArray)
             const remoteOldRules = defaultCSSRulesJson.oldRules[String(currentRulesVersion)]
             const remoteNewRules = defaultCSSRulesJson.defaultRules
