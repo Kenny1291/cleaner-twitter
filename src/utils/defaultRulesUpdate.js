@@ -36,30 +36,21 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from ".
         const currentRulesVersion = versionItem.version
         const defaultRulesVersion = defaultCSSRulesJson.version
 
-    //Temp check -->
-    const currentCSSRulesArray = await getCSSRulesFromStorage()
-    const remoteDefaultRules = defaultCSSRulesJson.defaultRules
-    for (const localCSSRule of currentCSSRulesArray) {
-        // @ts-ignore
-        if (!Object.hasOwn(localCSSRule, 'UUID')) {
-            const defaultRule = remoteDefaultRules.find(defaultRule => localCSSRule.rule === defaultRule.rule)
-            localCSSRule.UUID = defaultRule ? defaultRule.UUID : crypto.randomUUID()
+        //Temp check -->
+        const currentCSSRulesArray = await getCSSRulesFromStorage()
+        const remoteDefaultRules = defaultCSSRulesJson.defaultRules
+        for (const localCSSRule of currentCSSRulesArray) {
+            // @ts-ignore
+            if (!Object.hasOwn(localCSSRule, 'UUID')) {
+                const defaultRule = remoteDefaultRules.find(defaultRule => localCSSRule.rule === defaultRule.rule)
+                localCSSRule.UUID = defaultRule ? defaultRule.UUID : crypto.randomUUID()
+            }
         }
-    }
-    if (defaultRulesVersion === currentRulesVersion) {
-        chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: currentCSSRulesArray })
-    }
-    // <--
+        if (defaultRulesVersion === currentRulesVersion) {
+            chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: currentCSSRulesArray })
+        }
+        // <--
 
-    if(defaultRulesVersion > currentRulesVersion) {
-        // const currentCSSRulesArray = await getCSSRulesFromStorage()
-        const currentRulesHashed = await getCurrentRulesHashed(currentCSSRulesArray)
-        const remoteOldRules = defaultCSSRulesJson.oldRules[String(currentRulesVersion)]
-        const remoteNewRules = defaultCSSRulesJson.defaultRules
-        const oldRulesIndexAndNewRulesUUID = getRulesToUpdate(remoteOldRules, currentRulesHashed)
-        const UUIDSOfRulesToAdd = getRulesToAdd(remoteNewRules, remoteOldRules)
-        const indexesOfRulesToRemove = getRulesToRemove(remoteOldRules, remoteNewRules)
-        const CSSRulesArrayOfObjectsWithNames = composeNewCSSRulesArray(currentCSSRulesArray, oldRulesIndexAndNewRulesUUID, UUIDSOfRulesToAdd, indexesOfRulesToRemove, remoteNewRules)
         if (defaultRulesVersion > currentRulesVersion) {
             const currentCSSRulesArray = CSSRulesFromStorageMOCK ? CSSRulesFromStorageMOCK.CSSRulesArrayOfObjectsWithNames : await getCSSRulesFromStorage()
             const currentRulesHashed = await getCurrentRulesHashed(currentCSSRulesArray)
