@@ -1,4 +1,5 @@
-import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from "./utils.js"
+import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName, chromeStorageSyncGet, chromeStorageSyncSet } from "./utils.js"
+
 /**
  * NOTES:
  *
@@ -26,14 +27,23 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from ".
         setStorageMOCK = undefined
     ) {
         if (!manual) {
-            const autoUpdateItem = await chrome.storage.sync.get('autoUpdate')
+            const autoUpdateItem = await chromeStorageSyncGet('autoUpdate')
             const autoUpdateState = autoUpdateItem.autoUpdate
             if (!autoUpdateState) return
         }
 
-        const defaultCSSRulesJson = defaultCSSRulesJsonMOCK ? defaultCSSRulesJsonMOCK : await fetchDefaultCSSRulesJSON()
-        const versionItem = versionItemMOCK ? versionItemMOCK : await chrome.storage.sync.get('version')
+        const versionItem = versionItemMOCK ? versionItemMOCK : await chromeStorageSyncGet('version')
         const currentRulesVersion = versionItem.version
+        let defaultCSSRulesJson
+        if (defaultCSSRulesJsonMOCK) {
+            defaultCSSRulesJson = defaultCSSRulesJsonMOCK
+        } else {
+            try {
+                defaultCSSRulesJson = await fetchDefaultCSSRulesJSON()
+            } catch (error) {
+                return "An error occurred. Try again later"
+            }
+        }
         const defaultRulesVersion = defaultCSSRulesJson.version
 
         //Temp check -->
@@ -65,7 +75,7 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName } from ".
             if (setStorageMOCK) {
                 setStorageMOCK(objToSet)
             } else {
-                chrome.storage.sync.set(objToSet)
+                chromeStorageSyncSet(objToSet)
             }
 
         return `Default rules updated from version ${currentRulesVersion} to version ${defaultRulesVersion}`

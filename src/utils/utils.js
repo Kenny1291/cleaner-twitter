@@ -1,10 +1,35 @@
+import RetryHandler from "./RetryHandler/RetryHandler.js"
+
+/**
+ * @param {string} key
+ * @returns {Promise<{[key: string]: any}>}
+ */
+export async function chromeStorageSyncGet(key) {
+    return new RetryHandler(async () => chrome.storage.sync.get(key)).run()
+}
+
+/**
+ * @param {{[key: string]: any}} items
+ * @returns {Promise<void>}
+ */
+export async function chromeStorageSyncSet(items) {
+    return new RetryHandler(async () => chrome.storage.sync.set(items)).run()
+}
+
+/**
+ * @returns {Promise<void>}
+ */
+export async function chromeStorageSyncClear() {
+    return new RetryHandler(async () => chrome.storage.sync.clear()).run()
+}
+
 /**
  * Asynchronously retrieves CSS rules from the Chrome storage.
  *
  * @returns {Promise<CSSRuleObject[]>}
  */
 export async function getCSSRulesFromStorage() {
-    const CSSRulesArrayOfObjectsWithNamesItem = await chrome.storage.sync.get('CSSRulesArrayOfObjectsWithNames')
+    const CSSRulesArrayOfObjectsWithNamesItem = await chromeStorageSyncGet('CSSRulesArrayOfObjectsWithNames')
     return CSSRulesArrayOfObjectsWithNamesItem.CSSRulesArrayOfObjectsWithNames
 }
 
@@ -78,20 +103,31 @@ function processCSSRuleDefaultObject(ruleObject) {
  * Asynchronously creates a {@link CSSRuleObject} Array and then sets it in the Chrome storage.
  */
 export async function setDefaultRules() {
-    const defaultRulesJSON = await fetchDefaultCSSRulesJSON()
+    const defaultRulesJSON = await fetchDefaultCSSRulesJSON()//TODO: call a server api
     defaultRulesJSON.defaultRules.forEach(ruleObj => processCSSRuleDefaultObject(ruleObj))
-    chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
+    chromeStorageSyncSet({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
+}
+
+/**
+ * @param {string} url
+ * @returns {Promise<any>}
+ */
+async function httpGet(url) {
+    return fetch(url).then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+        return response.json()
+    })
 }
 
 /**
  * @returns {Promise<defaultCSSRules>}
  */
 export async function fetchDefaultCSSRulesJSON() {
-    let defaultRules
-    await fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
-            .then(response => response.json())
-            .then(data => defaultRules = data)
-    return defaultRules
+    return new RetryHandler(async () => {
+        return httpGet('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
+    }).run()
 }
 
 /**
@@ -104,7 +140,7 @@ export function toggleStorageKey(CSSRuleUUID) {
         const CSSRules = result.CSSRulesArrayOfObjectsWithNames
         const CSSRule = CSSRules.find(rule => rule.UUID === CSSRuleUUID)
         CSSRule.active = !CSSRule.active
-        chrome.storage.sync.set({ CSSRulesArrayOfObjectsWithNames: CSSRules })
+        chromeStorageSyncSet({ CSSRulesArrayOfObjectsWithNames: CSSRules })
     })
 }
 
@@ -125,4 +161,17 @@ export function getRuleWithUniqueClass(CSSRule) {
 export function getRuleUniqueName(CSSRule) {
     const ruleClass = getRuleName(CSSRule.rule)
     return ruleClass + CSSRule.UUID
+}
+
+/**
+ * @param {Function} fn
+ * @param {...*} args
+ * @returns {Function} A new function with the same name as `fn` and preset arguments.
+ */
+export function makeNamedFn(fn, ...args) {
+    return {
+        [fn.name]: function() {
+            return fn(...args)
+        }
+    }[fn.name]
 }

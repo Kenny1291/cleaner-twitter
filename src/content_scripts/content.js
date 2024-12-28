@@ -16,12 +16,12 @@
         /**@type {boolean} */
         const messageState = Object.values(message)[0]
 
-        if(messageName === 'rulesChanged') {
-            injectStylesAndSetClasses()
-        } else {
-            document.body.classList.toggle(messageName, messageState)
-        }
-    })
+    if (messageName === 'rulesChanged') {
+        injectStylesAndSetClasses()
+    } else {
+        document.body.classList.toggle(messageName, messageState)
+    }
+})
 
     /**
      * Injects CSS styles into the page (body) and sets classes based on the stored CSS rules.
@@ -38,8 +38,11 @@
 
         style.id = 'cleanerTwitterStyles'
 
+        //Note: Not using util getCSSRulesFromStorage() intentionally
         chrome.storage.sync.get().then(result => {
-            result.CSSRulesArrayOfObjectsWithNames.forEach(CSSRule => {
+            /**@type {CSSRuleObject[]} */
+            const CSSRulesArr = result.CSSRulesArrayOfObjectsWithNames
+            CSSRulesArr.forEach(CSSRule => {
                 style.innerHTML += utils.getRuleWithUniqueClass(CSSRule)
                 document.body.classList.toggle(utils.getRuleUniqueName(CSSRule), CSSRule.active)
             })

@@ -1,4 +1,4 @@
-## <img src="https://github.com/Kenny1291/readme-assets/blob/main/cleaner-twitter/clean%20tw%20new%20icon.jpg" height="100" width="100">  <p align="center">Cleaner Twitter</p> 
+## <p align="center"><img src="https://github.com/Kenny1291/readme-assets/blob/main/cleaner-twitter/clean%20tw%20new%20icon.jpg" height="100" width="100"></p> <p align="center">Cleaner Twitter</p> 
 
 A Chromium extension to hide annoying elements from the Twitter UI. Customizable.
 
