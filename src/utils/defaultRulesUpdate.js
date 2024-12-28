@@ -40,6 +40,13 @@ import { fetchNewAndOldRulesJSON, getCSSRulesFromStorage, getRuleName, chromeSto
             try {
                 defaultCSSRulesJson = await fetchNewAndOldRulesJSON(currentRulesVersion)
             } catch (error) {
+                const payload = JSON.stringify({ name: error.name, message: error.message, stack: error.stack })
+                fetch('https://cleaner-twitter-one.vercel.app/logs/collect', {
+                    method: 'POST',
+                    headers: { Authorization: 'Bearer 6222a22b-3f39-481b-8332-cbdf0cf876b0' },//TODO: get token from storage
+                    body: payload
+                }).then(res => console.log(res.text()))
+                
                 return "An error occurred. Try again later"
             }
         }
