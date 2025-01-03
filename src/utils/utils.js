@@ -68,7 +68,7 @@ export function getToggleName(ruleClass) {
  */
 export function processCSSRule(rule, CSSRules) {
     const name = getRuleName(rule)
-    const CSSRule = CSSRules.find(CSSRule => CSSRule.rule === rule); //TODO: Is this reliable? (Only if the parses is I guess and if the are not duplicate rules lol)
+    const CSSRule = CSSRules.find(CSSRule => CSSRule.rule === rule) //TODO: Is this reliable? (Only if the parses is I guess and if the are not duplicate rules lol)
     return { UUID: CSSRule ? CSSRule.UUID : crypto.randomUUID(), name, rule, active: CSSRule ? CSSRule.active : true, group: CSSRule ? CSSRule.group : "" }
 }
 
@@ -132,7 +132,7 @@ export async function fetchDefaultCSSRulesJSON() {
 
 /**
  * Toggles the 'active' property of a CSS rule in Chrome storage.
- * 
+ *
  * @param {string} CSSRuleUUID - The UUID of the CSS rule to toggle.
  */
 export function toggleStorageKey(CSSRuleUUID) {
@@ -154,9 +154,9 @@ export function getRuleWithUniqueClass(CSSRule) {
 }
 
 /**
- * 
+ *
  * @param {CSSRuleObject} CSSRule
- * @returns {string} 
+ * @returns {string}
  */
 export function getRuleUniqueName(CSSRule) {
     const ruleClass = getRuleName(CSSRule.rule)

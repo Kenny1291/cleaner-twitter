@@ -15,7 +15,7 @@ async function addFolder(zip, folderPath) {
     const folder = zip.folder(folderName)
     for (const file of files) {
         const filePath = path.join(folderPath, file)
-        if(fs.statSync(filePath).isDirectory()) {
+        if (fs.statSync(filePath).isDirectory()) {
             await addFolder(folder, filePath)
         } else {
             await addFile(folder, filePath)

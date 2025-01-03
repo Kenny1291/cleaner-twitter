@@ -39,9 +39,9 @@ class XHR {
     send() {
         this.#request = new XMLHttpRequest()
         this.#open()
-        if(this.#headers) this.#setHeaders()
+        if (this.#headers) this.#setHeaders()
         this.#setEventsHandler()
-        if(this.#body) this.#request.send(this.#body)
+        if (this.#body) this.#request.send(this.#body)
         else this.#request.send()
 
         return this
@@ -54,7 +54,7 @@ class XHR {
      */
     getResponse() {
         return new Promise((resolve, reject) => {
-            if(this.#response !== undefined) {
+            if (this.#response !== undefined) {
                 resolve(this.#response)
             } else {
                 this.#responsePromiseResolve = resolve
@@ -76,9 +76,9 @@ class XHR {
         this.#request.onloadend = event => {
             const status = this.#request.status
             const successful = status >= 200 || status <= 299
-            if(successful) {
+            if (successful) {
                 this.#response = JSON.parse(this.#request.response)
-                if(this.#responsePromiseResolve !== undefined) {
+                if (this.#responsePromiseResolve !== undefined) {
                     this.#responsePromiseResolve(this.#response)
                 }
             } else {

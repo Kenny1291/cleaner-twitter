@@ -1,5 +1,5 @@
 (async () => {
-    const utils = await import('../utils/utils.js');
+    const utils = await import('../utils/utils.js')
 
     /**
      * Call when content.js is injected (when Twitter is visited)
@@ -29,9 +29,9 @@
     function injectStylesAndSetClasses() {
         /**@type {?HTMLStyleElement} */
         // @ts-ignore
-        const oldStyle =  document.getElementById('cleanerTwitterStyles')
+        const oldStyle = document.getElementById('cleanerTwitterStyles')
 
-        if(oldStyle) oldStyle.remove()
+        if (oldStyle) oldStyle.remove()
 
         /**@type {HTMLStyleElement} */
         const style = document.createElement('style')
