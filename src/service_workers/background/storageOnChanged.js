@@ -45,7 +45,7 @@ function getRulesThatChangedState(oldValue, newValue) {
     const rulesToggled = []
 
     for (let i = 0; i < oldValue.length; i++) {
-        if (oldValue[i].active != newValue[i].active) {
+        if (oldValue[i].active !== newValue[i].active) {
             rulesToggled.push({ name: getRuleUniqueName(newValue[i]), active: newValue[i].active })
         }
     }
