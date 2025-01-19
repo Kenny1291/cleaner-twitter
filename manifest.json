@@ -32,5 +32,11 @@
   },
   "options_page": "options/options.html",
   "host_permissions": ["https://*.twitter.com/*", "https://*.x.com/*"],
+  "web_accessible_resources": [
+    {
+      "resources": ["utils/utils.js"],
+      "matches": ["https://*.twitter.com/*", "https://*.x.com/*"]
+    }
+  ],
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy8MTwhSP9HImGU8Qzu0crCvtcBrxiRMm8UOCfgwGBriQwa7vQrjMt5SemPgGfXHmQJYQuz/+5NSpd9B8Q2L0l6ssqf5azx2OoP9BJP5YUbaHmVMnA0O9mwvPyZ6cMwBCMWJCwBUw7RohY6UkX8HFx20YeTKgUP5BNZgtFmW4HRlSxdE201r+zpDTR7hBe7xbnFqffr1bL/JeVqikyWzS61BWTOzEYkr1CiVf8RKc2FoQKY8MysfyCYp/KBsd3fyxCcqQy0I8O6Nk3eN4zh7/NAbHA0fSYJDvUmVnHTzErm1Jy5nxRGMyrvPG1UGKIhgWsu//yzoI8Igqb6bXhdc6VQIDAQAB"
 }

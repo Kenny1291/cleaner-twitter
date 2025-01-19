@@ -5,7 +5,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 
     const rulesChanged = checkIfRulesChanged(oldValue, newValue)
 
-    if(rulesChanged) {
+    if (rulesChanged) {
         sendMessageToTwitterTabs({ name: 'rulesChanged', active: true })
     } else {
         const rulesToggled = getRulesThatChangedState(oldValue, newValue)
@@ -21,9 +21,9 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
  * @returns {boolean} true if rules changed, false otherwise
  */
 function checkIfRulesChanged(oldValue, newValue) {
-    if(oldValue.length === newValue.length) {
+    if (oldValue.length === newValue.length) {
         for (let i = 0; i < oldValue.length; i++) {
-            if(oldValue[i].rule !== newValue[i].rule) {
+            if (oldValue[i].rule !== newValue[i].rule) {
                 return true
             }
         }
@@ -45,7 +45,7 @@ function getRulesThatChangedState(oldValue, newValue) {
     const rulesToggled = []
 
     for (let i = 0; i < oldValue.length; i++) {
-        if (oldValue[i].active != newValue[i].active) {
+        if (oldValue[i].active !== newValue[i].active) {
             rulesToggled.push({ name: getRuleUniqueName(newValue[i]), active: newValue[i].active })
         }
     }

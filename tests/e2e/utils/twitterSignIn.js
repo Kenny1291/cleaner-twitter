@@ -19,7 +19,7 @@ export async function signIn(page) {
 
     try {
         const sel = await page.waitForSelector('input[name="text"]', { timeout: 5000 })
-        if(sel) {
+        if (sel) {
             const response = await fetch(`https://api.testmail.app/api/json?apikey=${process.env.TEST_MAIL_APP_APIKEY}&namespace=${process.env.TEST_MAIL_APP_NAMESPACE}&timestamp_from=${Date.now()}&livequery=true`)
             const emails = await response.json()
             const emailText = emails.emails[0].text
@@ -44,7 +44,7 @@ async function checkAndDealWithSuspiciousLogin(page) {
 
     try {
         const sel = await page.waitForSelector('text="Suspicious login prevented"', { timeout: 1000 })
-        if(sel) {
+        if (sel) {
             suspiciousLoginMessage = true
         } else {
             suspiciousLoginMessage = false
@@ -52,7 +52,7 @@ async function checkAndDealWithSuspiciousLogin(page) {
         await page.click('text="Got it"')
     } catch (e) {}
 
-    if(suspiciousLoginMessage) {
+    if (suspiciousLoginMessage) {
         await fillEmail(page)
         await fillUsername(page)
         await fillPassword(page)

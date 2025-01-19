@@ -94,7 +94,7 @@ export function getRulesToUpdate(oldRulesHashed, currentRulesHashed) {
     const oldRulesIndexAndNewRulesUUID = []
     for (const oldRule of oldRulesHashed) {
         for (let i = 0; i < currentRulesHashed.length; i++) {
-            if(oldRule.hash === currentRulesHashed[i]) {
+            if (oldRule.hash === currentRulesHashed[i]) {
                 oldRulesIndexAndNewRulesUUID.push({ oldRuleIndex: i, newRuleUUID: oldRule.UUID })
                 break
             }
@@ -115,12 +115,12 @@ export function getRulesToAdd(defaultRules, oldRules) {
     for (const defaultRule of defaultRules) {
         let matchFound = false
         for (const oldRule of oldRules) {
-            if(defaultRule.UUID === oldRule.UUID) {
+            if (defaultRule.UUID === oldRule.UUID) {
                 matchFound = true
                 break
             }
         }
-        if(!matchFound) UUIDSOfRulesToAdd.push(defaultRule.UUID)
+        if (!matchFound) UUIDSOfRulesToAdd.push(defaultRule.UUID)
     }
     return UUIDSOfRulesToAdd
 }
@@ -138,7 +138,7 @@ export function getRulesToRemove(oldRules, defaultRules) {
     for (let i = 0; i < oldRules.length; i++) {
         let matchFound = false
         for (const defaultRule of defaultRules) {
-            if(oldRules[i].UUID === defaultRule.UUID) {
+            if (oldRules[i].UUID === defaultRule.UUID) {
                 matchFound = true
                 break
             }
@@ -160,9 +160,9 @@ export function getRulesToRemove(oldRules, defaultRules) {
  * @returns {CSSRuleObject[]}
  */
 function composeNewCSSRulesArray(currentCSSRules, oldRulesIndexAndNewRulesUUID, UUIDSOfRulesToAdd, indexesOfRulesToRemove, newDefaultRules) {
-    if(oldRulesIndexAndNewRulesUUID.length > 0) updateRules(oldRulesIndexAndNewRulesUUID, currentCSSRules, newDefaultRules)
-    if(UUIDSOfRulesToAdd.length > 0) addRules(UUIDSOfRulesToAdd, currentCSSRules, newDefaultRules)
-    if(indexesOfRulesToRemove.length > 0) removeRules(indexesOfRulesToRemove, currentCSSRules)
+    if (oldRulesIndexAndNewRulesUUID.length > 0) updateRules(oldRulesIndexAndNewRulesUUID, currentCSSRules, newDefaultRules)
+    if (UUIDSOfRulesToAdd.length > 0) addRules(UUIDSOfRulesToAdd, currentCSSRules, newDefaultRules)
+    if (indexesOfRulesToRemove.length > 0) removeRules(indexesOfRulesToRemove, currentCSSRules)
     handleEventualCSSRulesArrayOldStructure(currentCSSRules, oldRulesIndexAndNewRulesUUID, newDefaultRules)
     return currentCSSRules
 }
@@ -202,7 +202,7 @@ export function addRules(UUIDSOfRulesToAdd, currentCSSRule, newDefaultRules) {
                 const rule = newDefaultRule.rule
                 const name = getRuleName(rule)
                 const UUID = newDefaultRule.UUID
-                currentCSSRule.push({ UUID, name, rule, active: true, group: newDefaultRule.group})
+                currentCSSRule.push({ UUID, name, rule, active: true, group: newDefaultRule.group })
                 break
             }
         }

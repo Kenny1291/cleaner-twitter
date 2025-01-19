@@ -1,5 +1,3 @@
-import RetryHandler from "./RetryHandler/RetryHandler.js"
-
 /**
  * @param {string} key
  * @returns {Promise<{[key: string]: any}>}
@@ -68,7 +66,7 @@ export function getToggleName(ruleClass) {
  */
 export function processCSSRule(rule, CSSRules) {
     const name = getRuleName(rule)
-    const CSSRule = CSSRules.find(CSSRule => CSSRule.rule === rule); //TODO: Is this reliable? (Only if the parses is I guess and if the are not duplicate rules lol)
+    const CSSRule = CSSRules.find(CSSRule => CSSRule.rule === rule) //TODO: Is this reliable? (Only if the parses is I guess and if the are not duplicate rules lol)
     return { UUID: CSSRule ? CSSRule.UUID : crypto.randomUUID(), name, rule, active: CSSRule ? CSSRule.active : true, group: CSSRule ? CSSRule.group : "" }
 }
 
@@ -132,7 +130,7 @@ export async function fetchDefaultCSSRulesJSON() {
 
 /**
  * Toggles the 'active' property of a CSS rule in Chrome storage.
- * 
+ *
  * @param {string} CSSRuleUUID - The UUID of the CSS rule to toggle.
  */
 export function toggleStorageKey(CSSRuleUUID) {
@@ -154,9 +152,9 @@ export function getRuleWithUniqueClass(CSSRule) {
 }
 
 /**
- * 
+ *
  * @param {CSSRuleObject} CSSRule
- * @returns {string} 
+ * @returns {string}
  */
 export function getRuleUniqueName(CSSRule) {
     const ruleClass = getRuleName(CSSRule.rule)
@@ -174,4 +172,56 @@ export function makeNamedFn(fn, ...args) {
             return fn(...args)
         }
     }[fn.name]
+}
+
+class RetryHandler {
+    #attempts = 0
+    #fn
+    #tries
+    #delay
+
+    /**
+     * @param {function} fn - Function to call
+     * @param {number} tries - (Int) Max number of tries. (Defaults to 3)
+     * @param {number} delay - (Int) The delay in milliseconds between each retry. (Defaults to 1000)
+     */
+    constructor(fn, tries = 3, delay = 1000) {
+        if (tries < 1) throw new RangeError("tries must be >= 1")
+        if (delay < 1) throw new RangeError("delay must be >= 1")
+        this.#fn = fn
+        this.#tries = Math.trunc(tries)
+        this.#delay = Math.trunc(delay)
+    }
+
+    async run() {
+        while (this.#attempts < this.#tries) {
+            try {
+                return await this.#fn()
+            } catch (error) {
+                this.#attempts++
+                if (this.#attempts >= this.#tries) {
+                    throw new TooManyAttemptsError(`${this.#fn.name || "Anonymous function"} exceeded max number of tries (${this.#tries})`)
+                }
+                await this.#sleep(this.#delay)
+            }
+        }
+    }
+
+    /**
+     * @param {number} time - Milliseconds
+     * @returns {Promise}
+     */
+    #sleep(time) {
+        return new Promise(resolve => setTimeout(resolve, time))
+    }
+}
+
+class TooManyAttemptsError extends Error {
+    /**
+     * @param {string} message
+     */
+    constructor(message) {
+        super(message)
+        this.name = 'TooManyAttemptsError'
+    }
 }

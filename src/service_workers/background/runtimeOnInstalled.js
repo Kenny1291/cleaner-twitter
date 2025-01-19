@@ -1,7 +1,7 @@
 import { updateDefaultCSSRules } from "../../utils/defaultRulesUpdate.js"
 import { setDefaultRules, chromeStorageSyncGet, chromeStorageSyncClear } from "../../utils/utils.js"
 
-chrome.runtime.onInstalled.addListener(async (details) => {
+chrome.runtime.onInstalled.addListener(async details => {
     const openTwitterTabs = await chrome.tabs.query({ url: ['https://*.twitter.com/*', 'https://*.x.com/*'] })
 
     const versionInStorage = await chromeStorageSyncGet('version')
@@ -34,7 +34,7 @@ function injectContentScriptInOpenTwitterTabs(tabs) {
     for (const tab of tabs) {
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
-            files: ['src/content_scripts/content.js']
+            files: ['content_scripts/content.js']
         })
     }
 }
