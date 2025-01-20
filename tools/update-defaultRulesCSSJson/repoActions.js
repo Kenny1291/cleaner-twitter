@@ -29,10 +29,11 @@ async function createNewBranch(name) {
 }
 
 /**
+ * @param {string} path
  * @returns {Promise<string|boolean>}
  */
-async function getDefaultCSSRulesJsonBlobSHA() {
-    const req = new GitHubApiCall(HTTPMethod.GET, 'contents/data/defaultCSSRulesV2.json').make()
+async function getBlobSHA(path) {
+    const req = new GitHubApiCall(HTTPMethod.GET, path).make()
     const res = await req.getResponse()
     //@ts-ignore
     return res.sha
@@ -41,19 +42,21 @@ async function getDefaultCSSRulesJsonBlobSHA() {
 /**
  * @param {string} branch
  * @param {string} commitMessage
+ * @param {Object} file
+ * @param {string} path
+ * @param {boolean} fileAlreadyExists
  * @returns {Promise<JSON|boolean>}
  */
-async function commitUpdateDefaultCSSRulesJson(branch, commitMessage) {
-    const defaultCSSRulesJsonBlobSHA = await getDefaultCSSRulesJsonBlobSHA()
+async function commit(branch, commitMessage, file, path, fileAlreadyExists = false) {
     const req = new GitHubApiCall(
         HTTPMethod.PUT,
-        'contents/data/defaultCSSRulesV2.json',
+        path,
         {
             message: commitMessage,
-            committer: { name: 'Raiquen Guidotti', email: 'raiquen@live.com' },
-            content: btoa(JSON.stringify(defaultCSSRulesJson, undefined, 1)),
-            sha: defaultCSSRulesJsonBlobSHA,
-            branch: branch
+            committer: { name: 'Raiquen Guidotti', email: 'raiqueng@live.com' },
+            content: btoa(JSON.stringify(file, undefined, 1)),
+            branch: branch,
+            ...(fileAlreadyExists && { sha: await getBlobSHA(path) })
         }
     )
     .make()

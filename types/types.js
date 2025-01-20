@@ -39,7 +39,26 @@
  */
 
 /**
+ * @typedef {Object} defaultRulesV3
+ * @property {Number} version
+ * @property {defaultRule[]} defaultRules
+ */
+
+/**
+ * @typedef {Object} defaultCSSRulesV3
+ * @property {defaultRulesV3} defaultRules
+ * @property {oldRules[]} oldRules
+ */
+
+/**
  * @typedef {Object} oldRuleIndexAndNewRuleUUID
  * @property {Number} oldRuleIndex
  * @property {string} newRuleUUID
+ */
+
+/**
+ * @typedef {Object} updatedDefaultRules
+ * @property {string} UUID
+ * @property {string} rule
+ * @property {string} group
  */

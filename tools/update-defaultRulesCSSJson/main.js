@@ -1,10 +1,10 @@
 /* global processDefaultRulesUpdate */
 
 const fieldSet = document.querySelector('form')
-/**@type {defaultCSSRules} */
+/**@type {defaultRulesV3} */
 let defaultCSSRulesJson
 
-fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
+fetch('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/v3/defaultCSSRulesV3.json')
     .then(response => response.json())
     .then(data => {
         defaultCSSRulesJson = data
@@ -66,13 +66,6 @@ document.getElementById('applyUpdateBtn').addEventListener('click', event => {
     const newDefaultRules = getNewDefaultRules()
     processDefaultRulesUpdate(newDefaultRules, defaultCSSRulesJson)
 })
-
-/**
- * @typedef {Object} updatedDefaultRules
- * @property {string} UUID
- * @property {string} rule
- * @property {string} group
- */
 
 /**
  * @returns {updatedDefaultRules[]}

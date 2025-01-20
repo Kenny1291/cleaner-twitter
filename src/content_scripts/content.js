@@ -16,12 +16,12 @@
         /**@type {boolean} */
         const messageState = Object.values(message)[0]
 
-    if (messageName === 'rulesChanged') {
-        injectStylesAndSetClasses()
-    } else {
-        document.body.classList.toggle(messageName, messageState)
-    }
-})
+        if (messageName === 'rulesChanged') {
+            injectStylesAndSetClasses()
+        } else {
+            document.body.classList.toggle(messageName, messageState)
+        }
+    })
 
     /**
      * Injects CSS styles into the page (body) and sets classes based on the stored CSS rules.
