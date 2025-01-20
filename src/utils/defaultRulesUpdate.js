@@ -34,12 +34,14 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName, chromeSt
 
         const versionItem = versionItemMOCK ? versionItemMOCK : await chromeStorageSyncGet('version')
         const currentRulesVersion = versionItem.version
+        /**@type {defaultCSSRulesV3} */
         let defaultCSSRulesJson
         if (defaultCSSRulesJsonMOCK) {
             defaultCSSRulesJson = defaultCSSRulesJsonMOCK
         } else {
             try {
-                defaultCSSRulesJson = await fetchDefaultCSSRulesJSON(currentRulesVersion)
+                //@ts-ignore
+                defaultCSSRulesJson = await fetchDefaultCSSRulesJSON(currentRulesVersion)   
             } catch (error) {
                 return "An error occurred. Try again later"
             }
