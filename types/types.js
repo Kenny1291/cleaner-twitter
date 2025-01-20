@@ -55,3 +55,10 @@
  * @property {Number} oldRuleIndex
  * @property {string} newRuleUUID
  */
+
+/**
+ * @typedef {Object} updatedDefaultRules
+ * @property {string} UUID
+ * @property {string} rule
+ * @property {string} group
+ */

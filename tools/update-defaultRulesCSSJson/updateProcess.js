@@ -4,26 +4,21 @@ let rulesModified = false
 
 /**
  * @param {updatedDefaultRules[]} newDefaultRules
- * @param {defaultCSSRules} oldDefaultRulesJson
+ * @param {defaultRulesV3} oldDefaultRulesJson
  */
 async function processDefaultRulesUpdate(newDefaultRules, oldDefaultRulesJson) {
     const oldRules = JSON.parse(JSON.stringify(oldDefaultRulesJson.defaultRules))
-    // pushStatusUpdateToUser('Adding rules...')
     addRules(newDefaultRules, oldDefaultRulesJson)
-    // pushStatusUpdateToUser('Removing rules...')
     removeRules(newDefaultRules, oldDefaultRulesJson)
-    // pushStatusUpdateToUser('Replacing rules...')
     replaceRules(newDefaultRules, oldDefaultRulesJson)
     if (rulesModified) {
-        // pushStatusUpdateToUser('Updating version and adding old default rules...')
-        await updateOldDefaultRulesJson(oldDefaultRulesJson, oldRules)
-        // pushStatusUpdateToUser('Creating new branch remotely...')
+        const _composedOldRulesArr = await composeOldRulesArr(oldRules)
+        oldDefaultRulesJson.version += 1
         const branchName = "rules-update-tool" + Math.floor(Math.random() * 900) + 100
         await createNewBranch(branchName)
-        // pushStatusUpdateToUser('Pushing commit to remote repo...')
         const commitMessage = `defaultCSSRulesJSON update to version ${oldDefaultRulesJson.version}`
-        // pushStatusUpdateToUser('Opening a pull request...')
-        await commitUpdateDefaultCSSRulesJson(branchName, commitMessage)
+        await commit(branchName, commitMessage, defaultCSSRulesJson, 'contents/data/v3/defaultCSSRulesV3.json', true)
+        await commit(branchName, commitMessage, _composedOldRulesArr, `contents/data/v3/oldRules/oldRules-${oldDefaultRulesJson.version - 1}.json`)
         const pullReq = await openPullRequest(commitMessage + " [AUTOMATED]", branchName)
         //@ts-ignore
         pushStatusUpdateToUser(`Done! You can now review and accept the changes on GitHub. <a href=${pullReq.html_url}>Pull request</a>`)
@@ -34,7 +29,7 @@ async function processDefaultRulesUpdate(newDefaultRules, oldDefaultRulesJson) {
 
 /**
  * @param {updatedDefaultRules[]} newDefaultRules
- * @param {defaultCSSRules} oldDefaultRulesJson
+ * @param {defaultRulesV3} oldDefaultRulesJson
  */
 function addRules(newDefaultRules, oldDefaultRulesJson) {
     for (const newDefaultRule of newDefaultRules) {
@@ -57,7 +52,7 @@ function addRules(newDefaultRules, oldDefaultRulesJson) {
 
 /**
  * @param {updatedDefaultRules[]} newDefaultRules
- * @param {defaultCSSRules} oldDefaultRulesJson
+ * @param {defaultRulesV3} oldDefaultRulesJson
  */
 function removeRules(newDefaultRules, oldDefaultRulesJson) {
     for (const oldDefaultRule of defaultCSSRulesJson.defaultRules) {
@@ -79,7 +74,7 @@ function removeRules(newDefaultRules, oldDefaultRulesJson) {
 
 /**
  * @param {updatedDefaultRules[]} newDefaultRules
- * @param {defaultCSSRules} oldDefaultRulesJson
+ * @param {defaultRulesV3} oldDefaultRulesJson
  */
 function replaceRules(newDefaultRules, oldDefaultRulesJson) {
     let indexObj = 0
@@ -114,16 +109,6 @@ async function composeOldRulesArr(oldRules) {
         oldRulesArr.push({ UUID, hash })
     }
     return oldRulesArr
-}
-
-/**
- * @param {defaultCSSRules} oldDefaultRulesJson
- * @param {defaultCSSRules["defaultRules"]} oldRules
- */
-async function updateOldDefaultRulesJson(oldDefaultRulesJson, oldRules) {
-    const _composedOldRulesArr = await composeOldRulesArr(oldRules)
-    oldDefaultRulesJson.oldRules[oldDefaultRulesJson.version] = _composedOldRulesArr
-    oldDefaultRulesJson.version += 1
 }
 
 let lastCallTime
