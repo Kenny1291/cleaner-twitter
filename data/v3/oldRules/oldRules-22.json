@@ -1,0 +1,122 @@
+[
+    {
+     "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
+     "rule": ".hide_tweet_analytics div:has(> a[aria-label$='View post analytics']) {display: none;}",
+     "group": "timelineCard"
+    },
+    {
+     "UUID": "4f2a50c0-10a1-460a-b2e3-8909741c23b1",
+     "rule": ".hide_premium a[href='/i/premium_sign_up'] {display: none;}",
+     "group": "menuCard"
+    },
+    {
+     "UUID": "21bac13f-fa37-428c-b1db-c6f82a7c560c",
+     "rule": ".hide_try_premium_for_free_today div:has(> div > aside[aria-label='Try Premium for free today']) {display: none;}",
+     "group": "sidebarCard"
+    },
+    {
+     "UUID": "6a60761c-7806-4dc9-b96a-16be7a9db329",
+     "rule": ".hide_what_is_happening div:has(> section > div[aria-label='Timeline: Trending now']) {display: none;}",
+     "group": "sidebarCard"
+    },
+    {
+     "UUID": "5e98e03c-c16f-4e2f-9208-d966a69a8111",
+     "rule": ".hide_who_to_follow_sidebar div:has(> div > aside[aria-label='Who to follow']) {display: none;}",
+     "group": "sidebarCard"
+    },
+    {
+     "UUID": "0799879a-e14d-4b28-b23b-a73a9b2ba120",
+     "rule": ".hide_footer nav[aria-label='Footer'] {display: none;}",
+     "group": "sidebarCard"
+    },
+    {
+     "UUID": "fb46e63b-6fcd-49cc-88f8-86b60cbcd5f3",
+     "rule": ".hide_messages_drawer div[data-testid='DMDrawer'] {display: none;}",
+     "group": "otherCard"
+    },
+    {
+     "UUID": "a2ac2b88-1934-4973-8557-08af9b21a0ee",
+     "rule": ".hide_grok a[href='/i/grok'] {display: none;}",
+     "group": "menuCard"
+    },
+    {
+     "UUID": "811f41cd-7c36-4a03-9c42-daf20a2b76d3",
+     "rule": ".hide_verified_orgs a[href='/i/verified-orgs-signup'] {display: none;}",
+     "group": "menuCard"
+    },
+    {
+     "UUID": "c5b8237d-3c7d-461d-bf5b-5382e7f4eff1",
+     "rule": ".hide_communities a[aria-label='Communities'] {display: none;}",
+     "group": "menuCard"
+    },
+    {
+     "UUID": "2b31e97a-18a7-41cf-aee9-c5ee1842d0fb",
+     "rule": ".hide_premium_longer_posts div:has(> div > aside[aria-label='Subscribe to Premium to write your own longer posts']) {display: none;}",
+     "group": "sidebarCard"
+    },
+    {
+     "UUID": "97ec8dfb-f29a-4f15-80ac-dfd3004ffa5c",
+     "rule": ".hide_who_to_follow :is(div:has(> div > div > a[href='/i/connect_people?user_id=']), div:has(+ div > div > div > a[href='/i/connect_people?user_id=']), div:has(+ div + div > div > div > a[href='/i/connect_people?user_id=']), div:has(+ div + div + div > div > div > a[href='/i/connect_people?user_id=']), div:has(+ div + div + div + div > div > div > a[href='/i/connect_people?user_id='])) {display: none;}",
+     "group": "timelineCard"
+    },
+    {
+     "UUID": "7e191098-c2e8-4315-91e3-68632a6a465c",
+     "rule": ".hide_pinned_by_people_you_follow :is(div:has(> div > div > button > a[href='/i/topics/pinned']), div:has(> div > div > button > a[href='/i/topics/pinned']) + div, div:has(> div > div > button > a[href='/i/topics/pinned']) + div + div, div:has(> div > div > button > a[href='/i/topics/pinned']) + div + div + div) {display: none;}",
+     "group": "timelineCard"
+    },
+    {
+     "UUID": "2918a519-c6f0-4c19-8f14-1453df9cfe6d",
+     "rule": ".hide_subscribe_to_premium_to_write_your_own_articles div:has(> div > aside[aria-label='Subscribe to Premium+ to write your own Articles']) {display: none;}",
+     "group": "sidebarCard"
+    },
+    {
+     "UUID": "78caf792-1ff7-47dc-9720-f0d61176e125",
+     "rule": ".hide_discover_new_communities :is(div:has(> div > div > a[href='/i/communities/suggested']), div:has(+ div > div > div > a[href='/i/communities/suggested']), div:has(+ div + div > div > div > a[href='/i/communities/suggested'])) {display: none;}",
+     "group": "timelineCard"
+    },
+    {
+     "UUID": "cbcabd13-fdc0-459c-9b53-12a638c4090d",
+     "rule": ".hide_go_ad_free_with_premium div:has(> div > div > div > div > div > a[href='/i/premium_sign_up?tier=premium_plus&referring_page=timeline_prompt']) {display: none;}",
+     "group": "timelineCard"
+    },
+    {
+     "UUID": "c6edaa84-9061-48fc-ac83-8c510562080a",
+     "rule": ".hide_creators_for_you :is(div:has(> div > div > a[href='/i/connect_people?user_id=&is_creator_only=true']), div:has(+ div > div > div > a[href='/i/connect_people?user_id=&is_creator_only=true']), div:has(+ div + div > div > div > a[href='/i/connect_people?user_id=&is_creator_only=true']), div:has(+ div + div + div > div > div > a[href='/i/connect_people?user_id=&is_creator_only=true']), div:has(+ div + div + div + div > div > div > a[href='/i/connect_people?user_id=&is_creator_only=true'])) {display: none;}",
+     "group": "timelineCard"
+    },
+    {
+     "UUID": "eeeda381-bcde-431d-82ac-1a426db484c2",
+     "rule": ".hide_jobs a[href='/jobs'] {display: none;}",
+     "group": "menuCard"
+    },
+    {
+     "UUID": "b1bce4f4-f658-498b-80e3-0cc4b25f3426",
+     "rule": ".hide_get_40_off_a_year_of_Premium div:has(> div > div > div > div > div > div > img[src='https://ton.twitter.com/onboarding/subscriptions/AnniversaryInlinePrompt.png']) {display: none;}",
+     "group": "timelineCard"
+    },
+    {
+     "UUID": "1533715a-656d-4cbf-9724-f11e5b119c22",
+     "rule": ".hide_premium_offer :is(div:has(> aside[aria-label='40% off Premium ']), div:has(> aside[aria-label='Expiring soon!'])) {display: none;}",
+     "group": "sidebarCard"
+    },
+    {
+     "UUID": "6992878b-fc2b-4182-9484-7e93bb21b794",
+     "rule": ".hide_live_on_x :is(div:has( > div > button[aria-label^='Space']), div:has( > div > button[aria-label^='Broadcast'])) {display: none;}",
+     "group": "sidebarCard"
+    },
+    {
+     "UUID": "c825f06f-4671-455e-8348-73db92ffba6d",
+     "rule": ".hide_subscribe_to_premium div:has(> div > aside[aria-label='Subscribe to Premium']) {display: none;}",
+     "group": "sidebarCard"
+    },
+    {
+     "UUID": "c99d143b-cca6-4339-8a77-bfe69f5ae9c9",
+     "rule": ".hide_boost_your_replies_with_premium div:has(> div > aside[aria-label='Boost your replies with Premium']) {display: none;}",
+     "group": "sidebarCard"
+    },
+    {
+       "UUID": "c99d143b-cca6-4339-8a77-bfe69f5affff",
+       "rule": ".test(> div > aside[aria-label='Boost your replies with Premium']) {display: none;}",
+       "group": "sidebarCard"
+    }
+]
