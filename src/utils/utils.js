@@ -129,11 +129,13 @@ export async function fetchDefaultCSSRulesJSON(oldRulesVersion = undefined) {
         return await httpGet('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/v3/defaultCSSRulesV3.json')
     }).run()
     if (oldRulesVersion) {
-        const oldRulesPromise = new RetryHandler(async () => {
-            return await httpGet(`https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/v3/oldRules/oldRules-${oldRulesVersion}.json`)
-        }).run()
-        const [defaultRules, oldRules] = await Promise.all([defaultRulesPromise, oldRulesPromise])
-        return { defaultRules, oldRules }
+        try {
+            const oldRulesPromise = new RetryHandler(async () => {
+                return await httpGet(`https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/v3/oldRules/oldRules-${oldRulesVersion}.json`)
+            }).run()
+            const [defaultRules, oldRules] = await Promise.all([defaultRulesPromise, oldRulesPromise])
+            return { defaultRules, oldRules }
+        } catch (e) {}
     }
     return await defaultRulesPromise
 }
