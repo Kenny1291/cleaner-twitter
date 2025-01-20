@@ -1,5 +1,5 @@
 {
-    "version": 23,
+    "version": 22,
     "defaultRules": [
      {
       "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
@@ -115,11 +115,6 @@
       "UUID": "c99d143b-cca6-4339-8a77-bfe69f5ae9c9",
       "rule": ".hide_boost_your_replies_with_premium div:has(> div > aside[aria-label='Boost your replies with Premium']) {display: none;}",
       "group": "sidebarCard"
-     },
-     {
-        "UUID": "c99d143b-cca6-4339-8a77-bfe69f5affff",
-        "rule": ".test div:has(> div > aside[aria-label='Boost your replies with Premium']) {display: none;}",
-        "group": "sidebarCard"
-       }
+     }
     ]
 }
