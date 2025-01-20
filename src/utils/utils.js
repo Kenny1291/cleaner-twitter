@@ -119,12 +119,18 @@ async function httpGet(url) {
 }
 
 /**
- * @returns {Promise<defaultCSSRules>}
+ * @param {number} oldRulesVersion
+ * @returns {Promise<defaultCSSRulesV3>}
  */
-export async function fetchDefaultCSSRulesJSON() {
-    return await new RetryHandler(async () => {
-        return await httpGet('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/defaultCSSRulesV2.json')
+export async function fetchDefaultCSSRulesJSON(oldRulesVersion) {
+    const defaultRulesPromise = new RetryHandler(async () => {
+        return await httpGet('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/v3/defaultCSSRulesV3.json')
     }).run()
+    const oldRulesPromise = new RetryHandler(async () => {
+        return await httpGet(`https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/V3/oldRules-${oldRulesVersion}.json`)
+    }).run()
+    const [defaultRules, oldRules] = await Promise.all([defaultRulesPromise, oldRulesPromise])
+    return { defaultRules,  oldRules }
 }
 
 /**
