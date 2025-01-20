@@ -100,9 +100,9 @@ function processCSSRuleDefaultObject(ruleObject) {
  * Asynchronously creates a {@link CSSRuleObject} Array and then sets it in the Chrome storage.
  */
 export async function setDefaultRules() {
-    /**@type {defaultRulesV3} */ 
+    /**@type {defaultRulesV3} */
     //@ts-ignore
-    const defaultRulesJSON = await fetchDefaultCSSRulesJSON() 
+    const defaultRulesJSON = await fetchDefaultCSSRulesJSON()
     defaultRulesJSON.defaultRules.forEach(ruleObj => processCSSRuleDefaultObject(ruleObj))
     chromeStorageSyncSet({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
 }
@@ -133,10 +133,9 @@ export async function fetchDefaultCSSRulesJSON(oldRulesVersion = undefined) {
             return await httpGet(`https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/v3/oldRules/oldRules-${oldRulesVersion}.json`)
         }).run()
         const [defaultRules, oldRules] = await Promise.all([defaultRulesPromise, oldRulesPromise])
-        return { defaultRules,  oldRules }
+        return { defaultRules, oldRules }
     }
     return await defaultRulesPromise
-
 }
 
 /**

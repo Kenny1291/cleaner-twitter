@@ -1,4 +1,4 @@
-/* global createNewBranch, commitUpdateDefaultCSSRulesJson, openPullRequest, defaultCSSRulesJson, sha256Hash  */
+/* global createNewBranch, commit, openPullRequest, defaultCSSRulesJson, sha256Hash  */
 
 let rulesModified = false
 
