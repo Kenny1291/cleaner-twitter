@@ -13,7 +13,7 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName, chromeSt
  * Only if the auto update setting is enabled
  *
  * @param {boolean} manual - Indicates wether the updates is manually triggered or not
- * @param {defaultCSSRules} defaultCSSRulesJsonMOCK - Only for testing
+ * @param {defaultCSSRulesV3} defaultCSSRulesJsonMOCK - Only for testing
  * @param {{ version: number }} versionItemMOCK - Only for testing
  * @param {{ CSSRulesArrayOfObjectsWithNames: CSSRuleObject[] }} CSSRulesFromStorageMOCK - Only for testing
  * @param {((obj: { CSSRulesArrayOfObjectsWithNames: CSSRuleObject[], version: number }) => void)} setStorageMOCK - Only for testing
@@ -39,16 +39,16 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName, chromeSt
             defaultCSSRulesJson = defaultCSSRulesJsonMOCK
         } else {
             try {
-                defaultCSSRulesJson = await fetchDefaultCSSRulesJSON()
+                defaultCSSRulesJson = await fetchDefaultCSSRulesJSON(currentRulesVersion)
             } catch (error) {
                 return "An error occurred. Try again later"
             }
         }
-        const defaultRulesVersion = defaultCSSRulesJson.version
+        const defaultRulesVersion = defaultCSSRulesJson.defaultRules.version
 
         //Temp check -->
         const currentCSSRulesArray = CSSRulesFromStorageMOCK ? CSSRulesFromStorageMOCK.CSSRulesArrayOfObjectsWithNames : await getCSSRulesFromStorage()
-        const remoteDefaultRules = defaultCSSRulesJson.defaultRules
+        const remoteDefaultRules = defaultCSSRulesJson.defaultRules.defaultRules
         for (const localCSSRule of currentCSSRulesArray) {
             // @ts-ignore
             if (!Object.hasOwn(localCSSRule, 'UUID')) {
@@ -64,8 +64,8 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName, chromeSt
         if (defaultRulesVersion > currentRulesVersion) {
             //const currentCSSRulesArray = CSSRulesFromStorageMOCK ? CSSRulesFromStorageMOCK.CSSRulesArrayOfObjectsWithNames : await getCSSRulesFromStorage()
             const currentRulesHashed = await getCurrentRulesHashed(currentCSSRulesArray)
-            const remoteOldRules = defaultCSSRulesJson.oldRules[String(currentRulesVersion)]
-            const remoteNewRules = defaultCSSRulesJson.defaultRules
+            const remoteOldRules = defaultCSSRulesJson.oldRules
+            const remoteNewRules = remoteDefaultRules
             const oldRulesIndexAndNewRulesUUID = getRulesToUpdate(remoteOldRules, currentRulesHashed)
             const UUIDSOfRulesToAdd = getRulesToAdd(remoteNewRules, remoteOldRules)
             const indexesOfRulesToRemove = getRulesToRemove(remoteOldRules, remoteNewRules)
