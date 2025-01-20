@@ -90,7 +90,6 @@ export async function createCSSRulesArrayOfObjectsWithRuleNames(CSSRulesArr, fet
  * @param {defaultRule} ruleObject
  */
 function processCSSRuleDefaultObject(ruleObject) {
-    delete ruleObject.UUID
     // @ts-ignore
     ruleObject.name = getRuleName(ruleObject.rule)
     // @ts-ignore
@@ -101,7 +100,7 @@ function processCSSRuleDefaultObject(ruleObject) {
  * Asynchronously creates a {@link CSSRuleObject} Array and then sets it in the Chrome storage.
  */
 export async function setDefaultRules() {
-    const defaultRulesJSON = await fetchDefaultCSSRulesJSON()//TODO: call a server api
+    const defaultRulesJSON = await fetchDefaultCSSRulesJSON()
     defaultRulesJSON.defaultRules.forEach(ruleObj => processCSSRuleDefaultObject(ruleObj))
     chromeStorageSyncSet({ CSSRulesArrayOfObjectsWithNames: defaultRulesJSON.defaultRules, version: defaultRulesJSON.version })
 }

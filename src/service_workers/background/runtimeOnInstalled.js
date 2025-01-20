@@ -8,7 +8,7 @@ chrome.runtime.onInstalled.addListener(async details => {
     const foundVersionInStorage = Object.keys(versionInStorage).length === 1
     if (!foundVersionInStorage) {
         await chromeStorageSyncClear()
-        setDefaultRules()
+        await setDefaultRules()
 
         injectContentScriptInOpenTwitterTabs(openTwitterTabs)
 
