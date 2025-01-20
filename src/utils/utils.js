@@ -124,10 +124,10 @@ async function httpGet(url) {
  */
 export async function fetchDefaultCSSRulesJSON(oldRulesVersion) {
     const defaultRulesPromise = new RetryHandler(async () => {
-        return await httpGet('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/v3/defaultCSSRulesV3.json')
+        return await httpGet('https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/259-use-a-single-json-file-for-each-rule-version-to-have-the-client-receive-only-the-necessary-data/data/v3/defaultCSSRulesV3.json')
     }).run()
     const oldRulesPromise = new RetryHandler(async () => {
-        return await httpGet(`https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/main/data/V3/oldRules-${oldRulesVersion}.json`)
+        return await httpGet(`https://raw.githubusercontent.com/Kenny1291/cleaner-twitter/259-use-a-single-json-file-for-each-rule-version-to-have-the-client-receive-only-the-necessary-data/data/V3/oldRules-${oldRulesVersion}.json`)
     }).run()
     const [defaultRules, oldRules] = await Promise.all([defaultRulesPromise, oldRulesPromise])
     return { defaultRules,  oldRules }
