@@ -41,7 +41,7 @@ import { fetchDefaultCSSRulesJSON, getCSSRulesFromStorage, getRuleName, chromeSt
         } else {
             try {
                 //@ts-ignore
-                defaultCSSRulesJson = await fetchDefaultCSSRulesJSON(currentRulesVersion)   
+                defaultCSSRulesJson = await fetchDefaultCSSRulesJSON(currentRulesVersion)
             } catch (error) {
                 return "An error occurred. Try again later"
             }
