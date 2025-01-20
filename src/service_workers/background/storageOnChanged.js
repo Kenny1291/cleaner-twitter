@@ -21,7 +21,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
  * @returns {boolean} true if rules changed, false otherwise
  */
 function checkIfRulesChanged(oldValue, newValue) {
-    if (oldValue.length === newValue.length) {
+    if (oldValue && oldValue.length === newValue.length) {
         for (let i = 0; i < oldValue.length; i++) {
             if (oldValue[i].rule !== newValue[i].rule) {
                 return true
