@@ -35,6 +35,7 @@ export async function createZip(files, folders) {
 
     //Remove tests folder inside utils
     zip.remove('utils/tests')
+    zip.remove('utils/RetryHandler')
 
     zip.generateAsync({ type: 'nodebuffer' }).then(content => {
         fs.writeFileSync('dist/cleaner-twitter.zip', content)
