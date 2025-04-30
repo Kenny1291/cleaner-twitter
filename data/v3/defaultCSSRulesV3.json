@@ -1,5 +1,5 @@
 {
- "version": 23,
+ "version": 24,
  "defaultRules": [
   {
    "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
@@ -108,7 +108,7 @@
   },
   {
    "UUID": "c825f06f-4671-455e-8348-73db92ffba6d",
-   "rule": ".hide_subscribe_to_premium div:has(> div > aside[aria-label='Subscribe to Premium']) {display: none;}",
+   "rule": ".hide_subscribe_to_premium div[data-testid='super-upsell-UpsellCardRenderProperties'] {display: none;}",
    "group": "sidebarCard"
   },
   {
