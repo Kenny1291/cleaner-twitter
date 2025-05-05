@@ -5,6 +5,9 @@ on:
     - cron: '0 0 * * *' # This will run the test every day at midnight
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
