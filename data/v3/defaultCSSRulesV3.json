@@ -1,5 +1,5 @@
 {
- "version": 24,
+ "version": 25,
  "defaultRules": [
   {
    "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
@@ -120,6 +120,11 @@
    "UUID": "48c06288-1143-4f77-9cf8-e6f020e08b1c",
    "rule": ".hide_support_creators_by_subscribing_to_premium div:has(> div > aside[aria-label='Support Creators by subscribing to Premium']) {display: none;}",
    "group": "sidebarCard"
+  },
+  {
+   "UUID": "aa2b9b47-00a3-430c-a18a-1c400757e473",
+   "rule": ".hide_lists a[aria-label='Lists'] {display: none;}",
+   "group": "menuCard"
   }
  ]
 }
