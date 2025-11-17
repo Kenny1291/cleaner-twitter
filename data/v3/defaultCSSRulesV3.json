@@ -1,5 +1,5 @@
 {
- "version": 25,
+ "version": 26,
  "defaultRules": [
   {
    "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
@@ -125,6 +125,11 @@
    "UUID": "aa2b9b47-00a3-430c-a18a-1c400757e473",
    "rule": ".hide_lists a[aria-label='Lists'] {display: none;}",
    "group": "menuCard"
+  },
+  {
+   "UUID": "08783dd1-e984-40b6-b483-96044ed515a3",
+   "rule": ".hide_today_news div:has(> div[data-testid='news_sidebar']) {display: none;}",
+   "group": "sidebarCard"
   }
  ]
 }
