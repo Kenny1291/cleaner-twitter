@@ -1,5 +1,5 @@
 {
- "version": 28,
+ "version": 29,
  "defaultRules": [
   {
    "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
@@ -130,6 +130,11 @@
    "UUID": "08783dd1-e984-40b6-b483-96044ed515a3",
    "rule": ".hide_today_news div:has(> div[data-testid='news_sidebar']) {display: none;}",
    "group": "sidebarCard"
+  },
+  {
+   "UUID": "50f90af9-1fae-4b3d-9669-ef6095f68657",
+   "rule": ".hide_today_news :is(div:has(> div > div > button > a[href='/explore'] > h2 > div > span), div:has(> div > div > button > a[href='/explore'] > h2 > div > span) + div, div:has(> div > div > button > a[href='/explore'] > h2 > div > span) + div + div, div:has(> div > div > button > a[href='/explore'] > h2 > div > span) + div + div + div, div:has(> div > div > button > a[href='/explore'] > h2 > div > span) + div + div + div + div) {display: none;}",
+   "group": "timelineCard"
   }
  ]
 }
