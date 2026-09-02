@@ -26,6 +26,11 @@ OR
 5. Select "Load unpacked" and select the unzipped folder
 6. Keep the folder on your pc
 
-## License
-
+## Licenses
 Cleaner Twitter is released under the [AGPL-3.0 license](https://opensource.org/license/agpl-3-0).
+
+This project includes the following third‑party components:
+
+- Pico - [License](https://github.com/Kenny1291/cleaner-twitter/blob/main/src/vendor/pico/LICENSE.md)
+- Ace - [License](https://github.com/Kenny1291/cleaner-twitter/blob/main/src/vendor/ace/LICENSE.txt)
+
