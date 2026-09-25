@@ -2,7 +2,7 @@
 
 A Chromium extension to hide annoying elements from the Twitter UI. Customizable.
 
-![](https://github.com/Kenny1291/cleaner-twitter/blob/main/store-images/screenshoots/cleaner-twitter-presentation.png)
+![](https://github.com/Kenny1291/cleaner-twitter/blob/main/store-images/screenshots/cleaner-twitter-presentation.png)
 
 ## Features
 - Hide annoying UI elements from Twitter/X
