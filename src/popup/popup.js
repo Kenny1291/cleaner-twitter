@@ -1,6 +1,6 @@
 import { getCSSRulesFromStorage } from "../utils/utils.js"
 
-document.getElementById('extension-version').textContent = chrome.runtime.getManifest().version
+import('./components/rulesVersion.js')
 
 const CSSRules = await getCSSRulesFromStorage()
 
