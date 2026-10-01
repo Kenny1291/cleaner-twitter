@@ -12,4 +12,4 @@ jobs:
     - name: Install modules
       run: npm ci
     - name: Run ESLint
-      run: npx eslint . --fix
+      run: npx eslint .
