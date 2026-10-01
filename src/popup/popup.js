@@ -1,5 +1,7 @@
 import { getCSSRulesFromStorage } from "../utils/utils.js"
 
+document.getElementById('extension-version').textContent = chrome.runtime.getManifest().version
+
 const CSSRules = await getCSSRulesFromStorage()
 
 export { CSSRules as default }
