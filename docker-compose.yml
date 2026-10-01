@@ -1,0 +1,13 @@
+services:
+  workspace:
+    image: node:26-slim
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - node_modules:/workspace/node_modules
+    entrypoint: ["sleep", "infinity"]
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  node_modules:
