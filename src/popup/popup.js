@@ -1,7 +1,5 @@
 import { getCSSRulesFromStorage } from "../utils/utils.js"
 
-import('./components/rulesVersion.js')
-
 const CSSRules = await getCSSRulesFromStorage()
 
 export { CSSRules as default }
@@ -11,3 +9,4 @@ import('./components/toggleOptions.js')
 import('./components/autoUpdatesSetting.js')
 import('./components/updateNowButton.js')
 import('./components/editCSSRulesButton.js')
+import('./components/rulesVersion.js')
