@@ -1,5 +1,5 @@
 {
- "version": 30,
+ "version": 31,
  "defaultRules": [
   {
    "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
@@ -33,7 +33,7 @@
   },
   {
    "UUID": "fb46e63b-6fcd-49cc-88f8-86b60cbcd5f3",
-   "rule": ".hide_messages_drawer div[data-testid='DMDrawer'] {display: none;}",
+   "rule": ".hide_messages_drawer div[data-testid='chat-drawer-root'] {display: none;}",
    "group": "otherCard"
   },
   {
