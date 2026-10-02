@@ -3,8 +3,7 @@
   "type": "module",
   "scripts": {
     "zip": "node -e \"import('./scripts/make-publish-zip.js').then(({ createZip, filesToAdd, foldersToAdd }) => createZip(filesToAdd, foldersToAdd))\"",
-    "folder": "node -e \"import('./scripts/make-test-folder.js').then(({ make }) => make())\"",
-    "build": "npm run zip && npm run folder"
+    "folder": "node -e \"import('./scripts/make-test-folder.js').then(({ make }) => make())\""
   },
   "repository": {
     "type": "git",
