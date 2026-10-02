@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/Kenny1291/cleaner-twitter.git"
   },
-  "license": "GPL-3.0-only",
+  "license": "AGPL-3.0-only",
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/eslint-parser": "^7.25.1",
