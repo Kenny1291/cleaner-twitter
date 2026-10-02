@@ -13,7 +13,15 @@ h2 {
 .switch-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-left: 0.5rem;
+}
+
+.switch-container label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
 }
 
 label {
