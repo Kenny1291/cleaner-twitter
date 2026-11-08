@@ -1,4 +1,5 @@
 import { updateDefaultCSSRules } from "../../utils/defaultRulesUpdate.js"
+import { displayCurrentRulesVersion } from "./rulesVersion.js"
 
 const updateNowContainer = document.getElementById('update-now-container')
 
@@ -34,6 +35,11 @@ updateNowContainer.addEventListener('click', async () => {
             </p>
         </div>`
     )
+
+    const updateOccurred = response?.startsWith("Default")
+    if (updateOccurred) {
+        displayCurrentRulesVersion()
+    }
 })
 
 export {}
