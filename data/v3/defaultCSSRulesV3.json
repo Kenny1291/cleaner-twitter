@@ -1,5 +1,5 @@
 {
- "version": 31,
+ "version": 32,
  "defaultRules": [
   {
    "UUID": "7282db6d-efec-4369-9381-d3e6a048684d",
@@ -139,6 +139,11 @@
   {
    "UUID": "232e2217-23d2-44f2-9378-7cf32c6e3b6b",
    "rule": ".hide_creators_studio a[href='/i/jf/creators/studio'] {display: none;}",
+   "group": "menuCard"
+  },
+  {
+   "UUID": "1041e198-c0f1-4d64-ba2f-b2e182b63ca9",
+   "rule": ".hide_calls a[href='/i/calls'] {display: none;}",
    "group": "menuCard"
   }
  ]
